@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private Vector2 velocity;
+    //private Vector2 velocity;
+
+    private Rigidbody2D rigidbody;
 
     public float maxVelocity = 10;
     public float maxAcceleration = 5;
 
     private void Start()
     {
-
+        rigidbody = GetComponent<Rigidbody2D>();
     }
 
     private Vector2 getInput()
@@ -44,7 +46,7 @@ public class Player : MonoBehaviour
 
         Vector2 targetVelocity = input * maxVelocity;
 
-        Vector2 totalAccel = (targetVelocity - velocity);
+        Vector2 totalAccel = (targetVelocity - rigidbody.velocity);
         Vector2 accel = (totalAccel.normalized * maxAcceleration) * Time.fixedDeltaTime;
 
         if(accel.magnitude > totalAccel.magnitude)
@@ -52,8 +54,9 @@ public class Player : MonoBehaviour
             accel = totalAccel;
         }
 
-        velocity += accel;
+        rigidbody.AddForce(accel, ForceMode2D.Impulse);
+        //rigidbody.velocity += accel;
 
-        transform.Translate((Vector3)velocity * Time.fixedDeltaTime);
+        //transform.Translate((Vector3)velocity * Time.fixedDeltaTime);
     }
 }
