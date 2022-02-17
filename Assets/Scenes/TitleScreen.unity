@@ -216,7 +216,7 @@ GameObject:
   - component: {fileID: 257783880}
   m_Layer: 5
   m_Name: OptionsCanvas
-  m_TagString: Untagged
+  m_TagString: OptionsUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1266,7 +1266,7 @@ GameObject:
   - component: {fileID: 1763269012}
   - component: {fileID: 1763269011}
   m_Layer: 5
-  m_Name: Controls
+  m_Name: ControlsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1482,8 +1482,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 793cec6612b91a94985a34a44d709334, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TitleUI: {fileID: 1898413390}
-  OptionsUI: {fileID: 257783882}
+  TitleUI: {fileID: 0}
+  OptionsUI: {fileID: 0}
 --- !u!4 &1863684098
 Transform:
   m_ObjectHideFlags: 0
@@ -1509,7 +1509,7 @@ GameObject:
   - component: {fileID: 1889878782}
   - component: {fileID: 1889878783}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: SoundSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1602,7 +1602,7 @@ GameObject:
   - component: {fileID: 1898413388}
   m_Layer: 5
   m_Name: TitleScreenCanvas
-  m_TagString: Untagged
+  m_TagString: TitleUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
