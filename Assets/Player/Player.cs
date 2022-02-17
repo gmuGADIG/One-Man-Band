@@ -6,6 +6,9 @@ public class Player : MonoBehaviour
 {
     private Vector2 velocity;
 
+    public float maxVelocity = 10;
+    public float maxAcceleration = 5;
+
     private void Start()
     {
 
@@ -39,8 +42,18 @@ public class Player : MonoBehaviour
     {
         Vector2 input = getInput();
 
-        velocity = input * 1;
+        Vector2 targetVelocity = input * maxVelocity;
 
-        transform.Translate((Vector3)velocity);
+        Vector2 totalAccel = (targetVelocity - velocity);
+        Vector2 accel = (totalAccel.normalized * maxAcceleration) * Time.fixedDeltaTime;
+
+        if(accel.magnitude > totalAccel.magnitude)
+        {
+            accel = totalAccel;
+        }
+
+        velocity += accel;
+
+        transform.Translate((Vector3)velocity * Time.fixedDeltaTime);
     }
 }
