@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    //private Vector2 velocity;
-
     private Rigidbody2D rigidbody;
 
     public float maxVelocity = 10;
@@ -55,8 +53,5 @@ public class Player : MonoBehaviour
         }
 
         rigidbody.AddForce(accel, ForceMode2D.Impulse);
-        //rigidbody.velocity += accel;
-
-        //transform.Translate((Vector3)velocity * Time.fixedDeltaTime);
     }
 }
