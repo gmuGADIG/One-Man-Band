@@ -27,8 +27,14 @@ public class Instruments : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown == attack)
-        {
+        if(Input.GetKeyDown(attack)) 
+			/* Eyo so GetButtonDown is actually a function that takes in a string (which you can bind to a specific key in the player editor tab) and returns a bool 
+			 * since you are trying to compare it to a keycode (attack) you would actually wanna use GetKeyDown() (which takes in a keycode and returns a bool) 
+			 * so instead of "Input.GetButtonDown == attack" you would do Input.GetKeyDown(attack).
+			 * - David :)
+			 * PS if you wanna know more about this stuff feel free to ask me or check out the unity documentation, its really good!
+			 */
+		{
             return;
         }
     }
