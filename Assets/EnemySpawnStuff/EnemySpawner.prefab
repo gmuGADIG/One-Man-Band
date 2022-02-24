@@ -46,9 +46,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: {fileID: 8931512868122751305, guid: 98ad8cf97b9eb964f85a226612a94ef7, type: 3}
   spawnSize: 1
+  maxEnemies: 10
   spawnIntervalLowerBound: 5
   spawnIntervalUpperBound: 8
   spawnCheck: 1
+  player: {fileID: 0}
+  maxSpawningDistance: 30
 --- !u!212 &1960535426263073837
 SpriteRenderer:
   m_ObjectHideFlags: 0
