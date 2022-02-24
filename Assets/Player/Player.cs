@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     private Rigidbody2D rigidbody;
     private Collider2D collider;
 
+    private Animator animator;
+
     // MUST BE SET IN INSPECTOR!!
     [SerializeField]
     public Transform sprite = null;
@@ -32,6 +34,8 @@ public class Player : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody2D>();
         collider = GetComponent<Collider2D>();
+
+        animator = sprite.GetComponent<Animator>();
     }
 
     /// <summary>
@@ -120,5 +124,9 @@ public class Player : MonoBehaviour
 
         // The sprite is moved to the heightOffGround in order to visually represent jumping.
         sprite.localPosition = new Vector3(0, heightOffGround, 0);
+
+        animator.SetFloat("velocity_x", rigidbody.velocity.x);
+        animator.SetFloat("velocity_y", rigidbody.velocity.y);
+        animator.SetFloat("velocity_len", rigidbody.velocity.magnitude);
     }
 }
