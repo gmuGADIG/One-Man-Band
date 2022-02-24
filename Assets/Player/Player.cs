@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    /* The Rigidbody and Collider enable us to use the built-in physics system for collisions. */
+    /* The Rigidbody enables us to use the built-in physics system for collisions. */
     private Rigidbody2D rigidbody;
-    private Collider2D collider;
 
     private Animator animator;
 
@@ -20,20 +19,9 @@ public class Player : MonoBehaviour
     /* How fast the player accelerates to the top speed. */
     public float maxAcceleration = 5;
 
-    /* heightOffGround and zVelocity control the player's visual ability to jump. */
-    private float heightOffGround = 0;
-    private float zVelocity = 0;
-
-    /* The amount of gravity that applies to the player's jump. */
-    public float zGravity = 40;
-
-    /* The impulse used for the player's jump. */
-    public float zJumpImpulse = 20;
-
     private void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
-        collider = GetComponent<Collider2D>();
 
         animator = sprite.GetComponent<Animator>();
     }
@@ -89,41 +77,10 @@ public class Player : MonoBehaviour
         // So it is integrating to find velocity, but doing it with a rigidbody enables collisions.
         rigidbody.AddForce(accel, ForceMode2D.Impulse);
     }
-    
-    /// <summary>
-    /// Performs the physics controlling the player's heightOffGround variable.
-    /// </summary>
-    private void doHeightPhysics()
-    {
-        if (Input.GetKey(KeyCode.Space) && heightOffGround <= 0)
-        {
-            zVelocity = zJumpImpulse;
-        }
-
-        // Integrate gravity and velocity to get position.
-        zVelocity -= zGravity * Time.fixedDeltaTime;
-        heightOffGround += zVelocity * Time.fixedDeltaTime;
-
-
-        // Extremely simple collision--can't be less than 0 height off the ground.
-        if(heightOffGround <= 0)
-        {
-            zVelocity = 0;
-            heightOffGround = 0;
-        }
-
-        // Whether we collide with walls is based on the height off ground.
-        // TODO: Enable collisions that still happen while in the air
-        collider.enabled = (heightOffGround <= 0.2);
-    }
 
     private void FixedUpdate()
     {
         doXYPhysics();
-        doHeightPhysics();
-
-        // The sprite is moved to the heightOffGround in order to visually represent jumping.
-        sprite.localPosition = new Vector3(0, heightOffGround, 0);
 
         animator.SetFloat("velocity_x", rigidbody.velocity.x);
         animator.SetFloat("velocity_y", rigidbody.velocity.y);
