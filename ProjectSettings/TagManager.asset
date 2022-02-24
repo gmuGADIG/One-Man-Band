@@ -6,6 +6,9 @@ TagManager:
   tags:
   - TitleUI
   - OptionsUI
+  - RedNote
+  - BlueNote
+  - GreenNote
   layers:
   - Default
   - TransparentFX
