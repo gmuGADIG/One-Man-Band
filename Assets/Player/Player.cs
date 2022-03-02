@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     private Rigidbody2D rigidbody;
     private Collider2D collider;
 
+    
+
     // MUST BE SET IN INSPECTOR!!
     [SerializeField]
     public Transform sprite = null;
