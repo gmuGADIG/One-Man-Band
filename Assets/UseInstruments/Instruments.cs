@@ -7,7 +7,15 @@ public class Instruments : MonoBehaviour
     [Range(0.0f, 10.0f)]
     public float swap_speed = 5;
 
-    public KeyCode attack = KeyCode.E; 
+    public KeyCode attack = KeyCode.E;
+    public KeyCode instrument_swap = KeyCode.Tab;
+    public int instrument_cycle = 0;
+    public int Trumpet_cycle = 1;
+    public int Flute_cycle = 2;
+    public int Violin_cycle = 3;
+    public KeyCode Trumpet = KeyCode.Keypad1;
+    public KeyCode Flute = KeyCode.Keypad2;
+    public KeyCode Violin = KeyCode.Keypad3;
     public Notes notes;
 
     public GameObject notes_sprite;
@@ -21,7 +29,7 @@ public class Instruments : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -36,6 +44,45 @@ public class Instruments : MonoBehaviour
 			 */
 		{
             return;
+        }
+        if (Input.GetKeyDown(instrument_swap))
+        {
+            if(instrument_cycle == Trumpet_cycle)
+            {
+                Debug.Log("Trumpet ACTIVATED");
+                instrument_cycle += 1;
+            }
+            else if(instrument_cycle == Flute_cycle)
+            {
+                Debug.Log("Flute ACTIVATED");
+                instrument_cycle += 1;
+            }
+            else if (instrument_cycle == Violin_cycle)
+            {
+                Debug.Log("Violin ACTIVATED");
+                instrument_cycle += 1;
+            }
+            else
+            {
+                Debug.Log("MELE ACTIVATED");
+                instrument_cycle = 1;
+            }
+            
+        }
+        if (Input.GetKeyDown(Trumpet))
+        {
+            instrument_cycle = Trumpet_cycle + 1;
+            Debug.Log("Trumpet in use");
+        }
+        if (Input.GetKeyDown(Flute))
+        {
+            instrument_cycle = Flute_cycle + 1;
+            Debug.Log("Flute in use");
+        }
+        if (Input.GetKeyDown(Violin))
+        {
+            instrument_cycle = Violin_cycle + 1;
+            Debug.Log("Violin in use");
         }
     }
 }
