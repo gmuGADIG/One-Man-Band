@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//This can be used on any GUI, on said gui and your custom animations n such and on the buttons call their triggers
+
 public class AnimatedMenuManager : MonoBehaviour
 {
     private Animator anim;
