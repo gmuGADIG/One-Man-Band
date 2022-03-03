@@ -2,6 +2,76 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class TrumpetImpFormation {
+    public HashSet<TrumpetImp> imps;
+
+    private Vector2 myCenter;
+
+    private float timer = 0.0f;
+
+    public TrumpetImpFormation()
+    {
+        imps = new HashSet<TrumpetImp>();
+    }
+
+    public void update(TrumpetImp source)
+    {
+        if (source.currentFormationIndex != 0) return;
+
+        if(timer > 0)
+        {
+            timer -= Time.fixedDeltaTime;
+            return;
+        }
+
+        timer = 3.0f;
+        myCenter = (Vector2)source.currentTargetObject.transform.position;
+    }
+
+    public void addImp(TrumpetImp imp)
+    {
+        if(imp.myFormation != null)
+        {
+            imp.myFormation.removeImp(imp);
+        }
+
+        imps.Add(imp);
+        imp.currentFormationIndex = imps.Count - 1;
+        imp.myFormation = this;
+    }
+
+    public void removeImp(TrumpetImp imp)
+    {
+        imps.Remove(imp);
+    }
+
+    Vector2[] arrangement =
+    {
+        new Vector2(0, 0),
+        new Vector2(-2.0f, 0),
+        new Vector2(2.0f, 0),
+        new Vector2(0, -2.0f),
+        new Vector2(0, 2.0f),
+    };
+
+    public Vector2 getFormationPosition(int index)
+    {
+        return myCenter + arrangement[index];
+    }
+
+    // One single global formation for now for basic testing purposes
+    static TrumpetImpFormation theFormation = null;
+    public static TrumpetImpFormation getFormation()
+    {
+        if(theFormation == null)
+        {
+            theFormation = new TrumpetImpFormation();
+        }
+        return theFormation;
+    }
+}
+
+
 public class TrumpetImp : MonoBehaviour
 {
     /* The Rigidbody enables us to use the built-in physics system for collisions. */
@@ -15,7 +85,11 @@ public class TrumpetImp : MonoBehaviour
 
     private Vector2 targetLocation;
 
-    private GameObject currentTargetObject = null;
+    public GameObject currentTargetObject = null;
+
+    public int currentFormationIndex = 0;
+
+    public TrumpetImpFormation myFormation = null;
 
     private void Start()
     {
@@ -23,6 +97,7 @@ public class TrumpetImp : MonoBehaviour
 
         currentTargetObject = GameObject.FindWithTag("Player");
 
+        TrumpetImpFormation.getFormation().addImp(this);
     }
 
     /// <summary>
@@ -33,6 +108,11 @@ public class TrumpetImp : MonoBehaviour
     {
         Vector2 difference = (targetLocation - rigidbody.position);
         Vector2 targetVelocity = difference.normalized * maxVelocity;
+        float maxNeededVelocity = (difference.magnitude / Time.fixedDeltaTime);
+        if(targetVelocity.magnitude > maxNeededVelocity)
+        {
+            targetVelocity = targetVelocity.normalized * maxNeededVelocity;
+        }
 
         float decelThreshold = rigidbody.velocity.sqrMagnitude / maxAcceleration;
         if (difference.magnitude < decelThreshold)
@@ -77,15 +157,21 @@ public class TrumpetImp : MonoBehaviour
 
     private void computeTarget()
     {
-        if(currentTargetObject != null)
-        {
-            targetLocation = (Vector2)currentTargetObject.transform.position;
-        }
+        if (myFormation == null) return;
+        targetLocation = myFormation.getFormationPosition(currentFormationIndex);
+        //if(currentTargetObject != null)
+        //{
+            //targetLocation = (Vector2)currentTargetObject.transform.position;
+        //}
     }
 
     private void FixedUpdate()
     {
         computeTarget();
         doXYPhysics();
+
+        // Only formation index 0 actually does any updating.
+        if(myFormation != null)
+            myFormation.update(this);
     }
 }
