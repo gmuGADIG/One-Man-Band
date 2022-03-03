@@ -1288,8 +1288,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1863684097}
-        m_TargetAssemblyTypeName: TitleScreenScript, Assembly-CSharp
+      - m_Target: {fileID: 1863684100}
+        m_TargetAssemblyTypeName: AnimatedMenuManager, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:

@@ -602,6 +602,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3395070402257213511, guid: 8b65c6e5aa1e4fe4f89ef7509e6d673a, type: 3}
+      propertyPath: playAnimationOnStart
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3395070403151398620, guid: 8b65c6e5aa1e4fe4f89ef7509e6d673a, type: 3}
       propertyPath: m_RootOrder
       value: 2

@@ -19,4 +19,9 @@ public class AnimatedMenuManager : MonoBehaviour
     {
         transition.StartScene(nextLoadScene);
     }
+    public void QuitGame()
+    {
+        Application.Quit();
+        UnityEditor.EditorApplication.isPlaying = false;
+    }
 }

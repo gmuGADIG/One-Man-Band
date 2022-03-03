@@ -7,9 +7,17 @@ public class SceneTransitioner : MonoBehaviour
 {
     private Animator anim;
     private string nextScene;
-    private void Start()
+
+    [SerializeField] private bool playAnimationOnStart = true;
+
+    private void Awake()
     {
         anim = GetComponent<Animator>();
+    }
+    private void OnEnable()
+    {
+        if (playAnimationOnStart)
+            anim.SetTrigger("PlayEntry");
     }
     public void StartScene(string _nextScene)
     {
