@@ -24,8 +24,8 @@ public class TrumpetImpFormation {
             return;
         }
 
-        timer = 3.0f;
-        myCenter = (Vector2)source.currentTargetObject.transform.position;
+        timer = Random.Range(2.5f, 3.5f);
+        myCenter = (Vector2)source.currentTargetObject.transform.position + new Vector2(Random.Range(-3, 3), Random.Range(-3, 3));
     }
 
     public void addImp(TrumpetImp imp)
@@ -61,9 +61,19 @@ public class TrumpetImpFormation {
         return myCenter + arrangement[index];
     }
 
+    public int numSpotsRemaining()
+    {
+        return 5 - imps.Count;
+    }
+
     public bool hasSpots()
     {
-        return imps.Count <= 4;
+        return numSpotsRemaining() > 0;
+    }
+
+    public bool isSingular()
+    {
+        return imps.Count == 1;
     }
 
     //// One single global formation for now for basic testing purposes
@@ -165,12 +175,16 @@ public class TrumpetImp : MonoBehaviour
     }
 
 
-    static bool isInNonfullFormation(GameObject imp)
+    bool testImpFormation(GameObject imp)
     {
         TrumpetImp ti = imp.GetComponent<TrumpetImp>();
         if (ti == null) return false;
 
-        return ti.myFormation.hasSpots();
+        if (!ti.myFormation.hasSpots()) return false;
+
+        if (ti.myFormation.isSingular()) return true;
+
+        return ti.myFormation.numSpotsRemaining() < myFormation.numSpotsRemaining();
     }
 
     private void checkForNearbyFriends()
@@ -192,7 +206,9 @@ public class TrumpetImp : MonoBehaviour
 
             float dist = (imp.transform.position - transform.position).magnitude;
 
-            if(dist <= radius && isInNonfullFormation(imp))
+            bool f = testImpFormation(imp);
+
+            if (dist <= radius && f)
             {
                 if(closest == null)
                 {
@@ -215,7 +231,8 @@ public class TrumpetImp : MonoBehaviour
             {
                 // Change my formation to be that one.
                 imp.myFormation.addImp(this);
-                //print("JOINED A NEW FORMATION!!");
+                
+                
             }
         }
     }
