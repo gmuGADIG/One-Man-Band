@@ -30,6 +30,8 @@ public class TrumpetImpFormation {
 
     public void addImp(TrumpetImp imp)
     {
+        if (imp.myFormation == this) return;
+
         if(imp.myFormation != null)
         {
             imp.myFormation.removeImp(imp);
@@ -59,16 +61,21 @@ public class TrumpetImpFormation {
         return myCenter + arrangement[index];
     }
 
-    // One single global formation for now for basic testing purposes
-    static TrumpetImpFormation theFormation = null;
-    public static TrumpetImpFormation getFormation()
+    public bool hasSpots()
     {
-        if(theFormation == null)
-        {
-            theFormation = new TrumpetImpFormation();
-        }
-        return theFormation;
+        return imps.Count <= 4;
     }
+
+    //// One single global formation for now for basic testing purposes
+    //static TrumpetImpFormation theFormation = null;
+    //public static TrumpetImpFormation getFormation()
+    //{
+    //    if(theFormation == null)
+    //    {
+    //        theFormation = new TrumpetImpFormation();
+    //    }
+    //    return theFormation;
+    //}
 }
 
 
@@ -97,7 +104,9 @@ public class TrumpetImp : MonoBehaviour
 
         currentTargetObject = GameObject.FindWithTag("Player");
 
-        TrumpetImpFormation.getFormation().addImp(this);
+        // Everyone starts with their own formation by default.
+        TrumpetImpFormation newFormation = new TrumpetImpFormation();
+        newFormation.addImp(this);
     }
 
     /// <summary>
@@ -155,6 +164,62 @@ public class TrumpetImp : MonoBehaviour
         }
     }
 
+
+    static bool isInNonfullFormation(GameObject imp)
+    {
+        TrumpetImp ti = imp.GetComponent<TrumpetImp>();
+        if (ti == null) return false;
+
+        return ti.myFormation.hasSpots();
+    }
+
+    private void checkForNearbyFriends()
+    {
+        GameObject[] imps = GameObject.FindGameObjectsWithTag("TrumpetImp");
+
+        float radius = 2.0f;
+
+        GameObject closest = null;
+        float maxDist = -1.0f;
+
+
+        // TODO: Only do this once per frame, for all imps.
+        // That will still be O(n^2) but it will be much better.
+        // Even better option: Use colliders or something..?
+        foreach(GameObject imp in imps)
+        {
+            if (imp == gameObject) continue;
+
+            float dist = (imp.transform.position - transform.position).magnitude;
+
+            if(dist <= radius && isInNonfullFormation(imp))
+            {
+                if(closest == null)
+                {
+                    closest = imp;
+                    maxDist = dist;
+                }
+                else if(dist < maxDist)
+                {
+                    closest = imp;
+                    maxDist = dist;
+                }
+            }
+
+        }
+
+        if(closest != null)
+        {
+            TrumpetImp imp = closest.GetComponent<TrumpetImp>();
+            if(imp.myFormation != null)
+            {
+                // Change my formation to be that one.
+                imp.myFormation.addImp(this);
+                //print("JOINED A NEW FORMATION!!");
+            }
+        }
+    }
+
     private void computeTarget()
     {
         if (myFormation == null) return;
@@ -167,6 +232,8 @@ public class TrumpetImp : MonoBehaviour
 
     private void FixedUpdate()
     {
+        checkForNearbyFriends();
+
         computeTarget();
         doXYPhysics();
 
