@@ -6,16 +6,18 @@ using UnityEngine.SceneManagement;
 public class SceneTransitioner : MonoBehaviour
 {
     private Animator anim;
+    private string nextScene;
     private void Start()
     {
         anim = GetComponent<Animator>();
     }
-    public void StartScene()
+    public void StartScene(string _nextScene)
     {
+        nextScene = _nextScene;
         anim.SetTrigger("Start");
     }
-    public void LoadScene(string scene) //AN EVENT SUBSCRIBER, dont call on button, call on animation function instead
+    public void LoadScene() //AN EVENT SUBSCRIBER, dont call on button, call on animation function instead
     {
-        SceneManager.LoadScene(scene);
+        SceneManager.LoadScene(nextScene);
     }
 }
