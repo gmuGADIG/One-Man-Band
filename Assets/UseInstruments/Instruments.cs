@@ -10,21 +10,21 @@ public class Instruments : MonoBehaviour
     public KeyCode attack = KeyCode.E;
     public KeyCode instrument_swap = KeyCode.Tab;
     public int instrument_cycle = 0;
-    public int Trumpet_cycle = 1;
-    public int Flute_cycle = 2;
-    public int Violin_cycle = 3;
+    public int Trumpet_cycle = 0;
+    public int Flute_cycle = 1;
+    public int Violin_cycle = 2;
     public KeyCode Trumpet = KeyCode.Keypad1;
     public KeyCode Flute = KeyCode.Keypad2;
     public KeyCode Violin = KeyCode.Keypad3;
-    public Notes notes;
+    public string color = "Red";
+
+    public Notes note;
+    public GameObject player;
 
     public GameObject notes_sprite;
 
-
-    private void Awake()
-    {
-        
-    }
+    public AudioSource playerSource;
+    public AudioClip[] AttackAudio;
 
     // Start is called before the first frame update
     void Start()
@@ -35,53 +35,57 @@ public class Instruments : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(attack)) 
-			/* Eyo so GetButtonDown is actually a function that takes in a string (which you can bind to a specific key in the player editor tab) and returns a bool 
-			 * since you are trying to compare it to a keycode (attack) you would actually wanna use GetKeyDown() (which takes in a keycode and returns a bool) 
-			 * so instead of "Input.GetButtonDown == attack" you would do Input.GetKeyDown(attack).
-			 * - David :)
-			 * PS if you wanna know more about this stuff feel free to ask me or check out the unity documentation, its really good!
-			 */
-		{
-            return;
+        if (Input.GetKeyDown(attack)) 
+        {
+            Vector3 cursorPosition = Input.mousePosition;
+            cursorPosition = Camera.main.ScreenToWorldPoint(cursorPosition);
+            cursorPosition -= note.transform.position;
+            Notes tempNote = Instantiate(note, player.transform);
+            tempNote.setVelocity(cursorPosition, color);
+            // playerSource.clip = AttackAudio[instrument_cycle];
+            // playerSource.Play();
         }
         if (Input.GetKeyDown(instrument_swap))
         {
+            instrument_cycle++;
+            if(instrument_cycle == 3)
+            {
+                instrument_cycle = 0;
+            }
             if(instrument_cycle == Trumpet_cycle)
             {
+                color = "Green";
                 Debug.Log("Trumpet ACTIVATED");
-                instrument_cycle += 1;
+                
             }
             else if(instrument_cycle == Flute_cycle)
             {
+                color = "Red";
                 Debug.Log("Flute ACTIVATED");
-                instrument_cycle += 1;
             }
             else if (instrument_cycle == Violin_cycle)
             {
+                color = "Blue";
                 Debug.Log("Violin ACTIVATED");
-                instrument_cycle += 1;
-            }
-            else
-            {
-                Debug.Log("MELE ACTIVATED");
-                instrument_cycle = 1;
             }
             
         }
         if (Input.GetKeyDown(Trumpet))
         {
-            instrument_cycle = Trumpet_cycle + 1;
+            instrument_cycle = Trumpet_cycle;
+            color = "Green";
             Debug.Log("Trumpet in use");
         }
         if (Input.GetKeyDown(Flute))
         {
-            instrument_cycle = Flute_cycle + 1;
+            instrument_cycle = Flute_cycle;
+            color = "Red";
             Debug.Log("Flute in use");
         }
         if (Input.GetKeyDown(Violin))
         {
-            instrument_cycle = Violin_cycle + 1;
+            instrument_cycle = Violin_cycle;
+            color = "Blue";
             Debug.Log("Violin in use");
         }
     }
