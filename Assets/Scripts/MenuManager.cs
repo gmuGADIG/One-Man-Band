@@ -24,7 +24,6 @@ public class MenuManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
-        UnityEditor.EditorApplication.isPlaying = false;
         Debug.Log("QUIT");
     }
 
