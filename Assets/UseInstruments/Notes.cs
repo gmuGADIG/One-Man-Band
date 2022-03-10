@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Notes : MonoBehaviour
 {
-    private float radiusAOE;
+
     private bool red, green, blue;
     [Range(0,100)]
     public int damage;
     [Range(0 ,100)]
     public float moveSpeed;
+    [Range(0, 1)]
+    public float Scale;
     private Vector3 cursorPosition;
     private Vector2 forceVelocity = new Vector2(0.0f, 0.0f);
     public GameObject note;
@@ -20,7 +22,7 @@ public class Notes : MonoBehaviour
 
     void Start()
     {
-        note.GetComponent<CircleCollider2D>().radius = radiusAOE;
+        note.transform.localScale = new Vector3(Scale, Scale, 1.0f);
     }
 
     // Update is called once per frame
@@ -44,7 +46,10 @@ public class Notes : MonoBehaviour
     public void setVelocity(Vector2 vel, string color)
     {
         forceVelocity = vel;
-        note.transform.LookAt(Input.mousePosition, Vector3.up);
+        float angleZ = 0.0f;
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        angleZ = Mathf.Atan2(mousePos.x, mousePos.y) * -Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0.0f, 0.0f, angleZ);
         if (color.Equals("Blue"))
         {
             red = false;
