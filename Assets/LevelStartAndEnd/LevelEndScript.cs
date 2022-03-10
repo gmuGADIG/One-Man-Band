@@ -13,6 +13,7 @@ public class LevelEndScript : MonoBehaviour
     void Start()
     {
         objCollider = gameObject.GetComponent<PolygonCollider2D>();
+        playerCollider = player.GetComponent<Collider2D>();
     }
 
     // Update is called once per frame
@@ -26,6 +27,6 @@ public class LevelEndScript : MonoBehaviour
 
     private void onPlayerTouch()
     {
-
+        //Play an animation(?), call the end level UI
     }
 }
