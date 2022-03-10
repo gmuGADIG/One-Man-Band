@@ -11,7 +11,7 @@ public class SpawnNoteOnEnemyDeath : MonoBehaviour
     void Start() 
     {
         //Change this to Notes disable
-        Note.enabled = false;
+        Note.SetActive(false);
     }
     private void OnEnable(){
         //Subscribe Cycle checks to each Enemy
@@ -22,7 +22,7 @@ public class SpawnNoteOnEnemyDeath : MonoBehaviour
     private void CycleChecks() {
         float amountRemaining = 0;
         foreach (Enemy guy in Enemies) {
-            if (!guy.isAlive) {
+            if (guy.health <= 0) {
                 amountRemaining++;
             }
         }

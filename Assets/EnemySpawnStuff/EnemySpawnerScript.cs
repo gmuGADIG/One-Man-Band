@@ -29,6 +29,7 @@ public class EnemySpawnerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+		player = GameObject.FindGameObjectWithTag("Player");
         incrementNextSpawn();
         //Below if statement sets the count of alive enemies to 0 if it's currently the start of the scene
         if (Time.frameCount <= 1)

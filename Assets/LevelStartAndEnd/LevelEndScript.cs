@@ -12,6 +12,7 @@ public class LevelEndScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+		player = GameObject.FindGameObjectWithTag("Player");
         objCollider = gameObject.GetComponent<PolygonCollider2D>();
         playerCollider = player.GetComponent<Collider2D>();
     }

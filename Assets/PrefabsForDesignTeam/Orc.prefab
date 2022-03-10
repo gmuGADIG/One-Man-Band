@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -4141356941425789020}
   - component: {fileID: 8212070748619971495}
   m_Layer: 0
-  m_Name: EnemySpritePrototype
+  m_Name: Orc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
