@@ -10,6 +10,10 @@ TagManager:
   - BlueNote
   - GreenNote
   - TrumpetImp
+  - New tag
+  - Note
+  - Daddy
+  - TimedNotes
   layers:
   - Default
   - TransparentFX
