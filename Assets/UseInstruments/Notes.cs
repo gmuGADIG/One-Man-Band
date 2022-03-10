@@ -47,7 +47,7 @@ public class Notes : MonoBehaviour
     {
         forceVelocity = vel;
         float angleZ = 0.0f;
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position; // - position makes it use local space meaning the player is the center instead of the global 0,0 coords
         angleZ = Mathf.Atan2(mousePos.x, mousePos.y) * -Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0.0f, 0.0f, angleZ);
         if (color.Equals("Blue"))
