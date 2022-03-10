@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Note : MonoBehaviour
+public class Note : ParentNote
 {
     //Notes traker
-    public int notesCollected;
+    
     public GameObject notes;
     public GameObject[] timedNotes;// = new GameObject[3];
     // Start is called before the first frame update
@@ -27,7 +27,7 @@ public class Note : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Note")
+        if (col.gameObject.tag == "TimedNotes")
         {
             col.gameObject.SetActive(false);
             notesCollected++;
@@ -72,6 +72,9 @@ public class Note : MonoBehaviour
                 timedNotes[i].SetActive(true);
                 tmd.check = false;
             }
+        } else
+        {
+            Collect();
         }
     }
 }

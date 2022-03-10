@@ -9,6 +9,7 @@ TagManager:
   - New tag
   - Note
   - Daddy
+  - TimedNotes
   layers:
   - Default
   - TransparentFX

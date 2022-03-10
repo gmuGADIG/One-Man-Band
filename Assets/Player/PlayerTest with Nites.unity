@@ -352,7 +352,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 879054849209397256, guid: 03cd0f8fac80569478ee1033bfd439c5, type: 3}
       propertyPath: m_TagString
-      value: Note
+      value: TimedNotes
       objectReference: {fileID: 0}
     - target: {fileID: 4823644628958791336, guid: 03cd0f8fac80569478ee1033bfd439c5, type: 3}
       propertyPath: m_RootOrder
@@ -521,7 +521,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 879054849209397256, guid: 03cd0f8fac80569478ee1033bfd439c5, type: 3}
       propertyPath: m_TagString
-      value: Note
+      value: TimedNotes
       objectReference: {fileID: 0}
     - target: {fileID: 4823644628958791336, guid: 03cd0f8fac80569478ee1033bfd439c5, type: 3}
       propertyPath: m_RootOrder
@@ -720,7 +720,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 879054849209397256, guid: 03cd0f8fac80569478ee1033bfd439c5, type: 3}
       propertyPath: m_TagString
-      value: Note
+      value: TimedNotes
       objectReference: {fileID: 0}
     - target: {fileID: 4823644628958791336, guid: 03cd0f8fac80569478ee1033bfd439c5, type: 3}
       propertyPath: m_RootOrder
