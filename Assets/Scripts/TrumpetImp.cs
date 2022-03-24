@@ -81,6 +81,10 @@ public class TrumpetImpFormation {
 
     public Vector2 getFormationPosition(int index)
     {
+        if(index < 0)
+        {
+            return myCenter;
+        }
         return myCenter + arrangement[index];
     }
 
@@ -92,6 +96,15 @@ public class TrumpetImpFormation {
     public bool hasSpots()
     {
         return numSpotsRemaining() > 0;
+    }
+
+    public bool mayAdd(TrumpetImp imp)
+    {
+        if (!hasSpots()) return false;
+
+        if (imp.affiliation != affiliation) return false;
+
+        return true;
     }
 
     public bool isSingular()
@@ -207,11 +220,18 @@ public class TrumpetImp : BaseEnemy
         TrumpetImp ti = imp.GetComponent<TrumpetImp>();
         if (ti == null) return false;
 
-        if (!ti.myFormation.hasSpots()) return false;
+        if (!ti.myFormation.mayAdd(this)) return false;
+
+        //if (!ti.myFormation.hasSpots()) return false;
 
         if (ti.myFormation.isSingular()) return true;
 
-        return ti.myFormation.numSpotsRemaining() < myFormation.numSpotsRemaining();
+        int fuzz_factor = 0;
+        // Add fuzz to potentially leave current formation on occassion.
+        if (Random.value < 0.01) fuzz_factor += 1;
+        if (Random.value < 0.01) fuzz_factor += 1;
+
+        return ti.myFormation.numSpotsRemaining() < (myFormation.numSpotsRemaining() + fuzz_factor);
     }
 
     private void checkForNearbyFriends()
@@ -298,9 +318,12 @@ public class TrumpetImp : BaseEnemy
 
     protected override void OnAffiliationChanged(EnemyAffiliation old, EnemyAffiliation newA)
     {
-        myFormation.removeImp(this);
+        if (old != newA)
+        {
+            myFormation.removeImp(this);
 
-        myFormation = new TrumpetImpFormation(newA);
-        myFormation.addImp(this);
+            TrumpetImpFormation newFormation = new TrumpetImpFormation(newA);
+            newFormation.addImp(this);
+        }
     }
 }
