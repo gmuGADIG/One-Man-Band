@@ -5,13 +5,30 @@ using UnityEngine;
 public class TrumpetImpFormation {
     public HashSet<TrumpetImp> imps;
 
+    private SortedSet<int> idQueue;
+
     private Vector2 myCenter;
 
     private float timer = 0.0f;
 
+    Vector2[] arrangement =
+    {
+        new Vector2(0, 0),
+        new Vector2(-2.0f, 0),
+        new Vector2(2.0f, 0),
+        new Vector2(0, -2.0f),
+        new Vector2(0, 2.0f),
+    };
+
     public TrumpetImpFormation()
     {
         imps = new HashSet<TrumpetImp>();
+        idQueue = new SortedSet<int>();
+
+        for(int i = 0; i < arrangement.Length; ++i)
+        {
+            idQueue.Add(i);
+        }
     }
 
     public void update(TrumpetImp source)
@@ -32,29 +49,31 @@ public class TrumpetImpFormation {
     {
         if (imp.myFormation == this) return;
 
+        // Do not erroneously try to add imps if not possible.
+        // This is a silent error; change this to an exception for debugging, maybe.
+        if (!hasSpots()) return;
+
         if(imp.myFormation != null)
         {
             imp.myFormation.removeImp(imp);
         }
 
         imps.Add(imp);
-        imp.currentFormationIndex = imps.Count - 1;
+
+        imp.currentFormationIndex = idQueue.Min;
+        idQueue.Remove(idQueue.Min);
+
         imp.myFormation = this;
     }
 
     public void removeImp(TrumpetImp imp)
     {
         imps.Remove(imp);
+        if(imp.currentFormationIndex != -1)
+            idQueue.Add(imp.currentFormationIndex);
+        imp.currentFormationIndex = -1;
     }
 
-    Vector2[] arrangement =
-    {
-        new Vector2(0, 0),
-        new Vector2(-2.0f, 0),
-        new Vector2(2.0f, 0),
-        new Vector2(0, -2.0f),
-        new Vector2(0, 2.0f),
-    };
 
     public Vector2 getFormationPosition(int index)
     {
@@ -63,7 +82,7 @@ public class TrumpetImpFormation {
 
     public int numSpotsRemaining()
     {
-        return 5 - imps.Count;
+        return arrangement.Length - imps.Count;
     }
 
     public bool hasSpots()
@@ -89,7 +108,7 @@ public class TrumpetImpFormation {
 }
 
 
-public class TrumpetImp : MonoBehaviour
+public class TrumpetImp : BaseEnemy
 {
     /* The Rigidbody enables us to use the built-in physics system for collisions. */
     private Rigidbody2D rigidbody;
@@ -104,7 +123,7 @@ public class TrumpetImp : MonoBehaviour
 
     public GameObject currentTargetObject = null;
 
-    public int currentFormationIndex = 0;
+    public int currentFormationIndex = -1;
 
     public TrumpetImpFormation myFormation = null;
 
