@@ -146,4 +146,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 1}
   windStrength: 40
-  isBlowing: 0
+  isBlowing: 1
