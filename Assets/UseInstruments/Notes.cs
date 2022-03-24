@@ -6,9 +6,10 @@ public class Notes : MonoBehaviour
 {
 
     private bool red, green, blue;
-    [Range(0,100)]
+    public EnemyAffiliation affiliation { get; private set; }
+    [Range(0, 100)]
     public int damage;
-    [Range(0 ,100)]
+    [Range(0, 100)]
     public float moveSpeed;
     [Range(0, 1)]
     public float Scale;
@@ -28,18 +29,10 @@ public class Notes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
 
 
         Move();
-        float height = Camera.main.orthographicSize;
-        float width = height * Camera.main.aspect;
-        Debug.Log(height);
-        Debug.Log(width);
-        if (!((transform.position.y > Camera.main.transform.position.y - height || transform.position.y < Camera.main.transform.position.y + height) && (transform.position.x > Camera.main.transform.position.x - width/2 || transform.position.x < Camera.main.transform.position.x - width/2)))
-        {
-            Destroy(gameObject);
-        }
         /*
         if (Input.GetMouseButtonDown(0))
         {
@@ -63,6 +56,7 @@ public class Notes : MonoBehaviour
             red = false;
             blue = true;
             green = false;
+            affiliation = EnemyAffiliation.Blue;
             note.GetComponent<SpriteRenderer>().sprite = noteSprite;
             note.GetComponent<SpriteRenderer>().color = Color.blue;
         }
@@ -71,6 +65,7 @@ public class Notes : MonoBehaviour
             red = true;
             blue = false;
             green = false;
+            affiliation = EnemyAffiliation.Red;
             note.GetComponent<SpriteRenderer>().sprite = noteSprite;
             note.GetComponent<SpriteRenderer>().color = Color.red;
         }
@@ -79,15 +74,17 @@ public class Notes : MonoBehaviour
             red = false;
             blue = false;
             green = true;
+            affiliation = EnemyAffiliation.Green;
             note.GetComponent<SpriteRenderer>().sprite = noteSprite;
             note.GetComponent<SpriteRenderer>().color = Color.green;
         }
         note.tag = color + "Note";
     }
-    
+
     void Move()
     {
         note.transform.position += (Vector3.Normalize(forceVelocity) * moveSpeed) * Time.deltaTime;
         note.transform.position = new Vector3(note.transform.position.x, note.transform.position.y, 0.0f);
     }
 }
+
