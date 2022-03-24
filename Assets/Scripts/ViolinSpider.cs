@@ -5,9 +5,10 @@ using UnityEngine;
 public class ViolinSpider : MonoBehaviour
 {
     //variables
-    public GameObject player;
+    public Transform player;
     public Animator anim;
-    public int health; 
+    public int health;
+     
     // Start is called before the first frame update
     void Start()
     {
