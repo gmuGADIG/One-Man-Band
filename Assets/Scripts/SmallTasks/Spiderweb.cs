@@ -5,15 +5,35 @@ using UnityEngine;
 public class Spiderweb : MonoBehaviour
 {
     [SerializeField] private float maxSpeedinWeb = 2f;
+    private AudioSource source;
 
     private List<Rigidbody2D> bodies = new List<Rigidbody2D>();
 
+    private void Start()
+    {
+        source = GetComponent<AudioSource>();
+    }
+
     private void FixedUpdate()
     {
+        int amoutOfBoiesMoving = 0;
         foreach(Rigidbody2D rb in bodies)
         {
-            if (rb.velocity.magnitude >= maxSpeedinWeb)
-                rb.velocity = rb.velocity.normalized * maxSpeedinWeb;
+            if (rb.velocity.magnitude != 0)
+            {
+                amoutOfBoiesMoving++;
+                if (rb.velocity.magnitude >= maxSpeedinWeb)
+                    rb.velocity = rb.velocity.normalized * maxSpeedinWeb;
+            }
+        }
+        if (amoutOfBoiesMoving != 0)
+        {
+            if (!source.isPlaying)
+                source.Play();
+        }
+        else
+        {
+            source.Stop();
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
