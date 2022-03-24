@@ -6,7 +6,7 @@ public class Notes : MonoBehaviour
 {
 
     private bool red, green, blue;
-    public EnemyAffiliation affiliation { get; private set; }
+    //public EnemyAffiliation affiliation { get; private set; }
     [Range(0,100)]
     public int damage;
     [Range(0 ,100)]
@@ -56,7 +56,7 @@ public class Notes : MonoBehaviour
             red = false;
             blue = true;
             green = false;
-            affiliation = EnemyAffiliation.Blue;
+            //affiliation = EnemyAffiliation.Blue;
             note.GetComponent<SpriteRenderer>().sprite = noteSprite;
             note.GetComponent<SpriteRenderer>().color = Color.blue;
         }
@@ -65,7 +65,7 @@ public class Notes : MonoBehaviour
             red = true;
             blue = false;
             green = false;
-            affiliation = EnemyAffiliation.Red;
+            //affiliation = EnemyAffiliation.Red;
             note.GetComponent<SpriteRenderer>().sprite = noteSprite;
             note.GetComponent<SpriteRenderer>().color = Color.red;
         }
@@ -74,7 +74,7 @@ public class Notes : MonoBehaviour
             red = false;
             blue = false;
             green = true;
-            affiliation = EnemyAffiliation.Green;
+            //affiliation = EnemyAffiliation.Green;
             note.GetComponent<SpriteRenderer>().sprite = noteSprite;
             note.GetComponent<SpriteRenderer>().color = Color.green;
         }

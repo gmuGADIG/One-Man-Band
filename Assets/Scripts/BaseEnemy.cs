@@ -4,9 +4,8 @@ using UnityEngine;
 
 public enum EnemyAffiliation
 {
-    Red,
-    Green,
-    Blue
+    AgainstPlayer,
+    WithPlayer
 }
 
 public class BaseEnemy : MonoBehaviour
@@ -15,12 +14,10 @@ public class BaseEnemy : MonoBehaviour
 
     public int baseConvertHealth = 5;
 
-    public EnemyAffiliation startingAffiliation = EnemyAffiliation.Red;
-
-    private void Start()
+    protected void Start()
     {
         convertHealth = baseConvertHealth;
-        affiliation = startingAffiliation;
+        affiliation = EnemyAffiliation.AgainstPlayer;
     }
 
     // Affiliation must be changed through ChangeAffiliation.
@@ -39,25 +36,27 @@ public class BaseEnemy : MonoBehaviour
 
     }
 
-    // Converts the enemy to the given affiliation and resets its health.
-    private void convertToAffiliation(EnemyAffiliation aff)
+    private void checkConvertNoteCollide(Collider2D collision)
     {
-        ChangeAffiliation(aff);
-        convertHealth = baseConvertHealth;
-    }
+        // Already converted, don't need to check for conversion notes
+        if (convertHealth <= 0) return;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
         Notes noteScript = collision.gameObject.GetComponent<Notes>();
 
         // If we actually collided with a note...
-        if(noteScript != null)
+        if (noteScript != null)
         {
             convertHealth -= noteScript.damage;
-            if(convertHealth <= 0)
+            if (convertHealth <= 0)
             {
-                convertToAffiliation(noteScript.affiliation);
+                ChangeAffiliation(EnemyAffiliation.WithPlayer);
             }
         }
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        checkConvertNoteCollide(collision);
     }
 }

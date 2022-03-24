@@ -148,6 +148,9 @@ public class TrumpetImp : BaseEnemy
 
     private void Start()
     {
+        // MUST CALL PARENT START!
+        base.Start();
+
         rigidbody = GetComponent<Rigidbody2D>();
 
         currentTargetObject = GameObject.FindWithTag("Player");
@@ -297,8 +300,8 @@ public class TrumpetImp : BaseEnemy
     private void UpdateColor()
     {
         Color result = Color.red;
-        if (affiliation == EnemyAffiliation.Green) result = Color.green;
-        if (affiliation == EnemyAffiliation.Blue) result = Color.blue;
+        if (affiliation == EnemyAffiliation.WithPlayer) result = Color.green;
+        //if (affiliation == EnemyAffiliation.Blue) result = Color.blue;
         spriteRenderer.color = result;
     }
 

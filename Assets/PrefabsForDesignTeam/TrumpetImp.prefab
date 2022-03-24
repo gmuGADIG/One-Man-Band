@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 891101225263380472}
   - component: {fileID: 891101225263380475}
   - component: {fileID: 891101225263380474}
-  - component: {fileID: 7050734916499686780}
   m_Layer: 0
   m_Name: TrumpetImp
   m_TagString: TrumpetImp
@@ -135,19 +134,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2dd3f206c8740249babd735f31b2093, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseConvertHealth: 5
   maxVelocity: 4
   maxAcceleration: 40
   currentTargetObject: {fileID: 0}
   currentFormationIndex: 0
---- !u!114 &7050734916499686780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 891101225263380477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65bdcef842ba6f646990f035d2808ab4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
