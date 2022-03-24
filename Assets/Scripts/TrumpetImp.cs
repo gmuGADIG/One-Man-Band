@@ -292,6 +292,8 @@ public class TrumpetImp : BaseEnemy
         // Only formation index 0 actually does any updating.
         if(myFormation != null)
             myFormation.update(this);
+
+        UpdateColor();
     }
 
     protected override void OnAffiliationChanged(EnemyAffiliation old, EnemyAffiliation newA)
