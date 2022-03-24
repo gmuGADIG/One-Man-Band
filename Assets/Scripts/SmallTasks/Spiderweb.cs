@@ -6,7 +6,6 @@ public class Spiderweb : MonoBehaviour
 {
     [SerializeField] private float maxSpeedinWeb = 2f;
 
-    //private List<character> effectedCharacters = new List<Character>();
     private List<Rigidbody2D> bodies = new List<Rigidbody2D>();
 
     private void FixedUpdate()
@@ -20,11 +19,11 @@ public class Spiderweb : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Rigidbody2D rb;
-        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Enemy")
-        {
-            //add to character list
-        }
-        else if (collision.gameObject.TryGetComponent(out rb))
+        //if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Enemy")
+        //{
+        //    //add to character list
+        //}
+        if (collision.gameObject.TryGetComponent(out rb))
         {
             if (!bodies.Contains(rb))
             {
@@ -35,11 +34,11 @@ public class Spiderweb : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         Rigidbody2D rb;
-        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Enemy")
-        {
-            //add to character list
-        }
-        else if (collision.gameObject.TryGetComponent(out rb))
+        //if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Enemy")
+        //{
+        //    //add to character list
+        //}
+        if (collision.gameObject.TryGetComponent(out rb))
         {
             if (bodies.Contains(rb))
             {
