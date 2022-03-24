@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TimedNoteManager : MonoBehaviour
 {
-    public bool check = false;
+
     // Start is called before the first frame update
     void Start()
     {
