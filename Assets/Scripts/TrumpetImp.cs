@@ -20,7 +20,9 @@ public class TrumpetImpFormation {
         new Vector2(0, 2.0f),
     };
 
-    public TrumpetImpFormation()
+    EnemyAffiliation affiliation;
+
+    public TrumpetImpFormation(EnemyAffiliation affiliation)
     {
         imps = new HashSet<TrumpetImp>();
         idQueue = new SortedSet<int>();
@@ -29,6 +31,8 @@ public class TrumpetImpFormation {
         {
             idQueue.Add(i);
         }
+
+        this.affiliation = affiliation;
     }
 
     public void update(TrumpetImp source)
@@ -127,6 +131,8 @@ public class TrumpetImp : BaseEnemy
 
     public TrumpetImpFormation myFormation = null;
 
+    private SpriteRenderer spriteRenderer;
+
     private void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
@@ -134,8 +140,10 @@ public class TrumpetImp : BaseEnemy
         currentTargetObject = GameObject.FindWithTag("Player");
 
         // Everyone starts with their own formation by default.
-        TrumpetImpFormation newFormation = new TrumpetImpFormation();
+        TrumpetImpFormation newFormation = new TrumpetImpFormation(affiliation);
         newFormation.addImp(this);
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     /// <summary>
@@ -266,6 +274,14 @@ public class TrumpetImp : BaseEnemy
         //}
     }
 
+    private void UpdateColor()
+    {
+        Color result = Color.red;
+        if (affiliation == EnemyAffiliation.Green) result = Color.green;
+        if (affiliation == EnemyAffiliation.Blue) result = Color.blue;
+        spriteRenderer.color = result;
+    }
+
     private void FixedUpdate()
     {
         checkForNearbyFriends();
@@ -276,5 +292,13 @@ public class TrumpetImp : BaseEnemy
         // Only formation index 0 actually does any updating.
         if(myFormation != null)
             myFormation.update(this);
+    }
+
+    protected override void OnAffiliationChanged(EnemyAffiliation old, EnemyAffiliation newA)
+    {
+        myFormation.removeImp(this);
+
+        myFormation = new TrumpetImpFormation(newA);
+        myFormation.addImp(this);
     }
 }
