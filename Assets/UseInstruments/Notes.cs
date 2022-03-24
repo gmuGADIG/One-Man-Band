@@ -32,6 +32,14 @@ public class Notes : MonoBehaviour
 
 
         Move();
+        float height = Camera.main.orthographicSize;
+        float width = height * Camera.main.aspect;
+        Debug.Log(height);
+        Debug.Log(width);
+        if (!((transform.position.y > Camera.main.transform.position.y - height || transform.position.y < Camera.main.transform.position.y + height) && (transform.position.x > Camera.main.transform.position.x - width/2 || transform.position.x < Camera.main.transform.position.x - width/2)))
+        {
+            Destroy(gameObject);
+        }
         /*
         if (Input.GetMouseButtonDown(0))
         {
