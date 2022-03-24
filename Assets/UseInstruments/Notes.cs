@@ -83,14 +83,12 @@ public class Notes : MonoBehaviour
         /*note.*/transform.position = new Vector3(/*note.*/transform.position.x, /*note.*/transform.position.y, 0.0f);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("boing");
         Health h  = collision.gameObject.GetComponent<Health>();
         if (h) //if our object has a health script on it at all
         {
-            Debug.Log("boing2");
-            h.Damage(damage);
+             h.Damage(damage);
         }
     }
 }

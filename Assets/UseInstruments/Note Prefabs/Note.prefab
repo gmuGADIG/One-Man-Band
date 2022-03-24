@@ -100,7 +100,6 @@ MonoBehaviour:
   damage: 10
   moveSpeed: 50
   Scale: 0.438
-  note: {fileID: 5630893792240628696}
   noteSprite: {fileID: 21300000, guid: e05bdea58f0441b40a81edd954600377, type: 3}
 --- !u!61 &5630893792240628708
 BoxCollider2D:
@@ -112,7 +111,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -1}
