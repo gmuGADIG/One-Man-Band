@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DaddyNote : ParentNote
 {
+	[Tooltip("Just make some 'TimedNote' prefabs and make them child objects of this and toy wont need to worry about the rest of this stuff")]
     public GameObject[] timedNotes;
     public TimedNoteManager tmd;
     public bool Tracking = false;
