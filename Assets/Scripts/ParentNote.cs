@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ParentNote : MonoBehaviour
 {
-    public int notesCollected;
+    public static int notesCollected;
 
     public delegate void NoteEvent();
     public event NoteEvent Collected;
@@ -28,7 +28,7 @@ public class ParentNote : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Note")
+        if (col.gameObject.tag == "Player")
         {
             Destroy(gameObject);
             Collect();
