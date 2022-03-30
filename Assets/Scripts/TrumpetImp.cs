@@ -5,13 +5,34 @@ using UnityEngine;
 public class TrumpetImpFormation {
     public HashSet<TrumpetImp> imps;
 
+    private SortedSet<int> idQueue;
+
     private Vector2 myCenter;
 
     private float timer = 0.0f;
 
-    public TrumpetImpFormation()
+    Vector2[] arrangement =
+    {
+        new Vector2(0, 0),
+        new Vector2(-2.0f, 0),
+        new Vector2(2.0f, 0),
+        new Vector2(0, -2.0f),
+        new Vector2(0, 2.0f),
+    };
+
+    EnemyAffiliation affiliation;
+
+    public TrumpetImpFormation(EnemyAffiliation affiliation)
     {
         imps = new HashSet<TrumpetImp>();
+        idQueue = new SortedSet<int>();
+
+        for(int i = 0; i < arrangement.Length; ++i)
+        {
+            idQueue.Add(i);
+        }
+
+        this.affiliation = affiliation;
     }
 
     public void update(TrumpetImp source)
@@ -32,43 +53,58 @@ public class TrumpetImpFormation {
     {
         if (imp.myFormation == this) return;
 
+        // Do not erroneously try to add imps if not possible.
+        // This is a silent error; change this to an exception for debugging, maybe.
+        if (!hasSpots()) return;
+
         if(imp.myFormation != null)
         {
             imp.myFormation.removeImp(imp);
         }
 
         imps.Add(imp);
-        imp.currentFormationIndex = imps.Count - 1;
+
+        imp.currentFormationIndex = idQueue.Min;
+        idQueue.Remove(idQueue.Min);
+
         imp.myFormation = this;
     }
 
     public void removeImp(TrumpetImp imp)
     {
         imps.Remove(imp);
+        if(imp.currentFormationIndex != -1)
+            idQueue.Add(imp.currentFormationIndex);
+        imp.currentFormationIndex = -1;
     }
 
-    Vector2[] arrangement =
-    {
-        new Vector2(0, 0),
-        new Vector2(-2.0f, 0),
-        new Vector2(2.0f, 0),
-        new Vector2(0, -2.0f),
-        new Vector2(0, 2.0f),
-    };
 
     public Vector2 getFormationPosition(int index)
     {
+        if(index < 0)
+        {
+            return myCenter;
+        }
         return myCenter + arrangement[index];
     }
 
     public int numSpotsRemaining()
     {
-        return 5 - imps.Count;
+        return arrangement.Length - imps.Count;
     }
 
     public bool hasSpots()
     {
         return numSpotsRemaining() > 0;
+    }
+
+    public bool mayAdd(TrumpetImp imp)
+    {
+        if (!hasSpots()) return false;
+
+        if (imp.affiliation != affiliation) return false;
+
+        return true;
     }
 
     public bool isSingular()
@@ -89,7 +125,7 @@ public class TrumpetImpFormation {
 }
 
 
-public class TrumpetImp : MonoBehaviour
+public class TrumpetImp : BaseEnemy
 {
     /* The Rigidbody enables us to use the built-in physics system for collisions. */
     private Rigidbody2D rigidbody;
@@ -104,19 +140,26 @@ public class TrumpetImp : MonoBehaviour
 
     public GameObject currentTargetObject = null;
 
-    public int currentFormationIndex = 0;
+    public int currentFormationIndex = -1;
 
     public TrumpetImpFormation myFormation = null;
 
+    private SpriteRenderer spriteRenderer;
+
     private void Start()
     {
+        // MUST CALL PARENT START!
+        base.Start();
+
         rigidbody = GetComponent<Rigidbody2D>();
 
         currentTargetObject = GameObject.FindWithTag("Player");
 
         // Everyone starts with their own formation by default.
-        TrumpetImpFormation newFormation = new TrumpetImpFormation();
+        TrumpetImpFormation newFormation = new TrumpetImpFormation(affiliation);
         newFormation.addImp(this);
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     /// <summary>
@@ -180,11 +223,18 @@ public class TrumpetImp : MonoBehaviour
         TrumpetImp ti = imp.GetComponent<TrumpetImp>();
         if (ti == null) return false;
 
-        if (!ti.myFormation.hasSpots()) return false;
+        if (!ti.myFormation.mayAdd(this)) return false;
+
+        //if (!ti.myFormation.hasSpots()) return false;
 
         if (ti.myFormation.isSingular()) return true;
 
-        return ti.myFormation.numSpotsRemaining() < myFormation.numSpotsRemaining();
+        int fuzz_factor = 0;
+        // Add fuzz to potentially leave current formation on occassion.
+        if (Random.value < 0.01) fuzz_factor += 1;
+        if (Random.value < 0.01) fuzz_factor += 1;
+
+        return ti.myFormation.numSpotsRemaining() < (myFormation.numSpotsRemaining() + fuzz_factor);
     }
 
     private void checkForNearbyFriends()
@@ -247,6 +297,14 @@ public class TrumpetImp : MonoBehaviour
         //}
     }
 
+    private void UpdateColor()
+    {
+        Color result = Color.red;
+        if (affiliation == EnemyAffiliation.WithPlayer) result = Color.green;
+        //if (affiliation == EnemyAffiliation.Blue) result = Color.blue;
+        spriteRenderer.color = result;
+    }
+
     private void FixedUpdate()
     {
         checkForNearbyFriends();
@@ -257,5 +315,18 @@ public class TrumpetImp : MonoBehaviour
         // Only formation index 0 actually does any updating.
         if(myFormation != null)
             myFormation.update(this);
+
+        UpdateColor();
+    }
+
+    protected override void OnAffiliationChanged(EnemyAffiliation old, EnemyAffiliation newA)
+    {
+        if (old != newA)
+        {
+            myFormation.removeImp(this);
+
+            TrumpetImpFormation newFormation = new TrumpetImpFormation(newA);
+            newFormation.addImp(this);
+        }
     }
 }

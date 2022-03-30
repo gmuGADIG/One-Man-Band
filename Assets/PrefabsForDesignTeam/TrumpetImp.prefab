@@ -134,6 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2dd3f206c8740249babd735f31b2093, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseConvertHealth: 5
   maxVelocity: 4
   maxAcceleration: 40
   currentTargetObject: {fileID: 0}

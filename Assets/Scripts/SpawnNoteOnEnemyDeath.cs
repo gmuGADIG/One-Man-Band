@@ -6,7 +6,7 @@ public class SpawnNoteOnEnemyDeath : MonoBehaviour
 {
     //Change these to types
     [SerializeField] private GameObject Note;
-    [SerializeField] private List<Enemy> Enemies;
+    [SerializeField] private List<BaseEnemy> Enemies;
 
     void Start() 
     {
@@ -21,8 +21,8 @@ public class SpawnNoteOnEnemyDeath : MonoBehaviour
     }
     private void CycleChecks() {
         float amountRemaining = 0;
-        foreach (Enemy guy in Enemies) {
-            if (guy.health <= 0) {
+        foreach (BaseEnemy guy in Enemies) {
+            if (guy.convertHealth > 0 && guy.Health > 0) {
                 amountRemaining++;
             }
         }

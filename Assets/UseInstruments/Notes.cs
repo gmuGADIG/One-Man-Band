@@ -6,8 +6,8 @@ public class Notes : MonoBehaviour
 {
 
     private bool red, green, blue;
-    public EnemyAffiliation affiliation { get; private set; }
-    [Range(0, 100)]
+    //public EnemyAffiliation affiliation { get; private set; }
+    [Range(0,100)]
     public int damage;
     [Range(0, 100)]
     public float moveSpeed;
@@ -57,10 +57,9 @@ public class Notes : MonoBehaviour
             blue = true;
             green = false;
 
-            affiliation = EnemyAffiliation.Blue;
-
             /*note.*/GetComponent<SpriteRenderer>().sprite = noteSprite;
             /*note.*/GetComponent<SpriteRenderer>().color = Color.blue;
+
         }
         else if (color.Equals("Red"))
         {
@@ -68,19 +67,19 @@ public class Notes : MonoBehaviour
             blue = false;
             green = false;
 
-            affiliation = EnemyAffiliation.Red;
             /*note.*/GetComponent<SpriteRenderer>().sprite = noteSprite;
             /*note.*/GetComponent<SpriteRenderer>().color = Color.red;
+
         }
         else if (color.Equals("Green"))
         {
             red = false;
             blue = false;
             green = true;
-            affiliation = EnemyAffiliation.Green;
-           
+
             /*note.*/GetComponent<SpriteRenderer>().sprite = noteSprite;
             /*note.*/GetComponent<SpriteRenderer>().color = Color.green;
+
         }
         /*note.*/tag = color + "Note";
     }
