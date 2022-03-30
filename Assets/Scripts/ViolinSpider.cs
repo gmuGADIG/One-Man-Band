@@ -18,15 +18,15 @@ public class ViolinSpider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(){
+       /* if(){ // bruh
             attack();
         }
-        else if(){  
+		else if(){  
             death();
         }
         else{
             walk();
-        }
+        }*/
     }
 
     void walk(){
