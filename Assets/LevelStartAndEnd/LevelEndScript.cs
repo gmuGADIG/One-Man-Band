@@ -28,6 +28,23 @@ public class LevelEndScript : MonoBehaviour
 
     private void onPlayerTouch()
     {
+        stopAllEnemies();
         //Play an animation(?), call the end level UI
+        
+    }
+
+    private void stopAllEnemies()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            enemy.SetActive(false);
+        }
+        //Stop the enemy spawners too
+        GameObject[] enemySpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
+        foreach (GameObject enemySpawner in enemySpawners)
+        {
+            enemySpawner.GetComponent<EnemySpawnerScript>().spawnCheck = false;
+        }
     }
 }
