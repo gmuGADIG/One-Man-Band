@@ -29,9 +29,6 @@ public class Notes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
-
         Move();
         /*
         if (Input.GetMouseButtonDown(0))
@@ -42,6 +39,10 @@ public class Notes : MonoBehaviour
             setVelocity(cursorPosition, "Red");
         }
         */
+    }
+
+    private void OnEnable()
+    {
     }
 
     public void setVelocity(Vector2 vel, string color)
@@ -92,11 +93,6 @@ public class Notes : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Health h  = collision.gameObject.GetComponent<Health>();
-        if (h) //if our object has a health script on it at all
-        {
-             h.Damage(damage);
-        }
     }
 }
 
