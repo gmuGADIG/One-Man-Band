@@ -5,7 +5,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     public int maxHP;
-    private int currentHP;
+    public int currentHP;
     
     // Start is called before the first frame update
     void Start()
@@ -16,10 +16,12 @@ public class Health : MonoBehaviour
     public void Damage(int dmg)
     {
         currentHP -= dmg;
-        if (currentHP <= 0)
-        {
-            Destroy(gameObject);
-        }
+
+        // Comment out this for now. Probably shouldn't apply to the player.
+        //if (currentHP <= 0)
+        //{
+        //    Destroy(gameObject);
+        //}
     }
 
     // Update is called once per frame

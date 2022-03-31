@@ -70,12 +70,29 @@ public class TrumpetImpFormation {
         imp.myFormation = this;
     }
 
+    private void reassignImpIds()
+    {
+        foreach (TrumpetImp imp in imps)
+        {
+            idQueue.Add(imp.currentFormationIndex);
+        }
+
+        foreach (TrumpetImp imp in imps)
+        {
+            imp.currentFormationIndex = idQueue.Min;
+            idQueue.Remove(idQueue.Min);
+        }
+    }
+
     public void removeImp(TrumpetImp imp)
     {
         imps.Remove(imp);
         if(imp.currentFormationIndex != -1)
             idQueue.Add(imp.currentFormationIndex);
         imp.currentFormationIndex = -1;
+
+        // Reassign IDs to be sure that some imp has id 0, and that they are in order
+        reassignImpIds();
     }
 
 
@@ -146,6 +163,16 @@ public class TrumpetImp : BaseEnemy
 
     private SpriteRenderer spriteRenderer;
 
+    private float aoeRadius;
+
+    private ParticleSystem attackParticleSystem;
+
+    private float attackCooldown = 0.5f;
+
+    public int attackDamage = 1;
+
+    private Health health;
+
     private void Start()
     {
         // MUST CALL PARENT START!
@@ -160,6 +187,49 @@ public class TrumpetImp : BaseEnemy
         newFormation.addImp(this);
 
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        aoeRadius = transform.FindChild("AOERadius").localPosition.magnitude;
+        attackParticleSystem = GetComponent<ParticleSystem>();
+
+        health = GetComponent<Health>();
+    }
+
+    private void attack()
+    {
+        foreach (Health health in GameObject.FindObjectsOfType<Health>())
+        {
+        
+            bool shouldAttack = false;
+
+            // Compare the given Health's position to our position.
+            float radius = (health.transform.position - transform.position).magnitude;
+
+            // Never attack anything outside the radius. Early exit, so to speak.
+            if (radius > aoeRadius) continue;
+
+            BaseEnemy be = health.gameObject.GetComponent<BaseEnemy>();
+            if (be != null)
+            {
+                if (be.affiliation != affiliation)
+                {
+                    shouldAttack = true;
+                }
+            }
+            else if(health.gameObject.GetComponent<Player>() != null && affiliation == EnemyAffiliation.AgainstPlayer)
+            {
+                shouldAttack = true;
+            }
+
+           
+            if (shouldAttack)
+            {
+                // Damage any relevant enemies.
+                health.Damage(attackDamage);
+            }
+        }
+
+        attackParticleSystem.Play();
+        attackCooldown = 1.0f;
     }
 
     /// <summary>
@@ -307,6 +377,9 @@ public class TrumpetImp : BaseEnemy
 
     private void FixedUpdate()
     {
+        // Cooldown is updated each frame to time when the attack is ready.
+        if(attackCooldown > 0) attackCooldown -= Time.fixedDeltaTime;
+
         checkForNearbyFriends();
 
         computeTarget();
@@ -317,6 +390,18 @@ public class TrumpetImp : BaseEnemy
             myFormation.update(this);
 
         UpdateColor();
+
+        // Simple attacking logic for now: just attack whenever our cooldown is less than zero.
+        if(attackCooldown <= 0)
+        {
+            attack();
+        }
+
+        if(health.currentHP <= 0)
+        {
+            myFormation.removeImp(this);
+            Destroy(gameObject);
+        }
     }
 
     protected override void OnAffiliationChanged(EnemyAffiliation old, EnemyAffiliation newA)
