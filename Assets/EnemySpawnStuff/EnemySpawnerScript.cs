@@ -16,8 +16,6 @@ public class EnemySpawnerScript : MonoBehaviour
     public float spawnIntervalUpperBound;
     [Tooltip("Spawns enemies only while this is true/checked")]
     public bool spawnCheck;
-    [Tooltip("The player object in this scene, the spawner only spawns enemies if the player is close enough to it")]
-    public GameObject player;
     [Tooltip("Only spawns enemies if player is within this distance of spawner")]
     public float maxSpawningDistance;
 
@@ -25,6 +23,7 @@ public class EnemySpawnerScript : MonoBehaviour
                                             //decremented by enemies as they despawn
 
     private float nextSpawn = 0.0f;
+    private GameObject player;
 
     // Start is called before the first frame update
     void Start()
