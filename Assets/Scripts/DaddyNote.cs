@@ -8,6 +8,7 @@ public class DaddyNote : ParentNote
     public GameObject[] timedNotes;
     public TimedNoteManager tmd;
     public bool Tracking = false;
+	public float TimeLimit = 3;
     // Start is called before the first frame update
     void Start()
     {
@@ -75,8 +76,7 @@ public class DaddyNote : ParentNote
     IEnumerator keepTrack()
     {
         Debug.Log("Start Tracking");
-        yield return new WaitForSeconds(3.0f);
-        Debug.Log("THREE SECONFSDD");
+        yield return new WaitForSeconds(TimeLimit);
         bool check = false;
         for (int i = 0; i < timedNotes.Length; i++)
         {

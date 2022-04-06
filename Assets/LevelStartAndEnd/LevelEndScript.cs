@@ -18,18 +18,25 @@ public class LevelEndScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    /*void Update()
     {
         if (objCollider.IsTouching(playerCollider))
         {
-            onPlayerTouch();
+            
         }
-    }
-
-    private void onPlayerTouch()
+    }*/ 
+	private void OnTriggerEnter2D(Collider2D collision) // we can use the built in trigger instead of checking every frame
+	{
+		if (collision.gameObject == player)
+		{
+			onPlayerTouch();
+		}
+	}
+	private void onPlayerTouch()
     {
         stopAllEnemies();
         //Play an animation(?), call the end level UI
+		//TODO: please make this load the next scene also
         
     }
 

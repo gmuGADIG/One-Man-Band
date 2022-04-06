@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 8824964171705841431}
   - component: {fileID: 2820184321265130583}
   - component: {fileID: -4141356941425789020}
-  - component: {fileID: 8212070748619971495}
+  - component: {fileID: 2901082217400393875}
+  - component: {fileID: 4845013616121755866}
   m_Layer: 0
   m_Name: Orc
   m_TagString: Enemy
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 8931512868122751305}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -97,7 +98,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9425282f4c5119449ba03081b64fcf37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  convertHealth: 0
+  baseConvertHealth: 5
+  Health: 0
+  baseHealth: 5
   movespeed: 2
 --- !u!50 &-4141356941425789020
 Rigidbody2D:
@@ -120,8 +124,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!60 &8212070748619971495
-PolygonCollider2D:
+--- !u!114 &2901082217400393875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8931512868122751305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c8476bf4a0bdb94fa13bb88c77c84c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 0
+  currentHP: 2
+--- !u!61 &4845013616121755866
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -130,7 +148,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -143,10 +161,6 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0, y: 0.25}
-      - {x: -0.5, y: 0}
-      - {x: 0, y: -0.25}
-      - {x: 0.27769366, y: -0.111153156}
-      - {x: 0.5, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.5}
+  m_EdgeRadius: 0
