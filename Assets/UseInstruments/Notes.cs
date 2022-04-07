@@ -93,6 +93,20 @@ public class Notes : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
+        // Uhh... notes do not damage enemies. LOL!!!!!!
+        // I've commented this out.
+        // ... to give a little more info, the Health script is, AFAIK, the enemy health--
+        // that is, once it's out of health, it will die.
+        // The player Notes script should actually change the BaseEnemy.convertHealth value.
+        // However, right now, the BaseEnemy script is already handling this behavior.
+
+        //Health h  = collision.gameObject.GetComponent<Health>();
+        //if (h) //if our object has a health script on it at all
+        //{
+        //     h.Damage(damage);
+        //}
+
     }
 }
 
