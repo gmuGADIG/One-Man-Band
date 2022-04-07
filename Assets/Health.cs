@@ -17,15 +17,13 @@ public class Health : MonoBehaviour
     {
         currentHP -= dmg;
 
-        // Comment out this for now. Probably shouldn't apply to the player.
-        //if (currentHP <= 0)
-        //{
-        //    Destroy(gameObject);
-        //}
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.CompareTag("Enemy"))
+        {
+            Damage(1);
+        }  
     }
 }
