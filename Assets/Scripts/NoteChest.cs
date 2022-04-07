@@ -35,17 +35,17 @@ public class NoteChest : MonoBehaviour
         for (int i = 0; i < transform.childCount; i++)
         {
             transform.GetChild(i).gameObject.SetActive(true);
-            radius[i] = Random.Range(0.01f, 0.05f);
-            angle[i] = Random.Range(-20f, 20f); 
+            radius[i] = Random.Range(0.05f, 0.12f);
+            angle[i] = Random.Range(-1f, 1f)*20f*Mathf.Deg2Rad; 
         }
         float timer = Time.time; 
-        while (Time.time - timer < 0.25f)
+        while (Time.time - timer < 0.1f)
         {
             for (int i = 0; i < transform.childCount; i++)
             {
                 transform.GetChild(i).Translate(
-                    radius[i] * Mathf.Cos(angle[i] + 360 * i / transform.childCount), 
-                    radius[i] * Mathf.Sin(angle[i] + 360 * i / transform.childCount), 
+                    radius[i] * Mathf.Cos(angle[i] + 2*Mathf.PI * i / transform.childCount), 
+                    radius[i] * Mathf.Sin(angle[i] + 2*Mathf.PI * i / transform.childCount), 
                     0);
 
             }
