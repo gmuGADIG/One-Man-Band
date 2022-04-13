@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrumpetImpFormation {
+/*public class TrumpetImpFormation {
     public HashSet<TrumpetImp> imps;
 
     private SortedSet<int> idQueue;
@@ -139,11 +139,18 @@ public class TrumpetImpFormation {
     //    }
     //    return theFormation;
     //}
-}
+}*/
 
 
 public class TrumpetImp : BaseEnemy
 {
+    // To keep track of formations: Each imp keeps track of the next imp in the formation, and the previous one.
+    // The imp that has no previous imp is responsible for controlling the whole formation.
+    private TrumpetImp nextImp = null;
+    private TrumpetImp prevImp = null;
+
+    int impsInFormation = 1;
+
     /* The Rigidbody enables us to use the built-in physics system for collisions. */
     private Rigidbody2D rigidbody;
 
@@ -159,7 +166,7 @@ public class TrumpetImp : BaseEnemy
 
     public int currentFormationIndex = -1;
 
-    public TrumpetImpFormation myFormation = null;
+   // public TrumpetImpFormation myFormation = null;
 
     private SpriteRenderer spriteRenderer;
 
@@ -181,10 +188,6 @@ public class TrumpetImp : BaseEnemy
         rigidbody = GetComponent<Rigidbody2D>();
 
         currentTargetObject = GameObject.FindWithTag("Player");
-
-        // Everyone starts with their own formation by default.
-        TrumpetImpFormation newFormation = new TrumpetImpFormation(affiliation);
-        newFormation.addImp(this);
 
         spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -293,18 +296,73 @@ public class TrumpetImp : BaseEnemy
         TrumpetImp ti = imp.GetComponent<TrumpetImp>();
         if (ti == null) return false;
 
-        if (!ti.myFormation.mayAdd(this)) return false;
+        if (ti.affiliation != affiliation) return false;
+
+        // TODO: More specific max formation size.
+        if (ti.impsInFormation >= 5) return false;
+
+        //if (!ti.myFormation.mayAdd(this)) return false;
 
         //if (!ti.myFormation.hasSpots()) return false;
 
-        if (ti.myFormation.isSingular()) return true;
+        if (ti.impsInFormation == 1) return true;
+        //if (ti.myFormation.isSingular()) return true;
 
         int fuzz_factor = 0;
         // Add fuzz to potentially leave current formation on occassion.
         if (Random.value < 0.01) fuzz_factor += 1;
         if (Random.value < 0.01) fuzz_factor += 1;
 
-        return ti.myFormation.numSpotsRemaining() < (myFormation.numSpotsRemaining() + fuzz_factor);
+        return ti.impsInFormation < (impsInFormation + fuzz_factor);
+    }
+
+    // FInds the head of this formation, for updating the imp count.
+    private TrumpetImp findFormationHead()
+    {
+        TrumpetImp head = this;
+        while (head.prevImp != null) head = head.prevImp;
+
+        return head;
+    }
+
+    // Updates the formation size for a head imp.
+    private void updateFormationSize(TrumpetImp head, int newSize)
+    {
+        while(head != null)
+        {
+            head.impsInFormation = newSize;
+            head = head.nextImp;
+        }
+    }
+
+    // Removes this imp from its current formation.
+    private void leaveFormation()
+    {
+        TrumpetImp head = findFormationHead();
+
+        updateFormationSize(head, impsInFormation - 1);
+
+        // Join a new empty formation.
+        prevImp = null;
+        nextImp = null;
+        impsInFormation = 1;
+    }
+
+    private void joinFormation(TrumpetImp someTargetImp)
+    {
+        // Cannot be in a formation when joining a new one.
+        leaveFormation();
+
+        // Insert after someTargetImp.
+        nextImp = someTargetImp.nextImp;
+        prevImp = someTargetImp;
+
+        someTargetImp.nextImp = this;
+
+        nextImp.prevImp = this;
+
+        // Need to update formation size.
+        updateFormationSize(findFormationHead(), someTargetImp.impsInFormation + 1);
     }
 
     private void checkForNearbyFriends()
@@ -346,21 +404,23 @@ public class TrumpetImp : BaseEnemy
 
         if(closest != null)
         {
-            TrumpetImp imp = closest.GetComponent<TrumpetImp>();
-            if(imp.myFormation != null)
-            {
-                // Change my formation to be that one.
-                imp.myFormation.addImp(this);
-                
-                
-            }
+            // Change my formation to be that one.
+            joinFormation(closest.GetComponent<TrumpetImp>());
+            //TrumpetImp imp = closest.GetComponent<TrumpetImp>();
+            //if(imp.myFormation != null)
+            //{
+
+            //   imp.myFormation.addImp(this);
+
+
+            //}
         }
     }
 
     private void computeTarget()
     {
-        if (myFormation == null) return;
-        targetLocation = myFormation.getFormationPosition(currentFormationIndex);
+        //if (myFormation == null) return;
+        //targetLocation = myFormation.getFormationPosition(currentFormationIndex);
         //if(currentTargetObject != null)
         //{
             //targetLocation = (Vector2)currentTargetObject.transform.position;
@@ -375,6 +435,11 @@ public class TrumpetImp : BaseEnemy
         spriteRenderer.color = result;
     }
 
+    private void updateTheWholeFormation()
+    {
+
+    }
+
     private void FixedUpdate()
     {
         // Cooldown is updated each frame to time when the attack is ready.
@@ -386,8 +451,12 @@ public class TrumpetImp : BaseEnemy
         doXYPhysics();
 
         // Only formation index 0 actually does any updating.
-        if(myFormation != null)
-            myFormation.update(this);
+        if(prevImp == null)
+        {
+            updateTheWholeFormation();
+        }
+       // if(myFormation != null)
+        //    myFormation.update(this);
 
         UpdateColor();
 
@@ -399,7 +468,7 @@ public class TrumpetImp : BaseEnemy
 
         if(health.currentHP <= 0)
         {
-            myFormation.removeImp(this);
+            leaveFormation();
             Destroy(gameObject);
         }
     }
@@ -408,10 +477,7 @@ public class TrumpetImp : BaseEnemy
     {
         if (old != newA)
         {
-            myFormation.removeImp(this);
-
-            TrumpetImpFormation newFormation = new TrumpetImpFormation(newA);
-            newFormation.addImp(this);
+            leaveFormation();
         }
     }
 }
