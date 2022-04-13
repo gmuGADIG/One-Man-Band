@@ -191,7 +191,7 @@ public class TrumpetImp : BaseEnemy
 
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        aoeRadius = transform.FindChild("AOERadius").localPosition.magnitude;
+        aoeRadius = transform.Find("AOERadius").localPosition.magnitude;
         attackParticleSystem = GetComponent<ParticleSystem>();
 
         health = GetComponent<Health>();

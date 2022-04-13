@@ -29,9 +29,6 @@ public class Notes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
-
         Move();
         /*
         if (Input.GetMouseButtonDown(0))
@@ -42,6 +39,10 @@ public class Notes : MonoBehaviour
             setVelocity(cursorPosition, "Red");
         }
         */
+    }
+
+    private void OnEnable()
+    {
     }
 
     public void setVelocity(Vector2 vel, string color)
@@ -92,6 +93,7 @@ public class Notes : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
         // Uhh... notes do not damage enemies. LOL!!!!!!
         // I've commented this out.
         // ... to give a little more info, the Health script is, AFAIK, the enemy health--
@@ -104,6 +106,7 @@ public class Notes : MonoBehaviour
         //{
         //     h.Damage(damage);
         //}
+
     }
 }
 
