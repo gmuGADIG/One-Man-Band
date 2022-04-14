@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelEndScript : MonoBehaviour
 {
@@ -9,18 +10,30 @@ public class LevelEndScript : MonoBehaviour
     
     private GameObject player;
     private Player playerMoveScript;
+    private Instruments playerAttackScript;
     private PolygonCollider2D objCollider;
     private Collider2D playerCollider;
     private GameObject levelEndGUI;
+    private LevelEndGUIScript GUIscript;
+    private int totalNotes;
     // Start is called before the first frame update
     void Start()
     {
 		player = GameObject.FindGameObjectWithTag("Player");
         playerMoveScript = player.GetComponent<Player>();
+        playerAttackScript = player.GetComponent<Instruments>();
         objCollider = gameObject.GetComponent<PolygonCollider2D>();
         playerCollider = player.GetComponent<Collider2D>();
         levelEndGUI = GameObject.Find("LevelEndGUI");
+        GUIscript = levelEndGUI.GetComponent<LevelEndGUIScript>();
+        if (levelEndGUI == null)
+        {
+            Debug.Log("Please add a LevelEndGUI to the scene!");
+        }
         levelEndGUI.SetActive(false);
+        GUIscript.enabled = true;
+        totalNotes = countNotesInScene();
+        GUIscript.setTotalNotes(totalNotes);
     }
 
     // Update is called once per frame
@@ -41,10 +54,10 @@ public class LevelEndScript : MonoBehaviour
 	private void onPlayerTouch()
     {
         stopAllEnemies();
-        //Play an animation(?), call the end level UI
         levelEndGUI.SetActive(true);
         playerMoveScript.maxVelocity = 0;
-		//TODO: please make this load the next scene also
+        playerAttackScript.enabled = false;
+        //TODO: please make this load the next scene also
         
     }
 
@@ -61,5 +74,12 @@ public class LevelEndScript : MonoBehaviour
         {
             enemySpawner.GetComponent<EnemySpawnerScript>().spawnCheck = false;
         }
+    }
+
+    private int countNotesInScene()
+    {
+        return GameObject.FindGameObjectsWithTag("Note").Length +
+               GameObject.FindGameObjectsWithTag("TimedNotes").Length +
+               GameObject.FindGameObjectsWithTag("Daddy").Length;
     }
 }
