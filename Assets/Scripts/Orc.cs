@@ -21,10 +21,8 @@ public class Orc : BaseEnemy
 	public void Update()
     {
 		base.Update();
-        Vector3 direction = Target.transform.position - transform.position;
-        Debug.Log(direction);
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // i assume your IDE isnt doing autocomplete so maybe do some googling on how to fix that lol - David
-        rb.rotation = angle;
+        Vector2 direction = Target.transform.position - transform.position;
+        rb.rotation = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         direction.Normalize();
         movement = direction;
     }
