@@ -6,8 +6,10 @@ public class WindBlast : MonoBehaviour
 {
     private Vector2 movement;
     private Rigidbody2D rb;
-    [Range(1.0f, 10.0f)]
+    [Range(1.0f, 20.0f)]
     public float moveSpeed;
+    private GameObject comeFrom;
+    private string Color;
 
     void Start()
     {
@@ -25,8 +27,22 @@ public class WindBlast : MonoBehaviour
         movement = move;
     }
 
+    public void setColor(GameObject parent, string Color)
+    {
+        comeFrom = parent;
+        this.Color = Color;
+    }
+
     void move()
     {
         transform.position += (Vector3.Normalize(movement) * -moveSpeed) * Time.deltaTime;
+    }
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.Equals(comeFrom)) { }
+        else if (collision.CompareTag("Player") || collision.CompareTag("Enemy"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     private Rigidbody2D rigidbody;
 
     private Animator animator;
+    public int instrument = 0;
+    public Instruments ins;
 
     
 
@@ -84,8 +86,60 @@ public class Player : MonoBehaviour
     {
         doXYPhysics();
 
-        animator.SetFloat("velocity_x", rigidbody.velocity.x);
-        animator.SetFloat("velocity_y", rigidbody.velocity.y);
-        animator.SetFloat("velocity_len", rigidbody.velocity.magnitude);
+        
+        if (rigidbody.velocity.y < -0.1) //THIS MEANS THE PLAYER IS HOLDING DOWN
+        {
+            if (rigidbody.velocity.x == 0) //THE PLAYER IS HOLDING ONLY DOWN
+            {
+                animator.Play("Walk_Down");
+            } else if (rigidbody.velocity.x > 0.1) //THE PLAYER IS HOLDING DOWN AND RIGHT
+            {
+                animator.Play("Walk_Right");
+            }else if (rigidbody.velocity.x < -0.1) //THE PLAYER IS HOLDING DOWN AND LEFT
+            {
+                animator.Play("Walk_Left");
+            }
+
+        } 
+        else if (rigidbody.velocity.y > 0.1) //THE PLAYER IS GOING UP
+        {
+            if (rigidbody.velocity.x == 0) //THE PLAYER IS HOLDING ONLY UP
+            {
+                animator.Play("Walk_Up");
+            }
+            else if (rigidbody.velocity.x > 0.1) //THE PLAYER IS HOLDING UP AND RIGHT
+            {
+                animator.Play("Walk_Right");
+            }
+            else if (rigidbody.velocity.x < -0.1) //THE PLAYER IS HOLDING UP AND LEFT
+            {
+                animator.Play("Walk_Left");
+            }
+        }
+        else if (rigidbody.velocity.x < -0.1 && rigidbody.velocity.y == 0) //THE PLAYER IS ONLY HOLDING LEFT
+        {
+            animator.Play("Walk_Left");
+        }
+        else if (rigidbody.velocity.x > 0.1 && rigidbody.velocity.y == 0) //THE PLAYER IS HOLDING RIGHT
+        {
+            animator.Play("Walk_Right");
+        } else if(Input.GetMouseButtonDown(0))
+        {
+            if(ins.instrument_cycle == 0)
+            {
+                animator.Play("Ins0");
+            }else if (ins.instrument_cycle == 1)
+            {
+                animator.Play("Ins1");
+            }
+            else if (ins.instrument_cycle == 2)
+            {
+                animator.Play("Ins2");
+            }
+        }
+        else
+        {
+            animator.Play("Idle_Down"); //THE PLAYER IS HOLDING NOTHING
+        }
     }
 }

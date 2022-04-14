@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 629491815}
   m_Layer: 0
   m_Name: FluteBat
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -272,9 +272,9 @@ MonoBehaviour:
   baseConvertHealth: 5
   Health: 0
   baseHealth: 5
-  target: {fileID: 0}
-  speed: 2
-  radius: 3
+  speed: 0.15
+  angleSpeed: 3
+  radius: 6
   WindBlast: {fileID: 4463901321374847123, guid: 302342e759228c4428b24e3a7ad6ac04, type: 3}
   attackAnim: 0
   doAttack: 0
