@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5913278279970325870}
   - component: {fileID: 7278516614244467309}
   m_Layer: 0
-  m_Name: WindBlast
+  m_Name: ViolinBow
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,8 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 976fe9d3950bb894da4a2eeee65c7493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 16
-  timeToDisappear: 5
+  moveSpeed: 30
+  timeToDisappear: 3
 --- !u!50 &5913278279970325870
 Rigidbody2D:
   serializedVersion: 4

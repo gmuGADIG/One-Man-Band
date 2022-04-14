@@ -6,20 +6,28 @@ public class WindBlast : MonoBehaviour
 {
     private Vector2 movement;
     private Rigidbody2D rb;
-    [Range(1.0f, 20.0f)]
+    [Range(1.0f, 50.0f)]
     public float moveSpeed;
+    [Range(0.5f,10)]
+    [Tooltip("Time in Seconds")]
+    public float timeToDisappear;
     private GameObject comeFrom;
     private string Color;
+    private int frameCounter;
 
     void Start()
     {
+        timeToDisappear *= 50;
         rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (frameCounter > timeToDisappear)
+            Destroy(gameObject);
         move();
+        frameCounter++;
     }
 
     public void setMovement(Vector2 move)
