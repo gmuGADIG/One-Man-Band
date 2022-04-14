@@ -180,6 +180,15 @@ public class TrumpetImp : BaseEnemy
 
     private Health health;
 
+    Vector2[] arrangement =
+    {
+        new Vector2(0, 0),
+        new Vector2(-2.0f, 0),
+        new Vector2(2.0f, 0),
+        new Vector2(0, -2.0f),
+        new Vector2(0, 2.0f),
+    };
+
     private void Start()
     {
         // MUST CALL PARENT START!
@@ -296,6 +305,8 @@ public class TrumpetImp : BaseEnemy
         TrumpetImp ti = imp.GetComponent<TrumpetImp>();
         if (ti == null) return false;
 
+        if (ti == this) return false;
+
         if (ti.affiliation != affiliation) return false;
 
         // TODO: More specific max formation size.
@@ -305,7 +316,14 @@ public class TrumpetImp : BaseEnemy
 
         //if (!ti.myFormation.hasSpots()) return false;
 
-        if (ti.impsInFormation == 1) return true;
+        
+
+        TrumpetImp myHead = findFormationHead();
+        TrumpetImp otherHead = ti.findFormationHead();
+        if (myHead == otherHead) return false;
+
+        // We always join if we are alone.
+        if (impsInFormation == 1) return true;
         //if (ti.myFormation.isSingular()) return true;
 
         int fuzz_factor = 0;
@@ -313,25 +331,61 @@ public class TrumpetImp : BaseEnemy
         if (Random.value < 0.01) fuzz_factor += 1;
         if (Random.value < 0.01) fuzz_factor += 1;
 
-        return ti.impsInFormation < (impsInFormation + fuzz_factor);
+        return impsInFormation < (ti.impsInFormation + fuzz_factor);
     }
 
     // FInds the head of this formation, for updating the imp count.
     private TrumpetImp findFormationHead()
     {
         TrumpetImp head = this;
-        while (head.prevImp != null) head = head.prevImp;
+        int cycleDetect = 0;
+        while (head.prevImp != null)
+        {
+            head = head.prevImp;
+
+            if(cycleDetect++ > impsInFormation)
+            {
+                Debug.Log("Find formation head cycle. SUs!!!");
+                break;
+            }
+        }
 
         return head;
+    }
+
+    private TrumpetImp findFormationTail()
+    {
+        TrumpetImp tail = this;
+        int cycleDetect = 0;
+        while (tail.nextImp != null)
+        {
+            tail = tail.nextImp;
+
+            if (cycleDetect++ > impsInFormation)
+            {
+                Debug.Log("Find formation tail cycle. SUs!!!");
+                break;
+            }
+        }
+
+        return tail;
     }
 
     // Updates the formation size for a head imp.
     private void updateFormationSize(TrumpetImp head, int newSize)
     {
+        int cycleDetect = 0;
+
         while(head != null)
         {
             head.impsInFormation = newSize;
             head = head.nextImp;
+
+            if(cycleDetect++ > impsInFormation)
+            {
+                Debug.Log("Update formation size: Cycle. Sus!!!");
+                break;
+            }
         }
     }
 
@@ -342,16 +396,39 @@ public class TrumpetImp : BaseEnemy
 
         updateFormationSize(head, impsInFormation - 1);
 
+        // Update linked list.
+        if(prevImp != null)
+        {
+            prevImp.nextImp = nextImp;
+        }
+        if(nextImp != null)
+        {
+            nextImp.prevImp = prevImp;
+        }
+
         // Join a new empty formation.
         prevImp = null;
         nextImp = null;
         impsInFormation = 1;
+
+        // Empty formation has short retarget timer
+        formationRetargetTimer = 0.1f;
     }
 
     private void joinFormation(TrumpetImp someTargetImp)
     {
+        if (someTargetImp == this) return;
+
+        TrumpetImp myHead = findFormationHead();
+        TrumpetImp otherHead = someTargetImp.findFormationHead();
+
+        if (myHead == otherHead) return;
+
         // Cannot be in a formation when joining a new one.
         leaveFormation();
+
+        Debug.Log("formation join: " + this + " and " + someTargetImp);
+        Debug.Log("    note: prevous heads: " + myHead + " vs " + otherHead);
 
         // Insert after someTargetImp.
         nextImp = someTargetImp.nextImp;
@@ -359,10 +436,15 @@ public class TrumpetImp : BaseEnemy
 
         someTargetImp.nextImp = this;
 
-        nextImp.prevImp = this;
+        if (nextImp != null)
+        {
+            nextImp.prevImp = this;
+        }
 
         // Need to update formation size.
-        updateFormationSize(findFormationHead(), someTargetImp.impsInFormation + 1);
+        updateFormationSize(otherHead, someTargetImp.impsInFormation + impsInFormation);
+
+        Debug.Log("My new head: " + findFormationHead());
     }
 
     private void checkForNearbyFriends()
@@ -384,19 +466,23 @@ public class TrumpetImp : BaseEnemy
 
             float dist = (imp.transform.position - transform.position).magnitude;
 
-            bool f = testImpFormation(imp);
+            
 
-            if (dist <= radius && f)
+            if (dist <= radius)
             {
-                if(closest == null)
+                bool f = testImpFormation(imp);
+                if (f)
                 {
-                    closest = imp;
-                    maxDist = dist;
-                }
-                else if(dist < maxDist)
-                {
-                    closest = imp;
-                    maxDist = dist;
+                    if (closest == null)
+                    {
+                        closest = imp;
+                        maxDist = dist;
+                    }
+                    else if (dist < maxDist)
+                    {
+                        closest = imp;
+                        maxDist = dist;
+                    }
                 }
             }
 
@@ -435,9 +521,49 @@ public class TrumpetImp : BaseEnemy
         spriteRenderer.color = result;
     }
 
+    private void retargetWholeFormation()
+    {
+        formationCenter = (Vector2)currentTargetObject.transform.position + new Vector2(Random.Range(-3, 3), Random.Range(-3, 3));
+
+        
+    }
+
+    private void updateFormationTargetsPerFrame()
+    {
+        TrumpetImp current = this;
+
+        int index = 0;
+
+        while (current != null)
+        {
+            current.targetLocation = formationCenter + arrangement[index];
+
+            index += 1;
+            current = current.nextImp;
+
+            if (index > impsInFormation)
+            {
+                Debug.Log("There was a cycle. Sus!!!");
+                break;
+            }
+        }
+    }
+
+    float formationRetargetTimer = 0.0f;
+    Vector2 formationCenter = Vector2.zero;
+
     private void updateTheWholeFormation()
     {
+        updateFormationTargetsPerFrame();
+        //currentTargetObject.transform.position + new Vector2(Random.Range(-3, 3), Random.Range(-3, 3));
+        if (formationRetargetTimer > 0)
+        {
+            formationRetargetTimer -= Time.fixedDeltaTime;
+            return;
+        }
 
+        formationRetargetTimer = Random.Range(2.5f, 3.5f);
+        retargetWholeFormation();
     }
 
     private void FixedUpdate()
