@@ -214,7 +214,8 @@ public class TrumpetImp : BaseEnemy
             bool shouldAttack = false;
 
             // Compare the given Health's position to our position.
-            float radius = (health.transform.position - transform.position).magnitude;
+            // IMPORTANT: These must be cast to Vector2 so taht the Z component does not influence the magnitude.
+            float radius = ((Vector2)health.transform.position - (Vector2)transform.position).magnitude;
 
             // Never attack anything outside the radius. Early exit, so to speak.
             if (radius > aoeRadius) continue;
@@ -427,8 +428,8 @@ public class TrumpetImp : BaseEnemy
         // Cannot be in a formation when joining a new one.
         leaveFormation();
 
-        Debug.Log("formation join: " + this + " and " + someTargetImp);
-        Debug.Log("    note: prevous heads: " + myHead + " vs " + otherHead);
+       // Debug.Log("formation join: " + this + " and " + someTargetImp);
+        //Debug.Log("    note: prevous heads: " + myHead + " vs " + otherHead);
 
         // Insert after someTargetImp.
         nextImp = someTargetImp.nextImp;
@@ -444,7 +445,7 @@ public class TrumpetImp : BaseEnemy
         // Need to update formation size.
         updateFormationSize(otherHead, someTargetImp.impsInFormation + impsInFormation);
 
-        Debug.Log("My new head: " + findFormationHead());
+        //Debug.Log("My new head: " + findFormationHead());
     }
 
     private void checkForNearbyFriends()
@@ -464,7 +465,7 @@ public class TrumpetImp : BaseEnemy
         {
             if (imp == gameObject) continue;
 
-            float dist = (imp.transform.position - transform.position).magnitude;
+            float dist = ((Vector2)imp.transform.position - (Vector2)transform.position).magnitude;
 
             
 
@@ -566,6 +567,53 @@ public class TrumpetImp : BaseEnemy
         retargetWholeFormation();
     }
 
+    private bool isThereAnyAttackTarget()
+    {
+        Health[] healths = GameObject.FindObjectsOfType<Health>();
+        //Debug.Log("Found " + healths.Length + " healths");
+        foreach (Health possibleEnemyHealth in healths)
+        {
+
+            bool shouldAttack = false;
+
+            // Compare the given Health's position to our position.
+            float radius = ((Vector2)possibleEnemyHealth.transform.position - (Vector2)transform.position).magnitude;
+
+            // We are checking if there's anything in the radius.
+            if (radius > aoeRadius) continue;
+
+            
+
+            BaseEnemy be = possibleEnemyHealth.GetComponent<BaseEnemy>();
+            if (be != null)
+            {
+                if (be.affiliation != affiliation)
+                {
+                    shouldAttack = true;
+                }
+            }
+            else if (possibleEnemyHealth.GetComponent<Player>() != null && affiliation == EnemyAffiliation.AgainstPlayer)
+            {
+                shouldAttack = true;
+            }
+
+            if (shouldAttack)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void tryAttacking()
+    {
+        if(isThereAnyAttackTarget())
+        {
+            attack();
+        }
+    }
+
     private void FixedUpdate()
     {
         // Cooldown is updated each frame to time when the attack is ready.
@@ -589,7 +637,11 @@ public class TrumpetImp : BaseEnemy
         // Simple attacking logic for now: just attack whenever our cooldown is less than zero.
         if(attackCooldown <= 0)
         {
-            attack();
+            // Only have a chance of attacking each frame that we are able to.
+            if (Random.value <= 0.1)
+            {
+                tryAttacking();
+            }
         }
 
         if(health.currentHP <= 0)
