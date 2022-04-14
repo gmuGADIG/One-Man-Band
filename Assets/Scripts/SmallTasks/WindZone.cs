@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class WindZone : MonoBehaviour
 {
+    [Tooltip("This gets normilized, if you want to change magnitude, change wind strength")]
     [SerializeField] private Vector2 direction;
     [SerializeField] private float windStrength = 4f;
     [SerializeField] private bool isBlowing = false;
+
+    private AudioSource source;
 
     private List<Rigidbody2D> bodies = new List<Rigidbody2D>();
 
@@ -21,6 +24,7 @@ public class WindZone : MonoBehaviour
     private void Start()
     {
         direction.Normalize();
+        source = GetComponent<AudioSource>();
 
         //These test to see if it should blow on start and plays any visual effects
         if (isBlowing)
@@ -66,11 +70,13 @@ public class WindZone : MonoBehaviour
     public void TurnOnWind()
     {
         isBlowing = true;
+        source.Play();
         //start any wind Particles or graphic animations
     }
     public void TurnOffWind()
     {
         isBlowing = false;
+        source.Stop();
         // stop wind particles or animations
     }
 }

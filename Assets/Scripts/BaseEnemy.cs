@@ -5,22 +5,28 @@ using UnityEngine;
 public enum EnemyAffiliation
 {
     Red,
+    Blue,
     Green,
-    Blue
+    AgainstPlayer,
+    WithPlayer
+
 }
 
 public class BaseEnemy : MonoBehaviour
 {
-    private int convertHealth;
 
+    public int convertHealth;
     public int baseConvertHealth = 5;
+	
+	public int Health;
+    public int baseHealth = 5;
+	protected GameObject Target;
 
-    public EnemyAffiliation startingAffiliation = EnemyAffiliation.Red;
-
-    private void Start()
+    protected void Start()
     {
         convertHealth = baseConvertHealth;
-        affiliation = startingAffiliation;
+        affiliation = EnemyAffiliation.AgainstPlayer;
+		Target = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Affiliation must be changed through ChangeAffiliation.
@@ -36,28 +42,46 @@ public class BaseEnemy : MonoBehaviour
 
     protected virtual void OnAffiliationChanged(EnemyAffiliation oldAffiliation, EnemyAffiliation newAffiliation)
     {
-
+		
     }
+	protected void Update()
+	{
+		
+		if(affiliation == EnemyAffiliation.WithPlayer)
+		{
+			GameObject closest = null;
+			foreach (BaseEnemy be in FindObjectsOfType<BaseEnemy>())
+			{
+				if (closest == null || (be.affiliation != affiliation && Vector3.Distance(be.transform.position,transform.position) < Vector3.Distance(closest.transform.position, transform.position)))
+				{
+					closest = be.gameObject;
+				}
+			}
+			Target = closest;
+		}
+	}
 
-    // Converts the enemy to the given affiliation and resets its health.
-    private void convertToAffiliation(EnemyAffiliation aff)
+	private void checkConvertNoteCollide(Collider2D collision)
     {
-        ChangeAffiliation(aff);
-        convertHealth = baseConvertHealth;
-    }
+        // Already converted, don't need to check for conversion notes
+        if (convertHealth <= 0) return;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
         Notes noteScript = collision.gameObject.GetComponent<Notes>();
 
         // If we actually collided with a note...
-        if(noteScript != null)
+        if (noteScript != null)
         {
             convertHealth -= noteScript.damage;
-            if(convertHealth <= 0)
+            if (convertHealth <= 0)
             {
-                //convertToAffiliation(noteScript.affiliation);
+                ChangeAffiliation(EnemyAffiliation.WithPlayer);
             }
         }
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        checkConvertNoteCollide(collision);
     }
 }

@@ -62,18 +62,14 @@ public class Instruments : MonoBehaviour
             if(instrument_cycle == Trumpet_cycle)
             {
                 color = "Green";
-                Debug.Log("Trumpet ACTIVATED");
-                
             }
             else if(instrument_cycle == Flute_cycle)
             {
                 color = "Red";
-                Debug.Log("Flute ACTIVATED");
             }
             else if (instrument_cycle == Violin_cycle)
             {
                 color = "Blue";
-                Debug.Log("Violin ACTIVATED");
             }
             FrameTimerSwitch = 0.0f;
         }
@@ -81,21 +77,18 @@ public class Instruments : MonoBehaviour
         {
             instrument_cycle = Trumpet_cycle;
             color = "Green";
-            Debug.Log("Trumpet in use");
             FrameTimerSwitch = 0.0f;
         }
         if (Input.GetKeyDown(Flute) && swap_speed <= FrameTimerSwitch)
         {
             instrument_cycle = Flute_cycle;
             color = "Red";
-            Debug.Log("Flute in use");
             FrameTimerSwitch = 0.0f;
         }
         if (Input.GetKeyDown(Violin) && swap_speed <= FrameTimerSwitch)
         {
             instrument_cycle = Violin_cycle;
             color = "Blue";
-            Debug.Log("Violin in use");
             FrameTimerSwitch = 0.0f;
         }
     }
