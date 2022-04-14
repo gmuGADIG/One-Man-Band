@@ -18,13 +18,21 @@ public class Orc : BaseEnemy
 	// Update is called once per frame
 	public void Update()
     {
+        base.Update();
         movement = (Target.transform.position - transform.position).normalized; 
         rb.rotation = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg;
     }
-    // Update enemy movement following convert to Vector2
+
     // Note: Add acceleration
     private void FixedUpdate() {
-        moveCharacter();
+        if (Target)
+        {
+            float targetDist = Vector3.Distance(Target.transform.position, transform.position);
+            if (targetDist > 2)
+            {
+                moveCharacter();
+            }
+        }
     }
 	void moveCharacter()
 	{
