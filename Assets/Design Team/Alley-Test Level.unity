@@ -3742,7 +3742,11 @@ PrefabInstance:
       value: 7
 =======
       value: 6
+<<<<<<< HEAD
 >>>>>>> d0cd6256e246eb501b18eafd5ed97140cf66999b
+=======
+>>>>>>> NoteChest
+>>>>>>> e1d6aadb88ef1ac58d07180e13ad24bf8f6921a3
       objectReference: {fileID: 0}
     - target: {fileID: 2326816997287063194, guid: cd6af3d8a63df5040a99931100d51933, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3851,7 +3855,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+<<<<<<< HEAD
 >>>>>>> d0cd6256e246eb501b18eafd5ed97140cf66999b
+=======
+>>>>>>> NoteChest
+>>>>>>> e1d6aadb88ef1ac58d07180e13ad24bf8f6921a3
     - target: {fileID: 891101225263380477, guid: 400b354ccdf16cc43836f07f01d2d3bc, type: 3}
       propertyPath: m_Name
       value: TrumpetImp (5)
@@ -4305,7 +4313,11 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
 =======
+<<<<<<< HEAD
 >>>>>>> d0cd6256e246eb501b18eafd5ed97140cf66999b
+=======
+>>>>>>> NoteChest
+>>>>>>> e1d6aadb88ef1ac58d07180e13ad24bf8f6921a3
 --- !u!1001 &1500868493
 PrefabInstance:
   m_ObjectHideFlags: 0

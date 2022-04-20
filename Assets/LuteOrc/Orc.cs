@@ -13,13 +13,12 @@ public class Orc : BaseEnemy
     {
 		base.Start();
         rb = GetComponent<Rigidbody2D>();
-		//player = GameObject.FindGameObjectWithTag("Player").transform; 
-		// in the future try not to push stuff with errors pl0x&th0x :) - David
     }
 
 	// Update is called once per frame
 	public void Update()
     {
+<<<<<<< HEAD:Assets/LuteOrc/Orc.cs
 		base.Update();
         Vector3 direction = Target.transform.position - transform.position;
         //Debug.Log(direction);
@@ -27,14 +26,26 @@ public class Orc : BaseEnemy
         rb.rotation = angle;
         direction.Normalize();
         movement = direction;
+=======
+        base.Update();
+        movement = (Target.transform.position - transform.position).normalized; 
+        rb.rotation = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg;
+>>>>>>> e1d6aadb88ef1ac58d07180e13ad24bf8f6921a3:Assets/Scripts/Orc.cs
     }
-    // Update enemy movement following convert to Vector2
+
     // Note: Add acceleration
     private void FixedUpdate() {
-        moveCharacter(movement);
+        if (Target)
+        {
+            float targetDist = Vector3.Distance(Target.transform.position, transform.position);
+            if (targetDist > 2)
+            {
+                moveCharacter();
+            }
+        }
     }
-	void moveCharacter(Vector2 direction)
+	void moveCharacter()
 	{
-		rb.MovePosition((Vector2)transform.position + (direction * movespeed * Time.deltaTime));
+		rb.MovePosition((Vector2)transform.position + (movement * movespeed * Time.deltaTime));
 	}
 }
