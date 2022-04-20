@@ -4,12 +4,7 @@ using UnityEngine;
 
 public enum EnemyAffiliation
 {
-<<<<<<< HEAD
-    Red,
-    Blue,
-    Green,
-=======
->>>>>>> e1d6aadb88ef1ac58d07180e13ad24bf8f6921a3
+
     AgainstPlayer,
     WithPlayer
 
@@ -48,6 +43,10 @@ public class BaseEnemy : MonoBehaviour
     {
 		
     }
+	public virtual void Die()
+	{
+		Destroy(gameObject);
+	}
 	protected void Update()
 	{
 		

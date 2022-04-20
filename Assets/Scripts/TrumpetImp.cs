@@ -613,7 +613,11 @@ public class TrumpetImp : BaseEnemy
             attack();
         }
     }
-
+	public new void Die()
+	{
+		leaveFormation();
+		Destroy(gameObject);
+	}
     private void FixedUpdate()
     {
         // Cooldown is updated each frame to time when the attack is ready.
@@ -644,11 +648,6 @@ public class TrumpetImp : BaseEnemy
             }
         }
 
-        if(health.currentHP <= 0)
-        {
-            leaveFormation();
-            Destroy(gameObject);
-        }
     }
 
     protected override void OnAffiliationChanged(EnemyAffiliation old, EnemyAffiliation newA)

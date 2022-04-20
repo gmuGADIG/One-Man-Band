@@ -27,10 +27,11 @@ public class Player : MonoBehaviour
     // To check if the player is moving -> this is used for the footstep audio
     bool isMoving = false;
 
+	AudioSource audioSrc; // please make sure you arent pushing errors, if you have them comment them out. - David
     private void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
-
+		audioSrc = GetComponent<AudioSource>();
         animator = sprite.GetComponent<Animator>();
     }
 
@@ -111,7 +112,10 @@ public class Player : MonoBehaviour
             }
         }
     }
-
+	public void Die()
+	{
+		UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+	}
     private void FixedUpdate()
     {
         doXYPhysics();
@@ -168,20 +172,20 @@ public class Player : MonoBehaviour
             Debug.Log("IDLE DOWN");
             animator.Play("Idle_Down"); //THE PLAYER IS HOLDING NOTHING
         }
-        
-        // Checking if the player is moving to play the stepping sound audio
-        if (rigidbody.velocity.x != 0)
-            isMoving = true
-        if (rigidbody.velocity.y != 0)
-            isMoving = true
-        else
-            isMoving = false
 
-        if isMoving {
-            if (!audioSrc.isplaying)
-                audioSrc.Play();
-        }
-        else
-            audioSrc.Stop();
+		// Checking if the player is moving to play the stepping sound audio
+		if (rigidbody.velocity.x != 0)
+			isMoving = true;
+		if (rigidbody.velocity.y != 0)
+			isMoving = true;
+		else
+			isMoving = false;
+
+		if (isMoving) {
+			if (!audioSrc.isPlaying)
+				audioSrc.Play();
+		} else {
+			audioSrc.Stop();
+		}
     }
 }

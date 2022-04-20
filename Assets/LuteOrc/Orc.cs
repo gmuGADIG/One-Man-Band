@@ -18,19 +18,9 @@ public class Orc : BaseEnemy
 	// Update is called once per frame
 	public void Update()
     {
-<<<<<<< HEAD:Assets/LuteOrc/Orc.cs
-		base.Update();
-        Vector3 direction = Target.transform.position - transform.position;
-        //Debug.Log(direction);
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // i assume your IDE isnt doing autocomplete so maybe do some googling on how to fix that lol - David
-        rb.rotation = angle;
-        direction.Normalize();
-        movement = direction;
-=======
         base.Update();
         movement = (Target.transform.position - transform.position).normalized; 
         rb.rotation = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg;
->>>>>>> e1d6aadb88ef1ac58d07180e13ad24bf8f6921a3:Assets/Scripts/Orc.cs
     }
 
     // Note: Add acceleration
@@ -43,6 +33,7 @@ public class Orc : BaseEnemy
                 moveCharacter();
             }
         }
+
     }
 	void moveCharacter()
 	{

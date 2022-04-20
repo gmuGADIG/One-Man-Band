@@ -16,8 +16,17 @@ public class Health : MonoBehaviour
     public void Damage(int dmg)
     {
         currentHP -= dmg;
-
-    }
+		if (currentHP <= 0)
+		{
+			if (GetComponent<BaseEnemy>())
+			{
+				GetComponent<BaseEnemy>().Die();
+			}else if (GetComponent<Player>())
+			{
+				GetComponent<Player>().Die();
+			}
+		}
+	}
 
     void OnTriggerEnter2D(Collider2D collision)
     {
