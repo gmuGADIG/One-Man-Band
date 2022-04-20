@@ -24,6 +24,9 @@ public class Player : MonoBehaviour
     /* How fast the player accelerates to the top speed. */
     public float maxAcceleration = 5;
 
+    // To check if the player is moving -> this is used for the footstep audio
+    bool isMoving = false;
+
     private void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
@@ -165,8 +168,20 @@ public class Player : MonoBehaviour
             Debug.Log("IDLE DOWN");
             animator.Play("Idle_Down"); //THE PLAYER IS HOLDING NOTHING
         }
+        
+        // Checking if the player is moving to play the stepping sound audio
+        if (rigidbody.velocity.x != 0)
+            isMoving = true
+        if (rigidbody.velocity.y != 0)
+            isMoving = true
+        else
+            isMoving = false
 
-
-    
+        if isMoving {
+            if (!audioSrc.isplaying)
+                audioSrc.Play();
+        }
+        else
+            audioSrc.Stop();
     }
 }

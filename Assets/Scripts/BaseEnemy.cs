@@ -4,13 +4,17 @@ using UnityEngine;
 
 public enum EnemyAffiliation
 {
-
+    Red,
+    Blue,
+    Green,
     AgainstPlayer,
     WithPlayer
+
 }
 
 public class BaseEnemy : MonoBehaviour
 {
+
     public int convertHealth;
     public int baseConvertHealth = 5;
 	
