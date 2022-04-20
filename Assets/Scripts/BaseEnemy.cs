@@ -16,13 +16,13 @@ public class BaseEnemy : MonoBehaviour
 	
 	public int Health;
     public int baseHealth = 5;
-
+	protected GameObject Target;
 
     protected void Start()
     {
         convertHealth = baseConvertHealth;
         affiliation = EnemyAffiliation.AgainstPlayer;
-
+		Target = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Affiliation must be changed through ChangeAffiliation.
@@ -38,11 +38,26 @@ public class BaseEnemy : MonoBehaviour
 
     protected virtual void OnAffiliationChanged(EnemyAffiliation oldAffiliation, EnemyAffiliation newAffiliation)
     {
-
+		
     }
+	protected void Update()
+	{
+		
+		if(affiliation == EnemyAffiliation.WithPlayer)
+		{
+			GameObject closest = null;
+			foreach (BaseEnemy be in FindObjectsOfType<BaseEnemy>())
+			{
+				if (closest == null || (be.affiliation != affiliation && Vector3.Distance(be.transform.position,transform.position) < Vector3.Distance(closest.transform.position, transform.position)))
+				{
+					closest = be.gameObject;
+				}
+			}
+			Target = closest;
+		}
+	}
 
-
-    private void checkConvertNoteCollide(Collider2D collision)
+	private void checkConvertNoteCollide(Collider2D collision)
     {
         // Already converted, don't need to check for conversion notes
         if (convertHealth <= 0) return;
