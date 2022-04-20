@@ -21,9 +21,11 @@ public class Health : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        // Note from Ben: This doesn't seem appropriate, as the Health component is on both enemies
+        // and players?? Please let me know if I'm wrong.
+        /*if (collision.CompareTag("Enemy"))
         {
             Damage(1);
-        }  
+        } */ 
     }
 }
