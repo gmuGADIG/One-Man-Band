@@ -81,7 +81,7 @@ public class FluteBat : BaseEnemy
     public void Attack()
     {
         GameObject temp = Instantiate(WindBlast, transform.position, transform.rotation);
-        temp.GetComponent<WindBlast>().setMovement(new Vector3(transform.position.x - Target.transform.position.x, transform.position.y - Target.transform.position.y, 0.0f));
+        temp.GetComponent<WindBlast>().setMovement(new Vector3(transform.position.x - Target.transform.position.x, transform.position.y - Target.transform.position.y, 0.0f), -angle);
         temp.GetComponent<WindBlast>().setColor(gameObject, "Red");
         attackAnim = false;
         FrameAttack = 0;
