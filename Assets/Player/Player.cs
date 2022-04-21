@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     private Animator animator;
     public int instrument = 0;
     public Instruments ins;
+    private bool playing;
 
     
 
@@ -23,10 +24,14 @@ public class Player : MonoBehaviour
     /* How fast the player accelerates to the top speed. */
     public float maxAcceleration = 5;
 
+    // To check if the player is moving -> this is used for the footstep audio
+    bool isMoving = false;
+
+	AudioSource audioSrc; // please make sure you arent pushing errors, if you have them comment them out. - David
     private void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
-
+		audioSrc = GetComponent<AudioSource>();
         animator = sprite.GetComponent<Animator>();
     }
 
@@ -82,22 +87,55 @@ public class Player : MonoBehaviour
         rigidbody.AddForce(accel, ForceMode2D.Impulse);
     }
 
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("MOUSE CLICKED");
+            playing = true;
+            if (ins.instrument_cycle == 0 && playing)
+            {
+                Debug.Log("Playing insrument 1");
+                animator.Play("Ins0");
+
+            }
+            else if (ins.instrument_cycle == 1 && playing)
+            {
+                Debug.Log("Playing insrument 2");
+                animator.Play("Ins1");
+
+            }
+            else if (ins.instrument_cycle == 2 && playing)
+            {
+                Debug.Log("Playing insrument 3");
+                animator.Play("Ins2");
+            }
+        }
+    }
+	public void Die()
+	{
+		UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+	}
     private void FixedUpdate()
     {
         doXYPhysics();
-
         
+
         if (rigidbody.velocity.y < -0.1) //THIS MEANS THE PLAYER IS HOLDING DOWN
         {
             if (rigidbody.velocity.x == 0) //THE PLAYER IS HOLDING ONLY DOWN
             {
                 animator.Play("Walk_Down");
+                playing = false;
             } else if (rigidbody.velocity.x > 0.1) //THE PLAYER IS HOLDING DOWN AND RIGHT
             {
                 animator.Play("Walk_Right");
-            }else if (rigidbody.velocity.x < -0.1) //THE PLAYER IS HOLDING DOWN AND LEFT
+                playing = false;
+            }
+            else if (rigidbody.velocity.x < -0.1) //THE PLAYER IS HOLDING DOWN AND LEFT
             {
                 animator.Play("Walk_Left");
+                playing = false;
             }
 
         } 
@@ -106,40 +144,48 @@ public class Player : MonoBehaviour
             if (rigidbody.velocity.x == 0) //THE PLAYER IS HOLDING ONLY UP
             {
                 animator.Play("Walk_Up");
+                playing = false;
             }
             else if (rigidbody.velocity.x > 0.1) //THE PLAYER IS HOLDING UP AND RIGHT
             {
                 animator.Play("Walk_Right");
+                playing = false;
             }
             else if (rigidbody.velocity.x < -0.1) //THE PLAYER IS HOLDING UP AND LEFT
             {
                 animator.Play("Walk_Left");
+                playing = false;
             }
         }
         else if (rigidbody.velocity.x < -0.1 && rigidbody.velocity.y == 0) //THE PLAYER IS ONLY HOLDING LEFT
         {
             animator.Play("Walk_Left");
+            playing = false;
         }
         else if (rigidbody.velocity.x > 0.1 && rigidbody.velocity.y == 0) //THE PLAYER IS HOLDING RIGHT
         {
             animator.Play("Walk_Right");
-        } else if(Input.GetMouseButtonDown(0))
-        {
-            if(ins.instrument_cycle == 0)
-            {
-                animator.Play("Ins0");
-            }else if (ins.instrument_cycle == 1)
-            {
-                animator.Play("Ins1");
-            }
-            else if (ins.instrument_cycle == 2)
-            {
-                animator.Play("Ins2");
-            }
+            playing = false;
         }
-        else
+        else if (playing == false)
         {
+            Debug.Log("IDLE DOWN");
             animator.Play("Idle_Down"); //THE PLAYER IS HOLDING NOTHING
         }
+
+		// Checking if the player is moving to play the stepping sound audio
+		if (rigidbody.velocity.x != 0)
+			isMoving = true;
+		if (rigidbody.velocity.y != 0)
+			isMoving = true;
+		else
+			isMoving = false;
+
+		if (isMoving) {
+			if (!audioSrc.isPlaying)
+				audioSrc.Play();
+		} else {
+			audioSrc.Stop();
+		}
     }
 }

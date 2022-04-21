@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6081479928290504909}
   - component: {fileID: 6081479928290504908}
   - component: {fileID: 6081479928290504944}
+  - component: {fileID: -3958827535117356398}
   m_Layer: 0
   m_Name: daddyNote
   m_TagString: Daddy
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  m_Sprite: {fileID: 2771163227860482886, guid: 35431a5e865173b43803d42e8d178f71, type: 3}
   m_Color: {r: 1, g: 0.8946514, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -147,3 +148,18 @@ MonoBehaviour:
   timedNotes: []
   tmd: {fileID: 0}
   Tracking: 0
+  TimeLimit: 3
+--- !u!114 &-3958827535117356398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4486502220344596563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1433d30d05d19374991b82f97ffd9111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  distance: 0.1

@@ -7,16 +7,22 @@ public enum EnemyAffiliation
 
     AgainstPlayer,
     WithPlayer
+
 }
 
 public class BaseEnemy : MonoBehaviour
 {
+
     public int convertHealth;
     public int baseConvertHealth = 5;
 	
 	public int Health;
     public int baseHealth = 5;
 	protected GameObject Target;
+
+    // Affiliation must be changed through ChangeAffiliation.
+    // This makes it clear that the affiliation change may have additional side effects.
+    public EnemyAffiliation affiliation { get; private set; }
 
     protected void Start()
     {
@@ -25,9 +31,6 @@ public class BaseEnemy : MonoBehaviour
 		Target = GameObject.FindGameObjectWithTag("Player");
     }
 
-    // Affiliation must be changed through ChangeAffiliation.
-    // This makes it clear that the affiliation change may have additional side effects.
-    public EnemyAffiliation affiliation { get; private set; }
     public void ChangeAffiliation(EnemyAffiliation newAffiliation)
     {
         EnemyAffiliation oldAffiliation = affiliation;
@@ -40,6 +43,10 @@ public class BaseEnemy : MonoBehaviour
     {
 		
     }
+	public virtual void Die()
+	{
+		Destroy(gameObject);
+	}
 	protected void Update()
 	{
 		
@@ -48,7 +55,9 @@ public class BaseEnemy : MonoBehaviour
 			GameObject closest = null;
 			foreach (BaseEnemy be in FindObjectsOfType<BaseEnemy>())
 			{
-				if (closest == null || (be.affiliation != affiliation && Vector3.Distance(be.transform.position,transform.position) < Vector3.Distance(closest.transform.position, transform.position)))
+                if(be == this) { continue; } //no targeting oneself
+                float newDist = Vector3.Distance(be.transform.position, transform.position);                
+                if ((!closest || (be.affiliation != affiliation && newDist < Vector3.Distance(closest.transform.position, transform.position))))
 				{
 					closest = be.gameObject;
 				}

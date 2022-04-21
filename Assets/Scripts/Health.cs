@@ -16,14 +16,25 @@ public class Health : MonoBehaviour
     public void Damage(int dmg)
     {
         currentHP -= dmg;
-
-    }
+		if (currentHP <= 0)
+		{
+			if (GetComponent<BaseEnemy>())
+			{
+				GetComponent<BaseEnemy>().Die();
+			}else if (GetComponent<Player>())
+			{
+				GetComponent<Player>().Die();
+			}
+		}
+	}
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        // Note from Ben: This doesn't seem appropriate, as the Health component is on both enemies
+        // and players?? Please let me know if I'm wrong.
+        /*if (collision.CompareTag("Enemy"))
         {
             Damage(1);
-        }  
+        } */ 
     }
 }
