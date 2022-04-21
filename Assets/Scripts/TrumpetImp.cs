@@ -221,10 +221,12 @@ public class TrumpetImp : BaseEnemy
     {
         if (impsInFormation < 1) return;
 
+       // Debug.Log(" --- Generate Arrangement: " + impsInFormation + " --- ");
+
         int rows = Mathf.CeilToInt(Mathf.Sqrt(impsInFormation));
         int remaining = impsInFormation;
 
-        int desired = Mathf.RoundToInt((float)remaining / (float)rows);
+        int desired = Mathf.CeilToInt((float)remaining / (float)rows);
 
         arrangement = new Vector2[impsInFormation];
 
@@ -252,6 +254,7 @@ public class TrumpetImp : BaseEnemy
             for(int x = 0; x < desired; ++x)
             {
                 arrangement[nextWrite++] = new Vector2(posX, posY) * 2.0f;
+                //Debug.Log("Added pos: " + arrangement[nextWrite - 1]);
                 posX += deltaX;
             }
 
@@ -276,6 +279,7 @@ public class TrumpetImp : BaseEnemy
             for (int x = 0; x < desired; ++x)
             {
                 arrangement[nextWrite++] = new Vector2(posX, posY) * 2.0f;
+                //Debug.Log("Added pos: " + arrangement[nextWrite - 1]);
                 posX += deltaX;
             }
 
@@ -284,7 +288,7 @@ public class TrumpetImp : BaseEnemy
 
             if (rows > 0)
             {
-                desired = Mathf.RoundToInt((float)remaining / (float)rows);
+                desired = Mathf.CeilToInt((float)remaining / (float)rows);
             }
 
             posY *= -1.0f;
@@ -475,6 +479,8 @@ public class TrumpetImp : BaseEnemy
     {
         int cycleDetect = 0;
 
+        // Must update the head before the formation may be correctly generated.
+        head.impsInFormation = newSize;
         head.generateFormation();
 
         while (head != null)
@@ -511,6 +517,8 @@ public class TrumpetImp : BaseEnemy
         prevImp = null;
         nextImp = null;
         impsInFormation = 1;
+
+        generateFormation();
 
         // Empty formation has short retarget timer
         formationRetargetTimer = 0.1f;
@@ -549,7 +557,7 @@ public class TrumpetImp : BaseEnemy
         // Need to update formation size.
         updateFormationSize(otherHead, someTargetImp.impsInFormation + 1);
 
-       // Debug.Log("Joined formation with size: " + impsInFormation);
+        //Debug.Log("Joined formation with size: " + impsInFormation);
         //Debug.Log("My new head: " + findFormationHead());
     }
 
