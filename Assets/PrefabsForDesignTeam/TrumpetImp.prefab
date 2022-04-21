@@ -142,7 +142,7 @@ MonoBehaviour:
   baseConvertHealth: 5
   Health: 0
   baseHealth: 5
-  maxVelocity: 4
+  maxVelocity: 8
   maxAcceleration: 40
   currentTargetObject: {fileID: 0}
   currentFormationIndex: 0
