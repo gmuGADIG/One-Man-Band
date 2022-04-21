@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class MusicManager : MonoBehaviour
 {
+    [SerializeField] private AudioMixerGroup mix;
     [SerializeField] private List<AudioClip> tracks = new List<AudioClip>();
 
     [HideInInspector] public AudioSource[] sources;
@@ -13,15 +15,21 @@ public class MusicManager : MonoBehaviour
     {
         //This audio source will not be destoyed between scene loads
         DontDestroyOnLoad(gameObject);
+        MusicManager[] otherManagers = FindObjectsOfType<MusicManager>();
+        if (otherManagers.Length > 1)
+        {
+            Destroy(gameObject);
+        }
         sources = new AudioSource[tracks.Count]; //init array
         for (int i = 0; i < tracks.Count; i++) //assigns array and track properties
         {
             sources[i] = gameObject.AddComponent<AudioSource>();
             sources[i].clip = tracks[i];
+            sources[i].outputAudioMixerGroup = mix;
 
             sources[i].loop = true;
             sources[i].Play();
-            sources[i].volume = 0;
+            sources[i].volume = 1; //CHANGE TO BE MUTED ON START ONLY FOR BUILD!!!
         }
     }
 
