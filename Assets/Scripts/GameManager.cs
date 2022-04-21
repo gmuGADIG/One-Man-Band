@@ -11,10 +11,24 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int enemysInScene = 0;
     private List<BaseEnemy> enemies = new List<BaseEnemy>();
     public MusicManager musicManager;
+    public static GameManager gm;
+
+    public void Awake()
+    {
+        if (gm == null)
+        {
+            gm = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public void Start()
     {
         allNotes = FindObjectsOfType<ParentNote>().Length;
+        Debug.Log("Notes at start: " + allNotes);
     }
 
     public void changeSong()

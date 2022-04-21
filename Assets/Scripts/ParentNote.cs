@@ -25,8 +25,8 @@ public class ParentNote : MonoBehaviour
     protected void Collect()
     {
         notesCollected++;
-        gm.notesCollected++;
-        gm.changeSong();
+        GameManager.gm.notesCollected++;
+        GameManager.gm.changeSong();
         Collected?.Invoke();
     }
 
