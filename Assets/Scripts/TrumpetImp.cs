@@ -653,14 +653,14 @@ public class TrumpetImp : BaseEnemy
             formationCenter = movePatternCenter + movePatternSize * movePattern[movePatternIndex];
 
             float dist = ((Vector2)transform.position - formationCenter).magnitude;
-            formationRetargetTimer = (dist / maxVelocity) + 0.5f;
+            formationRetargetTimer = (dist / maxVelocity) + 0.1f;
         }
         else
         {
             formationCenter = movePatternCenter + movePatternSize * movePattern[movePatternIndex];
 
             float dist = ((Vector2)transform.position - formationCenter).magnitude;
-            formationRetargetTimer = (dist / maxVelocity) + 0.5f;
+            formationRetargetTimer = (dist / maxVelocity) + 0.1f;
         }
         
     }
