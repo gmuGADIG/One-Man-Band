@@ -7,12 +7,18 @@ public class Orc : BaseEnemy
     public float movespeed = 2f;
     private Rigidbody2D rb;
     private Vector2 movement;
+    public GameObject player;
+    public GameManager gm;
+    public SpriteRenderer sr;
 
     // Start is called before the first frame update
     public void Start()
     {
 		base.Start();
+        gm = (GameManager) GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+        player = gm.GetPlayer();
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
 	// Update is called once per frame
@@ -20,7 +26,17 @@ public class Orc : BaseEnemy
     {
         base.Update();
         movement = (Target.transform.position - transform.position).normalized; 
-        rb.rotation = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg;
+        //rb.rotation = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg;
+        if (transform.position.x >= player.transform.position.x)
+        {
+            //face left
+            sr.flipX = false;
+        }
+        else
+        {
+            //face right
+            sr.flipX = true;
+        }
     }
 
     // Note: Add acceleration

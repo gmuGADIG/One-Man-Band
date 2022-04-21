@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private Player player;
-    [SerializeField] private int notesCollected = 0;
+    [SerializeField] private GameObject player;
+    [SerializeField] public int notesCollected = 0;
     [SerializeField] private int enemysInScene = 0;
     private List<BaseEnemy> enemies = new List<BaseEnemy>();
 
-    public Player GetPlayer()
+    public GameObject GetPlayer()
     {
         return player;
     }
