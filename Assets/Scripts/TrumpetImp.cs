@@ -488,7 +488,7 @@ public class TrumpetImp : BaseEnemy
             head.impsInFormation = newSize;
             head = head.nextImp;
 
-            if(cycleDetect++ > impsInFormation)
+            if(cycleDetect++ > newSize)
             {
                 //Debug.Log("Update formation size: Cycle. Sus!!!");
                 break;
