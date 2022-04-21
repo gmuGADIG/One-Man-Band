@@ -20,6 +20,9 @@ public class Spider : BaseEnemy
     public bool attackAnim, doAttack;
     public Animator ani;
     public bool following;
+    public AudioClip[] idleClips;
+    public AudioClip chargeClip;
+    public AudioClip attackClip;
 
 
     void Start()
@@ -60,19 +63,17 @@ public class Spider : BaseEnemy
     {
         rb.MovePosition(Vector2.MoveTowards(transform.position, Target.transform.position, speed));
     }
+    public void Charge()
+    {
+        gameObject.GetComponent<AudioSource>().PlayOneShot(chargeClip);
+    }
     //Makes an attack square
     public void Attack()
     {
+        gameObject.GetComponent<AudioSource>().PlayOneShot(attackClip);
         GameObject temp = Instantiate(WindBlast, transform.position, transform.rotation);
         temp.GetComponent<WindBlast>().setMovement(new Vector3(transform.position.x - Target.transform.position.x, transform.position.y - Target.transform.position.y, 0.0f), Mathf.Atan2(Target.transform.position.x - transform.position.x, Target.transform.position.y - transform.position.y) * -Mathf.Rad2Deg);
         temp.GetComponent<WindBlast>().setColor(gameObject, "Red");
         attackAnim = false;
     }
-    public void randomAudio()
-    {
-
-
-    }
-
-
 }

@@ -509,6 +509,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 58406514864570836, guid: 4e9d0604cf5f9e54a878d7c21def75d4, type: 3}
+      propertyPath: attackClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7379fb0ded3aaa446b8b1c6176906665, type: 3}
+    - target: {fileID: 58406514864570836, guid: 4e9d0604cf5f9e54a878d7c21def75d4, type: 3}
+      propertyPath: chargeClip
+      value: 
+      objectReference: {fileID: 8300000, guid: ae0071a78cb384b468cfafbfca17ff5a, type: 3}
     - target: {fileID: 58406514864570843, guid: 4e9d0604cf5f9e54a878d7c21def75d4, type: 3}
       propertyPath: m_Name
       value: Violince
