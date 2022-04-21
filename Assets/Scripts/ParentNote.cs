@@ -26,6 +26,7 @@ public class ParentNote : MonoBehaviour
     {
         notesCollected++;
         gm.notesCollected++;
+        gm.changeSong();
         Collected?.Invoke();
     }
 
