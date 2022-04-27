@@ -72,7 +72,6 @@
       "source": "builtin",
       "dependencies": {}
     },
-<<<<<<< HEAD
     "com.unity.2d.tilemap.extras": {
       "version": "1.8.3-preview",
       "depth": 0,
@@ -83,13 +82,13 @@
         "com.unity.ugui": "1.0.0",
         "com.unity.modules.jsonserialize": "1.0.0"
       },
-=======
+      "url": "https://packages.unity.com"
+    },
     "com.unity.cinemachine": {
       "version": "2.6.11",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
->>>>>>> b3ff775fac4a6a91e2cfd129eb5f30481f4bd2ba
       "url": "https://packages.unity.com"
     },
     "com.unity.collab-proxy": {

@@ -6,13 +6,9 @@
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.2d.spriteshape": "5.1.7",
     "com.unity.2d.tilemap": "1.0.0",
-<<<<<<< HEAD
     "com.unity.2d.tilemap.extras": "1.8.3-preview",
     "com.unity.collab-proxy": "1.15.16",
-=======
     "com.unity.cinemachine": "2.6.11",
-    "com.unity.collab-proxy": "1.15.7",
->>>>>>> b3ff775fac4a6a91e2cfd129eb5f30481f4bd2ba
     "com.unity.ide.rider": "2.0.7",
     "com.unity.ide.visualstudio": "2.0.15",
     "com.unity.ide.vscode": "1.2.5",
