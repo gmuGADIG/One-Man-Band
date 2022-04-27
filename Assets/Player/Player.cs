@@ -169,7 +169,6 @@ public class Player : MonoBehaviour
         }
         else if (playing == false)
         {
-            Debug.Log("IDLE DOWN");
             animator.Play("Idle_Down"); //THE PLAYER IS HOLDING NOTHING
         }
 
