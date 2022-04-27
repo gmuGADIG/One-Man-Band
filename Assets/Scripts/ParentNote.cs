@@ -9,8 +9,9 @@ public class ParentNote : MonoBehaviour
     public delegate void NoteEvent();
     public event NoteEvent Collected;
     public GameManager gm;
-    // Start is called before the first frame update
-    void Start()
+	[SerializeField] protected AudioClip[] pickupSound;
+	// Start is called before the first frame update
+	void Start()
     {
         gm = (GameManager)GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
 
@@ -34,7 +35,8 @@ public class ParentNote : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
-            Destroy(gameObject);
+			AudioSource.PlayClipAtPoint(pickupSound[Random.Range(0, pickupSound.Length)], transform.position);
+			Destroy(gameObject);
             Collect();
         }
     }

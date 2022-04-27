@@ -35,7 +35,7 @@ public class Spider : BaseEnemy
     
     void FixedUpdate()
     {
-        if(Vector2.Distance(transform.position,Target.transform.position) > alertDistance)
+        if(Vector2.Distance(transform.position,Target.transform.position) < alertDistance)
         {
             following = true;
         }

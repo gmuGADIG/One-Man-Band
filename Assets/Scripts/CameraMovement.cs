@@ -28,12 +28,12 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per .2 seconds
     void FixedUpdate()
     {
-        storedPositions.Add(transform.position); //store the position every frame
+        storedPositions.Add(player.transform.position); //store the position every frame
 
         if (storedPositions.Count > followDistance)
         {
             Vector3 pos = storedPositions[0];
-            pos.z = -10;
+            pos.z -= 1;
             followingMe.transform.position = pos; //move the player
             storedPositions.RemoveAt(0); //delete the position that player just move to
         }

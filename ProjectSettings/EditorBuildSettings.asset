@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/EnemySpawnStuff/Level 1.unity
-    guid: 6c200eae47b3e4c4c8063a29fa234981
+    path: Assets/Scenes/TitleScreen.unity
+    guid: f47320de06980cd498f4860f48f2116f
   - enabled: 1
     path: Assets/Design Team/toine-tutorial.unity
     guid: e9e34c660c056d44eacdf089b85d5bf4

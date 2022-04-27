@@ -45,7 +45,8 @@ public class DaddyNote : ParentNote
     {
         if (col.gameObject.tag == "Player")
         {
-            gameObject.GetComponent<Renderer>().enabled = false;
+			AudioSource.PlayClipAtPoint(pickupSound[Random.Range(0, pickupSound.Length)], transform.position);
+			gameObject.GetComponent<Renderer>().enabled = false;
             SpawnNotes();
 
 
