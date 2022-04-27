@@ -8,9 +8,11 @@ public class ParentNote : MonoBehaviour
 
     public delegate void NoteEvent();
     public event NoteEvent Collected;
+    public GameManager gm;
     // Start is called before the first frame update
     void Start()
     {
+        gm = (GameManager)GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
 
     }
 
@@ -23,6 +25,8 @@ public class ParentNote : MonoBehaviour
     protected void Collect()
     {
         notesCollected++;
+        gm.notesCollected++;
+        gm.changeSong();
         Collected?.Invoke();
     }
 
