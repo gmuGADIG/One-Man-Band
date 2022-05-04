@@ -126,4 +126,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f63f94c6e7d05488d88d40c644eeb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  nextScene: 
+  levelEndGUI: {fileID: 7605122507306414663, guid: c1bc42bec6af9b6419bcdf869e56ac72, type: 3}
