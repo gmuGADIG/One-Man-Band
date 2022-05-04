@@ -123,76 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &259024839
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 259024842}
-  - component: {fileID: 259024841}
-  - component: {fileID: 259024840}
-  m_Layer: 0
-  m_Name: enemyOrc
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!50 &259024840
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 259024839}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!114 &259024841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 259024839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9425282f4c5119449ba03081b64fcf37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  convertHealth: 0
-  baseConvertHealth: 5
-  Health: 0
-  baseHealth: 5
-  movespeed: 2
---- !u!4 &259024842
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 259024839}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1196527940
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,6 +263,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cee77ac0343428d4f86ef92f0a6685e4, type: 3}
+--- !u!1 &1670345325 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8552566467466430116, guid: cee77ac0343428d4f86ef92f0a6685e4, type: 3}
+  m_PrefabInstance: {fileID: 1492799829}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1817706066
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -340,6 +275,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4141356941425789020, guid: 98ad8cf97b9eb964f85a226612a94ef7, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2820184321265130583, guid: 98ad8cf97b9eb964f85a226612a94ef7, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1670345325}
     - target: {fileID: 6723649050370223276, guid: 98ad8cf97b9eb964f85a226612a94ef7, type: 3}
       propertyPath: m_RootOrder
       value: 2

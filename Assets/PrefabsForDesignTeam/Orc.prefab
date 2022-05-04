@@ -104,6 +104,9 @@ MonoBehaviour:
   Health: 0
   baseHealth: 5
   movespeed: 2
+  player: {fileID: 0}
+  gm: {fileID: 0}
+  sr: {fileID: 0}
 --- !u!50 &-4141356941425789020
 Rigidbody2D:
   serializedVersion: 4
