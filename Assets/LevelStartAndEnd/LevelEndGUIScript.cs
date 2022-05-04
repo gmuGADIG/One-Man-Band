@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LevelEndGUIScript : MonoBehaviour
 {
@@ -11,29 +12,39 @@ public class LevelEndGUIScript : MonoBehaviour
     private int totalNotes;
     private int notesCollected;
 
+    private GameObject panel;
     private GameObject songUnlockedText;
     private GameObject songLockedText;
     private GameObject notEnoughNotesText;
+
+    private void Awake()
+    {
+        
+    }
+
     // Start is called before the first frame update
+
     void Start()
     {
+        panel = gameObject.transform.Find("Panel").gameObject;
         notesCollected = ParentNote.notesCollected; //Avoids potential race conditions
-        notesCollectedText = gameObject.transform.Find("NotesCollectedText").gameObject.GetComponent<Text>();
+        notesCollectedText = panel.transform.Find("NotesCollectedText").gameObject.GetComponent<Text>();
         setNotesCollectedText();
 
-        songUnlockedText = transform.Find("SongUnlockedText").gameObject;
-        songLockedText = transform.Find("SongLockedText").gameObject;
-        notEnoughNotesText = transform.Find("NotEnoughNotesText").gameObject;
-
-        gameObject.GetComponent<Canvas>().enabled = true;
+        
+        songUnlockedText = panel.transform.Find("SongUnlockedText").gameObject;
+        songLockedText = panel.transform.Find("SongLockedText").gameObject;
+        notEnoughNotesText = panel.transform.Find("NotEnoughNotesText").gameObject;
+        
         songUnlockedText.SetActive(false);
         songLockedText.SetActive(false);
         notEnoughNotesText.SetActive(false);
         setSongLockedText();
     }
-    public void setTotalNotes(int totalNotes)
+
+    public void setTotalNotes(int num)
     {
-        this.totalNotes = totalNotes;
+        totalNotes = num;
     }
 
     void setNotesCollectedText()
@@ -62,7 +73,25 @@ public class LevelEndGUIScript : MonoBehaviour
             int neededNotes = Mathf.CeilToInt(0.7f * totalNotes);
             notEnoughNotesText.GetComponent<Text>().text = string.Format("You must collect at least {0} notes to continue.", neededNotes);
             notEnoughNotesText.SetActive(true);
-            transform.Find("ContinueButton").gameObject.SetActive(false);
+            panel.transform.Find("ContinueButton").gameObject.SetActive(false);
         }
+    }
+
+    public void continueButtonClicked()
+    {
+        ParentNote.notesCollected = 0;
+        SceneManager.LoadScene(nextLevel);
+    }
+
+    public void retryButtonClicked()
+    {
+        ParentNote.notesCollected = 0;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void menuButtonClicked()
+    {
+        ParentNote.notesCollected = 0;
+        SceneManager.LoadScene("TitleScreen");
     }
 }
