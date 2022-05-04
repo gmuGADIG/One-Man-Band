@@ -30,9 +30,10 @@ public class WindBlast : MonoBehaviour
         frameCounter++;
     }
 
-    public void setMovement(Vector2 move)
+    public void setMovement(Vector2 move, float rot)
     {
         movement = move;
+        gameObject.transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, rot));
     }
 
     public void setColor(GameObject parent, string Color)
