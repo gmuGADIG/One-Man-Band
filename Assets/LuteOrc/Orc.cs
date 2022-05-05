@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Orc : BaseEnemy
 {
+
     public float movespeed = 2f, minDist = 1;
+	[SerializeField] int damage = 1;
+	[SerializeField] int coolDown = 1;
     private Rigidbody2D rb;
     private Vector2 movement;
     public GameObject player;
@@ -16,8 +19,8 @@ public class Orc : BaseEnemy
     public void Start()
     {
 		base.Start();
-        //gm = (GameManager) GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-        //player = gm.GetPlayer();
+        gm = (GameManager) GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+        player = gm.GetPlayer();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         am = GetComponent<Animator>();
@@ -43,7 +46,7 @@ public class Orc : BaseEnemy
             }
         }
     }
-
+	float timer = 0;
     // Note: Add acceleration
     private void FixedUpdate() {
         if (Target)
@@ -57,6 +60,13 @@ public class Orc : BaseEnemy
             else
             {
                 am.SetBool("isAttack", true);
+				timer += Time.deltaTime;
+				print(timer);
+				if (timer >= coolDown)
+				{
+					Target.GetComponent<Health>().Damage(damage);
+					timer = 0;
+				}
             }
         }
 

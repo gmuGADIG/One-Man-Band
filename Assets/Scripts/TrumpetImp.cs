@@ -182,12 +182,119 @@ public class TrumpetImp : BaseEnemy
 
     Vector2[] arrangement =
     {
-        new Vector2(0, 0),
-        new Vector2(-2.0f, 0),
-        new Vector2(2.0f, 0),
-        new Vector2(0, -2.0f),
-        new Vector2(0, 2.0f),
+        new Vector2(0, 0)
     };
+
+    Vector2[] movePattern = { 
+        new Vector2(-3.0f,  3.0f),
+        new Vector2(-2.0f,  3.0f),
+        new Vector2(-1.0f,  3.0f),
+        new Vector2( 0.0f,  3.0f),
+        new Vector2( 1.0f,  3.0f),
+        new Vector2( 2.0f,  3.0f),
+        new Vector2( 3.0f,  3.0f),
+
+        new Vector2( 3.0f,  2.0f),
+        new Vector2( 2.0f,  2.0f),
+        new Vector2( 2.0f,  1.0f),
+        new Vector2( 1.0f,  1.0f),
+        new Vector2( 1.0f,  0.0f),
+        new Vector2( 0.0f,  0.0f),
+        new Vector2(-1.0f,  0.0f),
+        new Vector2(-1.0f, -1.0f),
+        new Vector2(-2.0f, -1.0f),
+        new Vector2(-2.0f, -2.0f),
+        new Vector2(-3.0f, -2.0f),
+
+        new Vector2(-3.0f, -3.0f),
+        new Vector2(-2.0f, -3.0f),
+        new Vector2(-1.0f, -3.0f),
+        new Vector2( 0.0f, -3.0f),
+        new Vector2( 1.0f, -3.0f),
+        new Vector2( 2.0f, -3.0f),
+        new Vector2( 3.0f, -3.0f),
+    };
+
+    float movePatternSize = 0.6f;
+
+    private void generateFormation()
+    {
+        if (impsInFormation < 1) return;
+
+       // Debug.Log(" --- Generate Arrangement: " + impsInFormation + " --- ");
+
+        int rows = Mathf.CeilToInt(Mathf.Sqrt(impsInFormation));
+        int remaining = impsInFormation;
+
+        int desired = Mathf.CeilToInt((float)remaining / (float)rows);
+
+        arrangement = new Vector2[impsInFormation];
+
+        float width = rows;
+
+        float posY = ((width - 1.0f) / 2.0f);
+
+        int nextWrite = 0;
+
+        while(rows > 0)
+        {
+            if (desired > remaining) desired = remaining;
+
+            float posX = (-0.5f * width);
+            float deltaX = 0.0f;
+            if(desired > 1)
+            {
+                deltaX = (width / (desired - 1));
+            }
+            else
+            {
+                posX = 0.0f;
+            }
+
+            for(int x = 0; x < desired; ++x)
+            {
+                arrangement[nextWrite++] = new Vector2(posX, posY) * 2.0f;
+                //Debug.Log("Added pos: " + arrangement[nextWrite - 1]);
+                posX += deltaX;
+            }
+
+            remaining -= desired;
+            rows -= 1;
+
+            posY *= -1.0f;
+
+            if (desired > remaining) desired = remaining;
+
+            posX = (-0.5f * width);
+            deltaX = 0.0f;
+            if (desired > 1)
+            {
+                deltaX = (width / (desired - 1));
+            }
+            else
+            {
+                posX = 0.0f;
+            }
+
+            for (int x = 0; x < desired; ++x)
+            {
+                arrangement[nextWrite++] = new Vector2(posX, posY) * 2.0f;
+                //Debug.Log("Added pos: " + arrangement[nextWrite - 1]);
+                posX += deltaX;
+            }
+
+            remaining -= desired;
+            rows -= 1;
+
+            if (rows > 0)
+            {
+                desired = Mathf.CeilToInt((float)remaining / (float)rows);
+            }
+
+            posY *= -1.0f;
+            posY -= 1.0f;
+        }
+    }
 
     private void Start()
     {
@@ -301,6 +408,7 @@ public class TrumpetImp : BaseEnemy
     }
 
 
+
     bool testImpFormation(GameObject imp)
     {
         TrumpetImp ti = imp.GetComponent<TrumpetImp>();
@@ -311,13 +419,7 @@ public class TrumpetImp : BaseEnemy
         if (ti.affiliation != affiliation) return false;
 
         // TODO: More specific max formation size.
-        if (ti.impsInFormation >= 5) return false;
-
-        //if (!ti.myFormation.mayAdd(this)) return false;
-
-        //if (!ti.myFormation.hasSpots()) return false;
-
-        
+        if (ti.impsInFormation >= 20) return false;
 
         TrumpetImp myHead = findFormationHead();
         TrumpetImp otherHead = ti.findFormationHead();
@@ -346,7 +448,7 @@ public class TrumpetImp : BaseEnemy
 
             if(cycleDetect++ > impsInFormation)
             {
-                Debug.Log("Find formation head cycle. SUs!!!");
+                //Debug.Log("Find formation head cycle. SUs!!!");
                 break;
             }
         }
@@ -364,7 +466,7 @@ public class TrumpetImp : BaseEnemy
 
             if (cycleDetect++ > impsInFormation)
             {
-                Debug.Log("Find formation tail cycle. SUs!!!");
+                //Debug.Log("Find formation tail cycle. SUs!!!");
                 break;
             }
         }
@@ -377,14 +479,18 @@ public class TrumpetImp : BaseEnemy
     {
         int cycleDetect = 0;
 
-        while(head != null)
+        // Must update the head before the formation may be correctly generated.
+        head.impsInFormation = newSize;
+        head.generateFormation();
+
+        while (head != null)
         {
             head.impsInFormation = newSize;
             head = head.nextImp;
 
-            if(cycleDetect++ > impsInFormation)
+            if(cycleDetect++ > newSize)
             {
-                Debug.Log("Update formation size: Cycle. Sus!!!");
+                //Debug.Log("Update formation size: Cycle. Sus!!!");
                 break;
             }
         }
@@ -411,6 +517,8 @@ public class TrumpetImp : BaseEnemy
         prevImp = null;
         nextImp = null;
         impsInFormation = 1;
+
+        generateFormation();
 
         // Empty formation has short retarget timer
         formationRetargetTimer = 0.1f;
@@ -442,9 +550,14 @@ public class TrumpetImp : BaseEnemy
             nextImp.prevImp = this;
         }
 
-        // Need to update formation size.
-        updateFormationSize(otherHead, someTargetImp.impsInFormation + impsInFormation);
+        //Debug.Log("Sanity check: (prev.next == this): " + (prevImp.nextImp == this));
+        //if(nextImp != null)
+       //     Debug.Log("Sanity check: (next.prev == this): " + (nextImp.prevImp == this));
 
+        // Need to update formation size.
+        updateFormationSize(otherHead, someTargetImp.impsInFormation + 1);
+
+        //Debug.Log("Joined formation with size: " + impsInFormation);
         //Debug.Log("My new head: " + findFormationHead());
     }
 
@@ -524,8 +637,31 @@ public class TrumpetImp : BaseEnemy
 
     private void retargetWholeFormation()
     {
-        formationCenter = (Vector2)currentTargetObject.transform.position + new Vector2(Random.Range(-3, 3), Random.Range(-3, 3));
+        movePatternIndex += 1;
+        if(movePatternIndex >= movePattern.Length)
+        {
+            movePatternIndex = 0;
+            movePatternCenter = (Vector2)currentTargetObject.transform.position;
 
+            int offsetX = Mathf.RoundToInt(Random.RandomRange(-5.3f, 5.3f));
+            int offsetY = Mathf.RoundToInt(Random.RandomRange(-5.3f, 5.3f));
+
+            // Random offsets for marching.
+            movePatternCenter.x += offsetX * movePatternSize;
+            movePatternCenter.y += offsetY * movePatternSize;
+
+            formationCenter = movePatternCenter + movePatternSize * movePattern[movePatternIndex];
+
+            float dist = ((Vector2)transform.position - formationCenter).magnitude;
+            formationRetargetTimer = (dist / maxVelocity) + 0.1f;
+        }
+        else
+        {
+            formationCenter = movePatternCenter + movePatternSize * movePattern[movePatternIndex];
+
+            float dist = ((Vector2)transform.position - formationCenter).magnitude;
+            formationRetargetTimer = (dist / maxVelocity) + 0.1f;
+        }
         
     }
 
@@ -537,21 +673,24 @@ public class TrumpetImp : BaseEnemy
 
         while (current != null)
         {
-            current.targetLocation = formationCenter + arrangement[index];
+            current.targetLocation = formationCenter + arrangement[(index % arrangement.Length)];
 
             index += 1;
             current = current.nextImp;
 
-            if (index > impsInFormation)
+            if (index >= impsInFormation)
             {
-                Debug.Log("There was a cycle. Sus!!!");
+                //Debug.Log("There was a cycle. Sus!!!");
                 break;
             }
         }
     }
 
-    float formationRetargetTimer = 0.0f;
+    float formationRetargetTimer = -1.0f;
     Vector2 formationCenter = Vector2.zero;
+
+    Vector2 movePatternCenter = Vector2.zero;
+    int movePatternIndex = 100000;
 
     private void updateTheWholeFormation()
     {
@@ -563,7 +702,7 @@ public class TrumpetImp : BaseEnemy
             return;
         }
 
-        formationRetargetTimer = Random.Range(2.5f, 3.5f);
+        //formationRetargetTimer = Random.Range(2.5f, 3.5f);
         retargetWholeFormation();
     }
 
@@ -647,7 +786,6 @@ public class TrumpetImp : BaseEnemy
                 tryAttacking();
             }
         }
-
     }
 
     protected override void OnAffiliationChanged(EnemyAffiliation old, EnemyAffiliation newA)

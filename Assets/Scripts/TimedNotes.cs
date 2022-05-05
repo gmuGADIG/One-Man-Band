@@ -21,7 +21,8 @@ public class TimedNotes : ParentNote
     {
         if (col.gameObject.tag == "Player")
         {
-            Dn.StartTracking();
+			AudioSource.PlayClipAtPoint(pickupSound[Random.Range(0,pickupSound.Length)], transform.position);
+			Dn.StartTracking();
             gameObject.SetActive(false);
         }
     }

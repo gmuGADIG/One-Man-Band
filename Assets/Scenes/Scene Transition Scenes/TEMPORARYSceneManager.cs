@@ -6,5 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class TEMPORARYSceneManager : MonoBehaviour
 {
-    
+    public void RestartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }
