@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class TrumpetImp : BaseEnemy
 {
+    /// <summary>
+    /// The radius within which the imp is allowed to retarget the player. If the imps don't retarget the player,
+    /// they will simply idle in their current position.
+    /// 
+    /// A value of 20 seems to be reasonable, possibly.
+    /// </summary>
+    public float allowToTargetPlayerRadius = 20;
+
     // To keep track of formations: Each imp keeps track of the next imp in the formation, and the previous one.
     // The imp that has no previous imp is responsible for controlling the whole formation.
     private TrumpetImp nextImp = null;
@@ -576,7 +584,17 @@ public class TrumpetImp : BaseEnemy
         }
 
         //formationRetargetTimer = Random.Range(2.5f, 3.5f);
-        retargetWholeFormation();
+
+        Vector2 tar = (Vector2)currentTargetObject.transform.position;
+        Vector2 me = (Vector2)transform.position;
+
+       // Debug.Log("Current dist: " + Vector2.Distance(tar, me) + " vs " + allowToTargetPlayerRadius);
+
+        if (Vector2.Distance(tar, me) <= allowToTargetPlayerRadius)
+        {
+           // Debug.Log("Retarget! Lmao...");
+            retargetWholeFormation();
+        }
     }
 
     private bool isThereAnyAttackTarget()
