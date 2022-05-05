@@ -5,10 +5,12 @@ using UnityEngine;
 public class OgreHurtbox : MonoBehaviour
 {
     bool hurt;
+    int damage;
+    GameObject target;
     // Start is called before the first frame update
     void Start()
     {
-        
+        damage = 1;
     }
 
     private void OnEnable()
@@ -21,8 +23,17 @@ public class OgreHurtbox : MonoBehaviour
         
     }
 
+    public void SetTarget(GameObject t)
+    {
+        target = t;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if 
+        if (!hurt & collision.gameObject == target) {
+            target.GetComponent<Health>().Damage(damage);
+            hurt = true;
+        }
+        
     }
 }

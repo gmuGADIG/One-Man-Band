@@ -34,7 +34,7 @@ public class Orc : BaseEnemy
         {
             movement = (Target.transform.position - transform.position).normalized;
             //rb.rotation = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg;
-            if (transform.position.x >= player.transform.position.x)
+            if (transform.position.x >= Target.transform.position.x)
             {
                 //face left
                 sr.flipX = false;
@@ -59,14 +59,15 @@ public class Orc : BaseEnemy
             }
             else
             {
+                transform.GetChild(0).GetComponent<OgreHurtbox>().SetTarget(Target);
                 am.SetBool("isAttack", true);
-				timer += Time.deltaTime;
+				/*timer += Time.deltaTime;
 				print(timer);
 				if (timer >= coolDown)
 				{
 					Target.GetComponent<Health>().Damage(damage);
 					timer = 0;
-				}
+				}*/
             }
         }
 
