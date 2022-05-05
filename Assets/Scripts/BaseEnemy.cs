@@ -87,6 +87,7 @@ public class BaseEnemy : MonoBehaviour
             convertHealth -= noteScript.damage;
             if (convertHealth <= 0)
             {
+                Debug.Log("I'm dead LMAO");
                 ChangeAffiliation(EnemyAffiliation.WithPlayer);
             }
         }
