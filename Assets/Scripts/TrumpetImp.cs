@@ -2,146 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/*public class TrumpetImpFormation {
-    public HashSet<TrumpetImp> imps;
-
-    private SortedSet<int> idQueue;
-
-    private Vector2 myCenter;
-
-    private float timer = 0.0f;
-
-    Vector2[] arrangement =
-    {
-        new Vector2(0, 0),
-        new Vector2(-2.0f, 0),
-        new Vector2(2.0f, 0),
-        new Vector2(0, -2.0f),
-        new Vector2(0, 2.0f),
-    };
-
-    EnemyAffiliation affiliation;
-
-    public TrumpetImpFormation(EnemyAffiliation affiliation)
-    {
-        imps = new HashSet<TrumpetImp>();
-        idQueue = new SortedSet<int>();
-
-        for(int i = 0; i < arrangement.Length; ++i)
-        {
-            idQueue.Add(i);
-        }
-
-        this.affiliation = affiliation;
-    }
-
-    public void update(TrumpetImp source)
-    {
-        if (source.currentFormationIndex != 0) return;
-
-        if(timer > 0)
-        {
-            timer -= Time.fixedDeltaTime;
-            return;
-        }
-
-        timer = Random.Range(2.5f, 3.5f);
-        myCenter = (Vector2)source.currentTargetObject.transform.position + new Vector2(Random.Range(-3, 3), Random.Range(-3, 3));
-    }
-
-    public void addImp(TrumpetImp imp)
-    {
-        if (imp.myFormation == this) return;
-
-        // Do not erroneously try to add imps if not possible.
-        // This is a silent error; change this to an exception for debugging, maybe.
-        if (!hasSpots()) return;
-
-        if(imp.myFormation != null)
-        {
-            imp.myFormation.removeImp(imp);
-        }
-
-        imps.Add(imp);
-
-        imp.currentFormationIndex = idQueue.Min;
-        idQueue.Remove(idQueue.Min);
-
-        imp.myFormation = this;
-    }
-
-    private void reassignImpIds()
-    {
-        foreach (TrumpetImp imp in imps)
-        {
-            idQueue.Add(imp.currentFormationIndex);
-        }
-
-        foreach (TrumpetImp imp in imps)
-        {
-            imp.currentFormationIndex = idQueue.Min;
-            idQueue.Remove(idQueue.Min);
-        }
-    }
-
-    public void removeImp(TrumpetImp imp)
-    {
-        imps.Remove(imp);
-        if(imp.currentFormationIndex != -1)
-            idQueue.Add(imp.currentFormationIndex);
-        imp.currentFormationIndex = -1;
-
-        // Reassign IDs to be sure that some imp has id 0, and that they are in order
-        reassignImpIds();
-    }
-
-
-    public Vector2 getFormationPosition(int index)
-    {
-        if(index < 0)
-        {
-            return myCenter;
-        }
-        return myCenter + arrangement[index];
-    }
-
-    public int numSpotsRemaining()
-    {
-        return arrangement.Length - imps.Count;
-    }
-
-    public bool hasSpots()
-    {
-        return numSpotsRemaining() > 0;
-    }
-
-    public bool mayAdd(TrumpetImp imp)
-    {
-        if (!hasSpots()) return false;
-
-        if (imp.affiliation != affiliation) return false;
-
-        return true;
-    }
-
-    public bool isSingular()
-    {
-        return imps.Count == 1;
-    }
-
-    //// One single global formation for now for basic testing purposes
-    //static TrumpetImpFormation theFormation = null;
-    //public static TrumpetImpFormation getFormation()
-    //{
-    //    if(theFormation == null)
-    //    {
-    //        theFormation = new TrumpetImpFormation();
-    //    }
-    //    return theFormation;
-    //}
-}*/
-
-
 public class TrumpetImp : BaseEnemy
 {
     // To keep track of formations: Each imp keeps track of the next imp in the formation, and the previous one.
@@ -444,13 +304,15 @@ public class TrumpetImp : BaseEnemy
         int cycleDetect = 0;
         while (head.prevImp != null)
         {
-            head = head.prevImp;
-
-            if(cycleDetect++ > impsInFormation)
+            if(cycleDetect >= impsInFormation)
             {
-                //Debug.Log("Find formation head cycle. SUs!!!");
+                //Debug.Log("Cycle in Find Head: " + cycleDetect + " vs " + impsInFormation);
                 break;
             }
+
+            head = head.prevImp;
+
+            cycleDetect++;
         }
 
         return head;
@@ -477,7 +339,14 @@ public class TrumpetImp : BaseEnemy
     // Updates the formation size for a head imp.
     private void updateFormationSize(TrumpetImp head, int newSize)
     {
+        //Debug.Log("Updating formation @ " + head + " to size " + newSize);
+
         int cycleDetect = 0;
+
+        // In e.g. leave formation, we will be updating more nodes than will
+        // actually exist.
+        // This is because we update the size before relinking the list.
+        int nodesToUpdate = head.impsInFormation;
 
         // Must update the head before the formation may be correctly generated.
         head.impsInFormation = newSize;
@@ -485,14 +354,16 @@ public class TrumpetImp : BaseEnemy
 
         while (head != null)
         {
+            if (cycleDetect >= nodesToUpdate)
+            {
+                //Debug.Log("Cycle in Update Size: " + cycleDetect + " vs " + newSize);
+                break;
+            }
+
             head.impsInFormation = newSize;
             head = head.nextImp;
 
-            if(cycleDetect++ > newSize)
-            {
-                //Debug.Log("Update formation size: Cycle. Sus!!!");
-                break;
-            }
+            cycleDetect++;
         }
     }
 
@@ -536,7 +407,7 @@ public class TrumpetImp : BaseEnemy
         // Cannot be in a formation when joining a new one.
         leaveFormation();
 
-       // Debug.Log("formation join: " + this + " and " + someTargetImp);
+        //Debug.Log("formation join: " + this + " and " + someTargetImp);
         //Debug.Log("    note: prevous heads: " + myHead + " vs " + otherHead);
 
         // Insert after someTargetImp.
@@ -673,16 +544,18 @@ public class TrumpetImp : BaseEnemy
 
         while (current != null)
         {
+            if (index >= impsInFormation)
+            {
+                //Debug.Log("Imp Debug: " + index + " vs " + impsInFormation);
+                break;
+            }
+
             current.targetLocation = formationCenter + arrangement[(index % arrangement.Length)];
 
             index += 1;
             current = current.nextImp;
 
-            if (index >= impsInFormation)
-            {
-                //Debug.Log("There was a cycle. Sus!!!");
-                break;
-            }
+            
         }
     }
 
@@ -752,11 +625,12 @@ public class TrumpetImp : BaseEnemy
             attack();
         }
     }
-	public new void Die()
-	{
-		leaveFormation();
-		Destroy(gameObject);
-	}
+    private void OnDestroy()
+    {
+        /* MUST leave the formation when the gameobject is destroyed! */
+        leaveFormation();
+    }
+
     private void FixedUpdate()
     {
         // Cooldown is updated each frame to time when the attack is ready.
