@@ -182,6 +182,12 @@ MonoBehaviour:
   gm: {fileID: 0}
   sr: {fileID: 0}
   am: {fileID: 0}
+  attackAudio:
+  - {fileID: 8300000, guid: c04d2c146b399c644a222dbe485344a4, type: 3}
+  hurtAudio:
+  - {fileID: 8300000, guid: 8e3ebc281bab71f4f8d3d4b32c0fdf85, type: 3}
+  defeatAudio:
+  - {fileID: 8300000, guid: bbd6c35dd59601b4daee57e1cf419d70, type: 3}
 --- !u!50 &-4141356941425789020
 Rigidbody2D:
   serializedVersion: 4

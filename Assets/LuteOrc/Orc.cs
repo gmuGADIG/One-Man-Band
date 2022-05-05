@@ -14,6 +14,9 @@ public class Orc : BaseEnemy
     public GameManager gm;
     public SpriteRenderer sr;
     public Animator am;
+    public AudioClip[] attackAudio;
+    public AudioClip[] hurtAudio;
+    public AudioClip[] defeatAudio;
 
     // Start is called before the first frame update
     public void Start()
@@ -34,19 +37,10 @@ public class Orc : BaseEnemy
         {
             movement = (Target.transform.position - transform.position).normalized;
             //rb.rotation = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg;
-            if (transform.position.x >= Target.transform.position.x)
-            {
-                //face left
-                sr.flipX = false;
-            }
-            else
-            {
-                //face right
-                sr.flipX = true;
-            }
+            sr.flipX = transform.position.x < Target.transform.position.x;
         }
     }
-	float timer = 0;
+
     // Note: Add acceleration
     private void FixedUpdate() {
         if (Target)
@@ -72,7 +66,36 @@ public class Orc : BaseEnemy
         }
 
     }
-	void moveCharacter()
+
+    public override void Die()
+    {
+        Destroy(gameObject);
+    }
+    private void checkConvertNoteCollide(Collider2D collision)
+    {
+        // Already converted, don't need to check for conversion notes
+        if (convertHealth <= 0) return;
+
+        Notes noteScript = collision.gameObject.GetComponent<Notes>();
+        gameObject.GetComponent<AudioSource>().PlayOneShot(defeatAudio[0]);
+        // If we actually collided with a note...
+        if (noteScript != null)
+        {
+            gameObject.GetComponent<AudioSource>().PlayOneShot(hurtAudio[0]);
+            convertHealth -= noteScript.damage;
+            if (convertHealth <= 0)
+            {
+                ChangeAffiliation(EnemyAffiliation.WithPlayer);
+            }
+        }
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        checkConvertNoteCollide(collision);
+    }
+    void moveCharacter()
 	{
 		rb.MovePosition((Vector2)transform.position + (movement * movespeed * Time.deltaTime));
 	}
