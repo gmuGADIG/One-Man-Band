@@ -10,13 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 6723649050370223276}
   - component: {fileID: 8824964171705841431}
-  - component: {fileID: 2820184321265130583}
   - component: {fileID: -4141356941425789020}
+  - component: {fileID: 6037968015153916742}
   - component: {fileID: 2901082217400393875}
   - component: {fileID: 4845013616121755866}
   - component: {fileID: 8606758232633907604}
   m_Layer: 0
-  m_Name: Orc
+  m_Name: FluteBat
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1798684235737349784, guid: 5e21433536aa36e4db9bf4f1c5fe204c, type: 3}
+  m_Sprite: {fileID: 2620723775378735317, guid: fdbe4769a02b2e94d804fa80207b9789, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -87,23 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2820184321265130583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8931512868122751305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9425282f4c5119449ba03081b64fcf37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  convertHealth: 0
-  baseConvertHealth: 5
-  Health: 0
-  baseHealth: 5
-  movespeed: 2
 --- !u!50 &-4141356941425789020
 Rigidbody2D:
   serializedVersion: 4
@@ -125,6 +108,31 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &6037968015153916742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8931512868122751305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffd68b9da44e7e94a8a6003c94fd72c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  convertHealth: 0
+  baseConvertHealth: 5
+  Health: 0
+  baseHealth: 5
+  speed: 0
+  angleSpeed: 0
+  radius: 0
+  alertDistance: 0
+  WindBlast: {fileID: 0}
+  attackAnim: 0
+  doAttack: 0
+  ani: {fileID: 0}
+  following: 0
 --- !u!114 &2901082217400393875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,7 +164,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.684, y: 1.024}
+    oldSize: {x: 1.6, y: 1.6}
     newSize: {x: 1, y: 0.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -175,7 +183,7 @@ Animator:
   m_GameObject: {fileID: 8931512868122751305}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c1cf1b1028b5dee42b9093912553bc0e, type: 2}
+  m_Controller: {fileID: 9100000, guid: bb7b07c5f90f9d04fb30de7905804b31, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
