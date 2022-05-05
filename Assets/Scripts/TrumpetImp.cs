@@ -48,6 +48,8 @@ public class TrumpetImp : BaseEnemy
 
     private Health health;
 
+    Animator animator;
+
     Vector2[] arrangement =
     {
         new Vector2(0, 0)
@@ -178,6 +180,8 @@ public class TrumpetImp : BaseEnemy
         aoeRadius = transform.Find("AOERadius").localPosition.magnitude;
         attackParticleSystem = GetComponent<ParticleSystem>();
 
+        animator = GetComponent<Animator>();
+
         health = GetComponent<Health>();
     }
 
@@ -218,6 +222,7 @@ public class TrumpetImp : BaseEnemy
 
         attackParticleSystem.Play();
         attackCooldown = 1.0f;
+        animator.SetTrigger("attack");
     }
 
     /// <summary>
@@ -640,6 +645,7 @@ public class TrumpetImp : BaseEnemy
     {
         if(isThereAnyAttackTarget())
         {
+            
             attack();
         }
     }
@@ -678,6 +684,9 @@ public class TrumpetImp : BaseEnemy
                 tryAttacking();
             }
         }
+
+        animator.SetFloat("velX", rigidbody.velocity.x);
+        animator.SetFloat("velY", rigidbody.velocity.y);
     }
 
     protected override void OnAffiliationChanged(EnemyAffiliation old, EnemyAffiliation newA)
