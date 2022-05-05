@@ -19,7 +19,7 @@ public class LevelEndScript : MonoBehaviour
     private PolygonCollider2D objCollider;
     private Collider2D playerCollider;
     private LevelEndGUIScript GUIscript;
-    private int totalNotes;
+    private float playerPrevVelocity;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +37,7 @@ public class LevelEndScript : MonoBehaviour
         GUIscript.setTotalNotes(totalNotes);
 
         source = GetComponent<AudioSource>();
+        GUIscript.nextLevel = nextScene;
     }
 
     // Update is called once per frame
@@ -58,6 +59,7 @@ public class LevelEndScript : MonoBehaviour
     {
         stopAllEnemies();
         levelEndGUI.SetActive(true);
+        playerPrevVelocity = playerMoveScript.maxVelocity;
         playerMoveScript.maxVelocity = 0;
         playerAttackScript.enabled = false;
         //TODO: please make this load the next scene also
@@ -79,10 +81,30 @@ public class LevelEndScript : MonoBehaviour
         }
     }
 
+
     private IEnumerator PlayMusicThenLoad()
     {
-        source.PlayOneShot(WinSound);
-        yield return new WaitForSeconds(2);
-        SceneManager.LoadSceneAsync(nextScene);
+		source.PlayOneShot(WinSound);
+		yield return new WaitForSeconds(2);
+		SceneManager.LoadSceneAsync(nextScene);
+	}
+    public void resumeGame()
+    {
+        //Resume the enemies
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            enemy.SetActive(true);
+        }
+        //Resume the enemy spawners too
+        GameObject[] enemySpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
+        foreach (GameObject enemySpawner in enemySpawners)
+        {
+            enemySpawner.GetComponent<EnemySpawnerScript>().spawnCheck = true;
+        }
+
+        levelEndGUI.SetActive(false);
+        playerMoveScript.maxVelocity = playerPrevVelocity;
+        playerAttackScript.enabled = true;
     }
 }
