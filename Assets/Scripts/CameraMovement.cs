@@ -23,6 +23,7 @@ public class CameraMovement : MonoBehaviour
         {
             Debug.Log("Please set distance higher then 0");
         }
+        transform.SetParent(null);
     }
 
     // Update is called once per .2 seconds
@@ -33,7 +34,7 @@ public class CameraMovement : MonoBehaviour
         if (storedPositions.Count > followDistance)
         {
             Vector3 pos = storedPositions[0];
-            pos.z -= 1;
+            pos.z -= 10;
             followingMe.transform.position = pos; //move the player
             storedPositions.RemoveAt(0); //delete the position that player just move to
         }
