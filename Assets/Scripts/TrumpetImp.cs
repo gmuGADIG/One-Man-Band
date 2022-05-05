@@ -500,10 +500,10 @@ public class TrumpetImp : BaseEnemy
 
     private void UpdateColor()
     {
-        Color result = Color.red;
-        if (affiliation == EnemyAffiliation.WithPlayer) result = Color.green;
+       // Color result = Color.red;
+      //  if (affiliation == EnemyAffiliation.WithPlayer) result = Color.green;
         //if (affiliation == EnemyAffiliation.Blue) result = Color.blue;
-        spriteRenderer.color = result;
+        spriteRenderer.color = Color.white;
     }
 
     private void retargetWholeFormation()
