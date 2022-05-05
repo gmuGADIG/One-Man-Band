@@ -45,6 +45,7 @@ public class Orc : BaseEnemy
     private void FixedUpdate() {
         if (Target)
         {
+            am.SetBool("hasTarget", true);
             float targetDist = Vector3.Distance(Target.transform.position, transform.position);
             if (targetDist > minDist)
             {
@@ -55,20 +56,17 @@ public class Orc : BaseEnemy
             {
                 transform.GetChild(0).GetComponent<OgreHurtbox>().SetTarget(Target);
                 am.SetBool("isAttack", true);
-				/*timer += Time.deltaTime;
-				print(timer);
-				if (timer >= coolDown)
-				{
-					Target.GetComponent<Health>().Damage(damage);
-					timer = 0;
-				}*/
             }
+        } else
+        {
+            am.SetBool("hasTarget", false);
+            rb.velocity = Vector3.zero; //To prevent "sliding"
         }
-
     }
 
     public override void Die()
     {
+        gameObject.GetComponent<AudioSource>().PlayOneShot(defeatAudio[0]);
         Destroy(gameObject);
     }
     private void checkConvertNoteCollide(Collider2D collision)
@@ -77,7 +75,6 @@ public class Orc : BaseEnemy
         if (convertHealth <= 0) return;
 
         Notes noteScript = collision.gameObject.GetComponent<Notes>();
-        gameObject.GetComponent<AudioSource>().PlayOneShot(defeatAudio[0]);
         // If we actually collided with a note...
         if (noteScript != null)
         {
