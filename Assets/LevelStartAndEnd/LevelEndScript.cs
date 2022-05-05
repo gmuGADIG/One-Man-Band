@@ -16,7 +16,7 @@ public class LevelEndScript : MonoBehaviour
     private PolygonCollider2D objCollider;
     private Collider2D playerCollider;
     private LevelEndGUIScript GUIscript;
-    private int totalNotes;
+    private float playerPrevVelocity;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,9 +29,7 @@ public class LevelEndScript : MonoBehaviour
         GUIscript = levelEndGUI.GetComponent<LevelEndGUIScript>();
         levelEndGUI.SetActive(false);
         GUIscript.enabled = true;
-
-        totalNotes = FindObjectsOfType<ParentNote>().Length; //So LevelEndGUI knows how many notes are in the level total
-        GUIscript.setTotalNotes(totalNotes);
+        GUIscript.nextLevel = nextScene;
     }
 
     // Update is called once per frame
@@ -53,6 +51,7 @@ public class LevelEndScript : MonoBehaviour
     {
         stopAllEnemies();
         levelEndGUI.SetActive(true);
+        playerPrevVelocity = playerMoveScript.maxVelocity;
         playerMoveScript.maxVelocity = 0;
         playerAttackScript.enabled = false;
         //TODO: please make this load the next scene also
@@ -72,5 +71,25 @@ public class LevelEndScript : MonoBehaviour
         {
             enemySpawner.GetComponent<EnemySpawnerScript>().spawnCheck = false;
         }
+    }
+
+    public void resumeGame()
+    {
+        //Resume the enemies
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            enemy.SetActive(true);
+        }
+        //Resume the enemy spawners too
+        GameObject[] enemySpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
+        foreach (GameObject enemySpawner in enemySpawners)
+        {
+            enemySpawner.GetComponent<EnemySpawnerScript>().spawnCheck = true;
+        }
+
+        levelEndGUI.SetActive(false);
+        playerMoveScript.maxVelocity = playerPrevVelocity;
+        playerAttackScript.enabled = true;
     }
 }
