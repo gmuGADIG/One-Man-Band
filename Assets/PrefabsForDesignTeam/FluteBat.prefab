@@ -87,6 +87,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2820184321265130583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8931512868122751305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9425282f4c5119449ba03081b64fcf37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  convertHealth: 0
+  baseConvertHealth: 5
+  Health: 0
+  baseHealth: 5
+  movespeed: 2
+  player: {fileID: 0}
+  gm: {fileID: 0}
+  sr: {fileID: 0}
 --- !u!50 &-4141356941425789020
 Rigidbody2D:
   serializedVersion: 4

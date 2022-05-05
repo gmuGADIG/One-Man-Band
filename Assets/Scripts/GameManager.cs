@@ -4,12 +4,42 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private Player player;
-    [SerializeField] private int notesCollected = 0;
+    [SerializeField] private GameObject player;
+    [SerializeField] public int notesCollected = 0;
+    public int allNotes = 0;
+    public int note_Percent = 0;
     [SerializeField] private int enemysInScene = 0;
     private List<BaseEnemy> enemies = new List<BaseEnemy>();
+    public MusicManager musicManager;
+    public static GameManager gm;
 
-    public Player GetPlayer()
+    public void Awake()
+    {
+        if (gm == null)
+        {
+            gm = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void Start()
+    {
+		player = GameObject.FindGameObjectWithTag("Player");
+        allNotes = FindObjectsOfType<ParentNote>().Length;
+        Debug.Log("Notes at start: " + allNotes);
+    }
+
+    public void changeSong()
+    {
+        Debug.Log("Notes at start: " + allNotes);
+        Debug.Log("Notes collected: " + notesCollected);
+        Debug.Log("Notes % = " + ((allNotes-notesCollected)/notesCollected)* 100);
+    }
+
+    public GameObject GetPlayer()
     {
         return player;
     }

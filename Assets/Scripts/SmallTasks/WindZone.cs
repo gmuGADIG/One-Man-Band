@@ -70,7 +70,7 @@ public class WindZone : MonoBehaviour
     public void TurnOnWind()
     {
         isBlowing = true;
-        source.Play();
+        source.Play();  
         //start any wind Particles or graphic animations
     }
     public void TurnOffWind()
