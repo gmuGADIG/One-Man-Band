@@ -32,13 +32,15 @@ public class GameManager : MonoBehaviour
 
     public void changeSong()
     {
-        Debug.Log("Notes at start: " + allNotes);
-        Debug.Log("Notes collected: " + notesCollected);
-        Debug.Log("Notes % = " + ((allNotes-notesCollected)/notesCollected));
+        //Debug.Log("Notes at start: " + allNotes);
+        //Debug.Log("Notes collected: " + notesCollected);
+        //Debug.Log("Notes % = " + ((allNotes-notesCollected)/notesCollected));
     }
     private void Update()
     {
-        collectionPercent = ((allNotes - notesCollected) / notesCollected);
+        //Debug.Log(notesCollected + " " + allNotes);
+        collectionPercent = (float)notesCollected / allNotes;
+        //Debug.Log(collectionPercent);
     }
     public GameObject GetPlayer()
     {
