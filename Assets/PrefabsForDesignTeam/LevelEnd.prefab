@@ -128,3 +128,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextScene: 
   levelEndGUI: {fileID: 7605122507306414663, guid: c1bc42bec6af9b6419bcdf869e56ac72, type: 3}
+  WinSound: {fileID: 8300000, guid: 2244a41e7929f9742a6206aaa90f407c, type: 3}

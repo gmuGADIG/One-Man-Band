@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public MusicManager musicManager;
     public static GameManager gm;
 
+    [HideInInspector] public float collectionPercent = 0;
+
     public void Awake()
     {
         if (gm == null)
@@ -23,22 +25,23 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    public void Start()
-    {
-		player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         allNotes = FindObjectsOfType<ParentNote>().Length;
         Debug.Log("Notes at start: " + allNotes);
     }
 
     public void changeSong()
     {
-        Debug.Log("Notes at start: " + allNotes);
-        Debug.Log("Notes collected: " + notesCollected);
-        Debug.Log("Notes % = " + ((allNotes-notesCollected)/notesCollected)* 100);
+        //Debug.Log("Notes at start: " + allNotes);
+        //Debug.Log("Notes collected: " + notesCollected);
+        //Debug.Log("Notes % = " + ((allNotes-notesCollected)/notesCollected));
     }
-
+    private void Update()
+    {
+        //Debug.Log(notesCollected + " " + allNotes);
+        collectionPercent = (float)notesCollected / allNotes;
+        //Debug.Log(collectionPercent);
+    }
     public GameObject GetPlayer()
     {
         return player;
