@@ -175,7 +175,9 @@ MonoBehaviour:
   Health: 0
   baseHealth: 5
   movespeed: 2
-  minDist: 1
+  minDist: 1.5
+  damage: 1
+  coolDown: 1
   player: {fileID: 0}
   gm: {fileID: 0}
   sr: {fileID: 0}
