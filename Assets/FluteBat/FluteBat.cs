@@ -20,6 +20,9 @@ public class FluteBat : BaseEnemy
     public bool attackAnim, doAttack;
     public Animator ani;
     public bool following;
+    public AudioClip[] idle;
+    public AudioClip attackClip;
+
 
 
     void Start()
@@ -32,7 +35,7 @@ public class FluteBat : BaseEnemy
     
     void FixedUpdate()
     {
-        if (Vector2.Distance(transform.position, Target.transform.position) > alertDistance)
+        if (Vector2.Distance(transform.position, Target.transform.position) < alertDistance)
         {
             following = true;
         }
@@ -62,6 +65,7 @@ public class FluteBat : BaseEnemy
     void MoveToward()
     {
         rb.MovePosition(Vector2.MoveTowards(transform.position, Target.transform.position, speed));
+        angle = Mathf.Atan2(Target.transform.position.x - transform.position.x, Target.transform.position.y - transform.position.y) * Mathf.Rad2Deg;
         //angle = Mathf.Atan2(transform.position.x - Target.transform.position.x, transform.position.y - Target.transform.position.y) * -Mathf.Rad2Deg;
         //transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, angle));
     }
@@ -80,9 +84,11 @@ public class FluteBat : BaseEnemy
     //Makes an attack square
     public void Attack()
     {
+        gameObject.GetComponent<AudioSource>().PlayOneShot(attackClip);
         GameObject temp = Instantiate(WindBlast, transform.position, transform.rotation);
-        temp.GetComponent<WindBlast>().setMovement(new Vector3(transform.position.x - Target.transform.position.x, transform.position.y - Target.transform.position.y, 0.0f), -angle);
+        temp.GetComponent<WindBlast>().setMovement(new Vector3(transform.position.x - Target.transform.position.x, transform.position.y - Target.transform.position.y, 0.0f), Mathf.Atan2(Target.transform.position.x - transform.position.x, Target.transform.position.y - transform.position.y) * -Mathf.Rad2Deg);
         temp.GetComponent<WindBlast>().setColor(gameObject, "Red");
+        angle = Mathf.Atan2(Target.transform.position.x - transform.position.x, Target.transform.position.y - transform.position.y) * Mathf.Rad2Deg;
         attackAnim = false;
         FrameAttack = 0;
     }
