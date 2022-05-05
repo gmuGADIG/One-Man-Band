@@ -10,6 +10,9 @@ public class MusicManager : MonoBehaviour
 
     [HideInInspector] public AudioSource[] sources;
 
+    private int currentBranchIndex = 1;
+    private float percentageBetweenTracks = 0;
+    private GameManager manager;
 
     private void Awake()
     {
@@ -29,7 +32,24 @@ public class MusicManager : MonoBehaviour
 
             sources[i].loop = true;
             sources[i].Play();
-            sources[i].volume = 1; //CHANGE TO BE MUTED ON START ONLY FOR BUILD!!!
+            sources[i].volume = 0; 
+        }
+        FadeInTrack(0);
+        
+        manager = GetComponent<GameManager>();
+    }
+    private void Start()
+    {
+        percentageBetweenTracks = (sources.Length / manager.allNotes) * 100;
+        Debug.Log(percentageBetweenTracks);
+    }
+    private void FixedUpdate()
+    {
+        Debug.Log(percentageBetweenTracks);
+        if (percentageBetweenTracks * currentBranchIndex <= manager.collectionPercent)
+        {
+            FadeInTrack(currentBranchIndex);
+            currentBranchIndex++;
         }
     }
 
