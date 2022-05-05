@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Orc : BaseEnemy
 {
-    public float movespeed = 2f;
+    public float movespeed = 2f, minDist = 1;
     private Rigidbody2D rb;
     private Vector2 movement;
     public GameObject player;
@@ -49,7 +49,7 @@ public class Orc : BaseEnemy
         if (Target)
         {
             float targetDist = Vector3.Distance(Target.transform.position, transform.position);
-            if (targetDist > 2)
+            if (targetDist > minDist)
             {
                 am.SetBool("isAttack", false);
                 moveCharacter();
