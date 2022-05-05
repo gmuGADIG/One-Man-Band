@@ -13,7 +13,7 @@ public class OgreAttackSound : StateMachineBehaviour
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         orc = animator.gameObject.GetComponent<Orc>();
-        animator.gameObject.GetComponent<AudioSource>().PlayOneShot(orc.attackAudio[0]);
+        animator.gameObject.GetComponent<AudioSource>().PlayOneShot(orc.attackAudio[Random.Range(0,orc.attackAudio.Length)]);
     }
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

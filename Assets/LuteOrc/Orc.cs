@@ -59,6 +59,7 @@ public class Orc : BaseEnemy
             }
         } else
         {
+            am.SetBool("isAttack", false);
             am.SetBool("hasTarget", false);
             rb.velocity = Vector3.zero; //To prevent "sliding"
         }
@@ -66,7 +67,16 @@ public class Orc : BaseEnemy
 
     public override void Die()
     {
-        gameObject.GetComponent<AudioSource>().PlayOneShot(defeatAudio[0]);
+        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponent<Animator>().enabled = false;
+        GetComponent<SpriteRenderer>().enabled = false;
+        float timer = Time.time;
+        GetComponent<AudioSource>().PlayOneShot(defeatAudio[Random.Range(0,defeatAudio.Length)]);
+        Invoke("MyDestroy", 2.0f);
+    }
+
+    private void MyDestroy()
+    {
         Destroy(gameObject);
     }
     private void checkConvertNoteCollide(Collider2D collision)
@@ -78,7 +88,7 @@ public class Orc : BaseEnemy
         // If we actually collided with a note...
         if (noteScript != null)
         {
-            gameObject.GetComponent<AudioSource>().PlayOneShot(hurtAudio[0]);
+            gameObject.GetComponent<AudioSource>().PlayOneShot(hurtAudio[Random.Range(0,hurtAudio.Length)]);
             convertHealth -= noteScript.damage;
             if (convertHealth <= 0)
             {
