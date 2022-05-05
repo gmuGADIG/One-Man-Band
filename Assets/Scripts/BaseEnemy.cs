@@ -20,6 +20,10 @@ public class BaseEnemy : MonoBehaviour
     public int baseHealth = 5;
 	protected GameObject Target;
 
+    public bool damagedByRed = true;
+    public bool damagedByBlue = true;
+    public bool damagedByGreen = true;
+
     // Affiliation must be changed through ChangeAffiliation.
     // This makes it clear that the affiliation change may have additional side effects.
     public EnemyAffiliation affiliation { get; private set; }
@@ -76,6 +80,10 @@ public class BaseEnemy : MonoBehaviour
         // If we actually collided with a note...
         if (noteScript != null)
         {
+            if (noteScript.red && !damagedByRed) return;
+            if (noteScript.green && !damagedByGreen) return;
+            if (noteScript.blue && !damagedByBlue) return;
+
             convertHealth -= noteScript.damage;
             if (convertHealth <= 0)
             {

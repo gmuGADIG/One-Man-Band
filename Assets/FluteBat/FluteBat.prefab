@@ -149,13 +149,18 @@ MonoBehaviour:
   baseConvertHealth: 5
   Health: 0
   baseHealth: 5
+  damagedByRed: 0
+  damagedByBlue: 0
+  damagedByGreen: 1
   speed: 0.15
   angleSpeed: 3
   radius: 6
+  alertDistance: 0
   WindBlast: {fileID: 4463901321374847123, guid: 302342e759228c4428b24e3a7ad6ac04, type: 3}
   attackAnim: 0
   doAttack: 0
   ani: {fileID: 0}
+  following: 0
 --- !u!95 &3364922255149450954
 Animator:
   serializedVersion: 3
