@@ -601,6 +601,7 @@ public class TrumpetImp : BaseEnemy
         if (Vector2.Distance(tar, me) <= allowToTargetPlayerRadius)
         {
             // Debug.Log("Retarget! Lmao...");
+
             retargetWholeFormation();
         }
     }
