@@ -33,8 +33,8 @@ public class LevelEndScript : MonoBehaviour
         levelEndGUI.SetActive(false);
         GUIscript.enabled = true;
 
-        totalNotes = FindObjectsOfType<ParentNote>().Length; //So LevelEndGUI knows how many notes are in the level total
-        GUIscript.setTotalNotes(totalNotes);
+        //totalNotes = FindObjectsOfType<ParentNote>().Length; //So LevelEndGUI knows how many notes are in the level total
+        //GUIscript.setTotalNotes(totalNotes);
 
         source = GetComponent<AudioSource>();
         GUIscript.nextLevel = nextScene;

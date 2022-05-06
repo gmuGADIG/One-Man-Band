@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/TitleScreen.unity
     guid: f47320de06980cd498f4860f48f2116f
   - enabled: 1
-    path: Assets/Design Team/toine-tutorial.unity
-    guid: e9e34c660c056d44eacdf089b85d5bf4
+    path: Assets/Scenes/UIPrefabScene/TestScene Play.unity
+    guid: a58c524424b2ed348932e95db5d2c8c4
+  - enabled: 1
+    path: Assets/Scenes/UIPrefabScene/PauseTestScene.unity
+    guid: fc4690ad34c4c77429a560e39d5b5484
+  - enabled: 1
+    path: Assets/Art/UI/Design Team/toine-tutorial.unity
+    guid: 6c200eae47b3e4c4c8063a29fa234981
   m_configObjects: {}

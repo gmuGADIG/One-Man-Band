@@ -24,8 +24,7 @@ public class Instruments : MonoBehaviour
 
     public Notes note;
     public GameObject player;
-
-    public GameObject notes_sprite;
+    public Camera main;
 
     public AudioSource playerSource;
     public AudioClip[] AttackAudio;
@@ -44,10 +43,14 @@ public class Instruments : MonoBehaviour
         if (Input.GetKeyDown(attack) && AttackCooldown <= FrameTimerAttack) 
         {
             Vector3 cursorPosition = Input.mousePosition;
-            cursorPosition = Camera.main.ScreenToWorldPoint(cursorPosition) - transform.position; // - position makes it use local space meaning the player is the center instead of the global 0,0 coords
+            //cursorPosition = Camera.main.ScreenToWorldPoint(cursorPosition) - transform.position; // - position makes it use local space meaning the player is the center instead of the global 0,0 coords
            
+
+            cursorPosition = main.ScreenToWorldPoint(cursorPosition) - transform.position; // - position makes it use local space meaning the player is the center instead of the global 0,0 coords
+
 			cursorPosition -= note.transform.position;
             Notes tempNote = Instantiate(note, player.transform);
+            Debug.Log(cursorPosition);
             tempNote.setVelocity(cursorPosition, color);
             FrameTimerAttack = 0.0f;
             // playerSource.clip = AttackAudio[instrument_cycle];
