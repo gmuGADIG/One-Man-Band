@@ -28,7 +28,7 @@ public class OgreHurtbox : MonoBehaviour
         target = t;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (!hurt & collision.gameObject == target) {
             target.GetComponent<Health>().Damage(damage);

@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
         //Debug.Log(collectionPercent);
         Debug.Log("Notes at start: " + allNotes);
         Debug.Log("Notes collected: " + notesCollected);
-        Debug.Log("Notes % = " + ((allNotes - notesCollected) / notesCollected) * 100);
+        //Debug.Log("Notes % = " + ((allNotes - notesCollected) / notesCollected) * 100);
     }
     public GameObject GetPlayer()
     {

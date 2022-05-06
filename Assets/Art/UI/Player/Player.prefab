@@ -221,7 +221,7 @@ MonoBehaviour:
   color: Red
   note: {fileID: 5630893792240628699, guid: c242f699e40942942815ce862b112c68, type: 3}
   player: {fileID: 3508245568329665400}
-  notes_sprite: {fileID: 0}
+  main: {fileID: 0}
   playerSource: {fileID: 1020285700995972120}
   AttackAudio:
   - {fileID: 0}
@@ -415,7 +415,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: 0
   m_CullingMask:
