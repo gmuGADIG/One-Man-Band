@@ -51,6 +51,10 @@ public class WindBlast : MonoBehaviour
         if (collision.gameObject.Equals(comeFrom)) { }
         else if (collision.CompareTag("Player") || collision.CompareTag("Enemy"))
         {
+            Health health = collision.gameObject.GetComponent<Health>();
+            if(health!=null){
+                health.Damage(1);
+            }
             Destroy(gameObject);
         }
     }

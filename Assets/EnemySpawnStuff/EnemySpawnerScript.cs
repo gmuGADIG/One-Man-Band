@@ -7,9 +7,9 @@ public class EnemySpawnerScript : MonoBehaviour
     [Tooltip("Original enemy (or any object) for this spawner to spawn")]
     public GameObject enemyType;
     [Tooltip("Number of enemies spawned at a time, but may spawn less if spawning this many would produce more enemies in the level than the int Max Enemies")]
-    public uint spawnSize;
+    public int spawnSize;
     [Tooltip("Only spawns enemies if less than this number of enemies are alive in the level")]
-    public uint maxEnemies;
+    public int maxEnemies;
     [Tooltip("Spawner will wait at least this many seconds between spawning each enemy")]
     public float spawnIntervalLowerBound;
     [Tooltip("Spawner will wait at most this many seconds between spawning each enemy")]
@@ -19,7 +19,7 @@ public class EnemySpawnerScript : MonoBehaviour
     [Tooltip("Only spawns enemies if player is within this distance of spawner")]
     public float maxSpawningDistance;
 
-    public static uint enemiesAliveInLevel; //Should be set to 0 by the scene when the level starts, 
+    public static int enemiesAliveInLevel; //Should be set to 0 by the scene when the level starts, 
                                             //decremented by enemies as they despawn
 
     private float nextSpawn = 0.0f;
@@ -47,12 +47,12 @@ public class EnemySpawnerScript : MonoBehaviour
             //(prevents spawner(s) from immediately spawning once spawnCheck is set to true/player gets close enough)
             if (spawnCheck && playerIsClose)
             {
-                uint amountToSpawn = spawnSize; //Number of enemies to spawn this time
+                int amountToSpawn = spawnSize; //Number of enemies to spawn this time
                 if (spawnSize + enemiesAliveInLevel > maxEnemies) //If spawning spawnSize enemies isn't allowed by maxEnemies
                 {
                     amountToSpawn = maxEnemies - enemiesAliveInLevel; //Only spawn enough enemies to reach maxEnemies
                 }
-                for (uint i = 0; i < amountToSpawn; ++i)
+                for (int i = 0; i < amountToSpawn; ++i)
                 {
                     Object.Instantiate(enemyType, gameObject.transform.position, gameObject.transform.rotation);
                     enemiesAliveInLevel++;
