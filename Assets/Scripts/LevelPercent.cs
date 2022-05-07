@@ -12,6 +12,7 @@ public class LevelPercent : MonoBehaviour
     {
         Sliders = GetComponent<Slider>();
         gm = (GameManager)GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+        Sliders.value = 0;
     }
 
     // Update is called once per frame
