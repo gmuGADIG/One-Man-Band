@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Orc : BaseEnemy
 {
-    public float movespeed = 2f;
+
+    public float movespeed = 2f, minDist = 1;
 	[SerializeField] int damage = 1;
 	[SerializeField] int coolDown = 1;
     private Rigidbody2D rb;
@@ -13,6 +14,9 @@ public class Orc : BaseEnemy
     public GameManager gm;
     public SpriteRenderer sr;
     public Animator am;
+    public AudioClip[] attackAudio;
+    public AudioClip[] hurtAudio;
+    public AudioClip[] defeatAudio;
 
     // Start is called before the first frame update
     public void Start()
@@ -33,44 +37,72 @@ public class Orc : BaseEnemy
         {
             movement = (Target.transform.position - transform.position).normalized;
             //rb.rotation = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg;
-            if (transform.position.x >= player.transform.position.x)
-            {
-                //face left
-                sr.flipX = false;
-            }
-            else
-            {
-                //face right
-                sr.flipX = true;
-            }
+            sr.flipX = transform.position.x < Target.transform.position.x;
         }
     }
-	float timer = 0;
+
     // Note: Add acceleration
     private void FixedUpdate() {
         if (Target)
         {
+            am.SetBool("hasTarget", true);
             float targetDist = Vector3.Distance(Target.transform.position, transform.position);
-            if (targetDist > 2)
+            if (targetDist > minDist)
             {
                 am.SetBool("isAttack", false);
                 moveCharacter();
             }
             else
             {
+                transform.GetChild(0).GetComponent<OgreHurtbox>().SetTarget(Target);
                 am.SetBool("isAttack", true);
-				timer += Time.deltaTime;
-				print(timer);
-				if (timer >= coolDown)
-				{
-					Target.GetComponent<Health>().Damage(damage);
-					timer = 0;
-				}
+            }
+        } else
+        {
+            am.SetBool("isAttack", false);
+            am.SetBool("hasTarget", false);
+            rb.velocity = Vector3.zero; //To prevent "sliding"
+        }
+    }
+
+    public override void Die()
+    {
+        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponent<Animator>().enabled = false;
+        GetComponent<SpriteRenderer>().enabled = false;
+        float timer = Time.time;
+        GetComponent<AudioSource>().PlayOneShot(defeatAudio[Random.Range(0,defeatAudio.Length)]);
+        Invoke("MyDestroy", 2.0f);
+    }
+
+    private void MyDestroy()
+    {
+        Destroy(gameObject);
+    }
+    private void checkConvertNoteCollide(Collider2D collision)
+    {
+        // Already converted, don't need to check for conversion notes
+        if (convertHealth <= 0) return;
+
+        Notes noteScript = collision.gameObject.GetComponent<Notes>();
+        // If we actually collided with a note...
+        if (noteScript != null)
+        {
+            gameObject.GetComponent<AudioSource>().PlayOneShot(hurtAudio[Random.Range(0,hurtAudio.Length)]);
+            convertHealth -= noteScript.damage;
+            if (convertHealth <= 0)
+            {
+                ChangeAffiliation(EnemyAffiliation.WithPlayer);
             }
         }
-
     }
-	void moveCharacter()
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        checkConvertNoteCollide(collision);
+    }
+    void moveCharacter()
 	{
 		rb.MovePosition((Vector2)transform.position + (movement * movespeed * Time.deltaTime));
 	}

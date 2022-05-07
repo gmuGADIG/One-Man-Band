@@ -23,6 +23,7 @@ public class HealthNotesremove : MonoBehaviour
     // Update is called once per frame
     public void notePop()
     {
+<<<<<<< HEAD
         Debug.Log("hdfsua");
         for (int i =0; i < notePops.Length; i++ )
         {
@@ -34,6 +35,12 @@ public class HealthNotesremove : MonoBehaviour
                 break;
             }
         }
+=======
+        /*foreach (GameObject notePoping in notePops)
+        {
+            if(notePoping.active == false)
+        }*/
+>>>>>>> eb021f7b370c573a1fb0dd4ae47276320509bdde
     }
 
     public void DestroyMe(GameObject noteToPops)

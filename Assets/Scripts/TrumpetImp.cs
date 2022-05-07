@@ -2,148 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/*public class TrumpetImpFormation {
-    public HashSet<TrumpetImp> imps;
-
-    private SortedSet<int> idQueue;
-
-    private Vector2 myCenter;
-
-    private float timer = 0.0f;
-
-    Vector2[] arrangement =
-    {
-        new Vector2(0, 0),
-        new Vector2(-2.0f, 0),
-        new Vector2(2.0f, 0),
-        new Vector2(0, -2.0f),
-        new Vector2(0, 2.0f),
-    };
-
-    EnemyAffiliation affiliation;
-
-    public TrumpetImpFormation(EnemyAffiliation affiliation)
-    {
-        imps = new HashSet<TrumpetImp>();
-        idQueue = new SortedSet<int>();
-
-        for(int i = 0; i < arrangement.Length; ++i)
-        {
-            idQueue.Add(i);
-        }
-
-        this.affiliation = affiliation;
-    }
-
-    public void update(TrumpetImp source)
-    {
-        if (source.currentFormationIndex != 0) return;
-
-        if(timer > 0)
-        {
-            timer -= Time.fixedDeltaTime;
-            return;
-        }
-
-        timer = Random.Range(2.5f, 3.5f);
-        myCenter = (Vector2)source.currentTargetObject.transform.position + new Vector2(Random.Range(-3, 3), Random.Range(-3, 3));
-    }
-
-    public void addImp(TrumpetImp imp)
-    {
-        if (imp.myFormation == this) return;
-
-        // Do not erroneously try to add imps if not possible.
-        // This is a silent error; change this to an exception for debugging, maybe.
-        if (!hasSpots()) return;
-
-        if(imp.myFormation != null)
-        {
-            imp.myFormation.removeImp(imp);
-        }
-
-        imps.Add(imp);
-
-        imp.currentFormationIndex = idQueue.Min;
-        idQueue.Remove(idQueue.Min);
-
-        imp.myFormation = this;
-    }
-
-    private void reassignImpIds()
-    {
-        foreach (TrumpetImp imp in imps)
-        {
-            idQueue.Add(imp.currentFormationIndex);
-        }
-
-        foreach (TrumpetImp imp in imps)
-        {
-            imp.currentFormationIndex = idQueue.Min;
-            idQueue.Remove(idQueue.Min);
-        }
-    }
-
-    public void removeImp(TrumpetImp imp)
-    {
-        imps.Remove(imp);
-        if(imp.currentFormationIndex != -1)
-            idQueue.Add(imp.currentFormationIndex);
-        imp.currentFormationIndex = -1;
-
-        // Reassign IDs to be sure that some imp has id 0, and that they are in order
-        reassignImpIds();
-    }
-
-
-    public Vector2 getFormationPosition(int index)
-    {
-        if(index < 0)
-        {
-            return myCenter;
-        }
-        return myCenter + arrangement[index];
-    }
-
-    public int numSpotsRemaining()
-    {
-        return arrangement.Length - imps.Count;
-    }
-
-    public bool hasSpots()
-    {
-        return numSpotsRemaining() > 0;
-    }
-
-    public bool mayAdd(TrumpetImp imp)
-    {
-        if (!hasSpots()) return false;
-
-        if (imp.affiliation != affiliation) return false;
-
-        return true;
-    }
-
-    public bool isSingular()
-    {
-        return imps.Count == 1;
-    }
-
-    //// One single global formation for now for basic testing purposes
-    //static TrumpetImpFormation theFormation = null;
-    //public static TrumpetImpFormation getFormation()
-    //{
-    //    if(theFormation == null)
-    //    {
-    //        theFormation = new TrumpetImpFormation();
-    //    }
-    //    return theFormation;
-    //}
-}*/
-
-
 public class TrumpetImp : BaseEnemy
 {
+    /// <summary>
+    /// The radius within which the imp is allowed to retarget the player. If the imps don't retarget the player,
+    /// they will simply idle in their current position.
+    /// 
+    /// A value of 20 seems to be reasonable, possibly.
+    /// </summary>
+    public float allowToTargetPlayerRadius = 20;
+
     // To keep track of formations: Each imp keeps track of the next imp in the formation, and the previous one.
     // The imp that has no previous imp is responsible for controlling the whole formation.
     private TrumpetImp nextImp = null;
@@ -166,7 +34,7 @@ public class TrumpetImp : BaseEnemy
 
     public int currentFormationIndex = -1;
 
-   // public TrumpetImpFormation myFormation = null;
+    // public TrumpetImpFormation myFormation = null;
 
     private SpriteRenderer spriteRenderer;
 
@@ -180,12 +48,14 @@ public class TrumpetImp : BaseEnemy
 
     private Health health;
 
+    Animator animator;
+
     Vector2[] arrangement =
     {
         new Vector2(0, 0)
     };
 
-    Vector2[] movePattern = { 
+    Vector2[] movePattern = {
         new Vector2(-3.0f,  3.0f),
         new Vector2(-2.0f,  3.0f),
         new Vector2(-1.0f,  3.0f),
@@ -221,7 +91,7 @@ public class TrumpetImp : BaseEnemy
     {
         if (impsInFormation < 1) return;
 
-       // Debug.Log(" --- Generate Arrangement: " + impsInFormation + " --- ");
+        // Debug.Log(" --- Generate Arrangement: " + impsInFormation + " --- ");
 
         int rows = Mathf.CeilToInt(Mathf.Sqrt(impsInFormation));
         int remaining = impsInFormation;
@@ -236,13 +106,13 @@ public class TrumpetImp : BaseEnemy
 
         int nextWrite = 0;
 
-        while(rows > 0)
+        while (rows > 0)
         {
             if (desired > remaining) desired = remaining;
 
             float posX = (-0.5f * width);
             float deltaX = 0.0f;
-            if(desired > 1)
+            if (desired > 1)
             {
                 deltaX = (width / (desired - 1));
             }
@@ -251,7 +121,7 @@ public class TrumpetImp : BaseEnemy
                 posX = 0.0f;
             }
 
-            for(int x = 0; x < desired; ++x)
+            for (int x = 0; x < desired; ++x)
             {
                 arrangement[nextWrite++] = new Vector2(posX, posY) * 2.0f;
                 //Debug.Log("Added pos: " + arrangement[nextWrite - 1]);
@@ -295,7 +165,10 @@ public class TrumpetImp : BaseEnemy
             posY -= 1.0f;
         }
     }
-
+    private void Update()
+    {
+        GetComponent<AudioSource>().Play();
+    }
     private void Start()
     {
         // MUST CALL PARENT START!
@@ -310,6 +183,8 @@ public class TrumpetImp : BaseEnemy
         aoeRadius = transform.Find("AOERadius").localPosition.magnitude;
         attackParticleSystem = GetComponent<ParticleSystem>();
 
+        animator = GetComponent<Animator>();
+
         health = GetComponent<Health>();
     }
 
@@ -317,7 +192,7 @@ public class TrumpetImp : BaseEnemy
     {
         foreach (Health health in GameObject.FindObjectsOfType<Health>())
         {
-        
+
             bool shouldAttack = false;
 
             // Compare the given Health's position to our position.
@@ -335,12 +210,12 @@ public class TrumpetImp : BaseEnemy
                     shouldAttack = true;
                 }
             }
-            else if(health.gameObject.GetComponent<Player>() != null && affiliation == EnemyAffiliation.AgainstPlayer)
+            else if (health.gameObject.GetComponent<Player>() != null && affiliation == EnemyAffiliation.AgainstPlayer)
             {
                 shouldAttack = true;
             }
 
-           
+
             if (shouldAttack)
             {
                 // Damage any relevant enemies.
@@ -350,6 +225,7 @@ public class TrumpetImp : BaseEnemy
 
         attackParticleSystem.Play();
         attackCooldown = 1.0f;
+        animator.SetTrigger("attack");
     }
 
     /// <summary>
@@ -361,7 +237,7 @@ public class TrumpetImp : BaseEnemy
         Vector2 difference = (targetLocation - rigidbody.position);
         Vector2 targetVelocity = difference.normalized * maxVelocity;
         float maxNeededVelocity = (difference.magnitude / Time.fixedDeltaTime);
-        if(targetVelocity.magnitude > maxNeededVelocity)
+        if (targetVelocity.magnitude > maxNeededVelocity)
         {
             targetVelocity = targetVelocity.normalized * maxNeededVelocity;
         }
@@ -373,13 +249,13 @@ public class TrumpetImp : BaseEnemy
             accel *= Time.fixedDeltaTime;
 
             float maxFrameAccel = rigidbody.velocity.magnitude;
-            if(accel.magnitude > maxFrameAccel)
+            if (accel.magnitude > maxFrameAccel)
             {
                 accel = accel.normalized * maxFrameAccel;
             }
 
             rigidbody.AddForce(accel, ForceMode2D.Impulse);
-            if(rigidbody.velocity.sqrMagnitude < 0.001 * 0.001)
+            if (rigidbody.velocity.sqrMagnitude < 0.001 * 0.001)
             {
                 rigidbody.velocity = new Vector2(0, 0);
             }
@@ -444,13 +320,15 @@ public class TrumpetImp : BaseEnemy
         int cycleDetect = 0;
         while (head.prevImp != null)
         {
-            head = head.prevImp;
-
-            if(cycleDetect++ > impsInFormation)
+            if (cycleDetect >= impsInFormation)
             {
-                //Debug.Log("Find formation head cycle. SUs!!!");
+                //Debug.Log("Cycle in Find Head: " + cycleDetect + " vs " + impsInFormation);
                 break;
             }
+
+            head = head.prevImp;
+
+            cycleDetect++;
         }
 
         return head;
@@ -477,7 +355,14 @@ public class TrumpetImp : BaseEnemy
     // Updates the formation size for a head imp.
     private void updateFormationSize(TrumpetImp head, int newSize)
     {
+        //Debug.Log("Updating formation @ " + head + " to size " + newSize);
+
         int cycleDetect = 0;
+
+        // In e.g. leave formation, we will be updating more nodes than will
+        // actually exist.
+        // This is because we update the size before relinking the list.
+        int nodesToUpdate = head.impsInFormation;
 
         // Must update the head before the formation may be correctly generated.
         head.impsInFormation = newSize;
@@ -485,14 +370,16 @@ public class TrumpetImp : BaseEnemy
 
         while (head != null)
         {
+            if (cycleDetect >= nodesToUpdate)
+            {
+                //Debug.Log("Cycle in Update Size: " + cycleDetect + " vs " + newSize);
+                break;
+            }
+
             head.impsInFormation = newSize;
             head = head.nextImp;
 
-            if(cycleDetect++ > newSize)
-            {
-                //Debug.Log("Update formation size: Cycle. Sus!!!");
-                break;
-            }
+            cycleDetect++;
         }
     }
 
@@ -504,11 +391,11 @@ public class TrumpetImp : BaseEnemy
         updateFormationSize(head, impsInFormation - 1);
 
         // Update linked list.
-        if(prevImp != null)
+        if (prevImp != null)
         {
             prevImp.nextImp = nextImp;
         }
-        if(nextImp != null)
+        if (nextImp != null)
         {
             nextImp.prevImp = prevImp;
         }
@@ -536,7 +423,7 @@ public class TrumpetImp : BaseEnemy
         // Cannot be in a formation when joining a new one.
         leaveFormation();
 
-       // Debug.Log("formation join: " + this + " and " + someTargetImp);
+        //Debug.Log("formation join: " + this + " and " + someTargetImp);
         //Debug.Log("    note: prevous heads: " + myHead + " vs " + otherHead);
 
         // Insert after someTargetImp.
@@ -552,7 +439,7 @@ public class TrumpetImp : BaseEnemy
 
         //Debug.Log("Sanity check: (prev.next == this): " + (prevImp.nextImp == this));
         //if(nextImp != null)
-       //     Debug.Log("Sanity check: (next.prev == this): " + (nextImp.prevImp == this));
+        //     Debug.Log("Sanity check: (next.prev == this): " + (nextImp.prevImp == this));
 
         // Need to update formation size.
         updateFormationSize(otherHead, someTargetImp.impsInFormation + 1);
@@ -574,13 +461,13 @@ public class TrumpetImp : BaseEnemy
         // TODO: Only do this once per frame, for all imps.
         // That will still be O(n^2) but it will be much better.
         // Even better option: Use colliders or something..?
-        foreach(GameObject imp in imps)
+        foreach (GameObject imp in imps)
         {
             if (imp == gameObject) continue;
 
             float dist = ((Vector2)imp.transform.position - (Vector2)transform.position).magnitude;
 
-            
+
 
             if (dist <= radius)
             {
@@ -602,7 +489,7 @@ public class TrumpetImp : BaseEnemy
 
         }
 
-        if(closest != null)
+        if (closest != null)
         {
             // Change my formation to be that one.
             joinFormation(closest.GetComponent<TrumpetImp>());
@@ -623,22 +510,22 @@ public class TrumpetImp : BaseEnemy
         //targetLocation = myFormation.getFormationPosition(currentFormationIndex);
         //if(currentTargetObject != null)
         //{
-            //targetLocation = (Vector2)currentTargetObject.transform.position;
+        //targetLocation = (Vector2)currentTargetObject.transform.position;
         //}
     }
 
     private void UpdateColor()
     {
-        Color result = Color.red;
-        if (affiliation == EnemyAffiliation.WithPlayer) result = Color.green;
+        // Color result = Color.red;
+        //  if (affiliation == EnemyAffiliation.WithPlayer) result = Color.green;
         //if (affiliation == EnemyAffiliation.Blue) result = Color.blue;
-        spriteRenderer.color = result;
+        spriteRenderer.color = Color.white;
     }
 
     private void retargetWholeFormation()
     {
         movePatternIndex += 1;
-        if(movePatternIndex >= movePattern.Length)
+        if (movePatternIndex >= movePattern.Length)
         {
             movePatternIndex = 0;
             movePatternCenter = (Vector2)currentTargetObject.transform.position;
@@ -662,7 +549,7 @@ public class TrumpetImp : BaseEnemy
             float dist = ((Vector2)transform.position - formationCenter).magnitude;
             formationRetargetTimer = (dist / maxVelocity) + 0.1f;
         }
-        
+
     }
 
     private void updateFormationTargetsPerFrame()
@@ -673,16 +560,18 @@ public class TrumpetImp : BaseEnemy
 
         while (current != null)
         {
+            if (index >= impsInFormation)
+            {
+                //Debug.Log("Imp Debug: " + index + " vs " + impsInFormation);
+                break;
+            }
+
             current.targetLocation = formationCenter + arrangement[(index % arrangement.Length)];
 
             index += 1;
             current = current.nextImp;
 
-            if (index >= impsInFormation)
-            {
-                //Debug.Log("There was a cycle. Sus!!!");
-                break;
-            }
+
         }
     }
 
@@ -703,7 +592,18 @@ public class TrumpetImp : BaseEnemy
         }
 
         //formationRetargetTimer = Random.Range(2.5f, 3.5f);
-        retargetWholeFormation();
+
+        Vector2 tar = (Vector2)currentTargetObject.transform.position;
+        Vector2 me = (Vector2)transform.position;
+
+        // Debug.Log("Current dist: " + Vector2.Distance(tar, me) + " vs " + allowToTargetPlayerRadius);
+
+        if (Vector2.Distance(tar, me) <= allowToTargetPlayerRadius)
+        {
+            // Debug.Log("Retarget! Lmao...");
+
+            retargetWholeFormation();
+        }
     }
 
     private bool isThereAnyAttackTarget()
@@ -721,7 +621,7 @@ public class TrumpetImp : BaseEnemy
             // We are checking if there's anything in the radius.
             if (radius > aoeRadius) continue;
 
-            
+
 
             BaseEnemy be = possibleEnemyHealth.GetComponent<BaseEnemy>();
             if (be != null)
@@ -747,20 +647,23 @@ public class TrumpetImp : BaseEnemy
 
     private void tryAttacking()
     {
-        if(isThereAnyAttackTarget())
+        if (isThereAnyAttackTarget())
         {
+
             attack();
         }
     }
-	public new void Die()
-	{
-		leaveFormation();
-		Destroy(gameObject);
-	}
+    private void OnDestroy()
+    {
+        /* MUST leave the formation when the gameobject is destroyed! */
+        leaveFormation();
+    }
+
     private void FixedUpdate()
     {
+        
         // Cooldown is updated each frame to time when the attack is ready.
-        if(attackCooldown > 0) attackCooldown -= Time.fixedDeltaTime;
+        if (attackCooldown > 0) attackCooldown -= Time.fixedDeltaTime;
 
         checkForNearbyFriends();
 
@@ -768,17 +671,17 @@ public class TrumpetImp : BaseEnemy
         doXYPhysics();
 
         // Only formation index 0 actually does any updating.
-        if(prevImp == null)
+        if (prevImp == null)
         {
             updateTheWholeFormation();
         }
-       // if(myFormation != null)
+        // if(myFormation != null)
         //    myFormation.update(this);
 
         UpdateColor();
 
         // Simple attacking logic for now: just attack whenever our cooldown is less than zero.
-        if(attackCooldown <= 0)
+        if (attackCooldown <= 0)
         {
             // Only have a chance of attacking each frame that we are able to.
             if (Random.value <= 0.1)
@@ -786,6 +689,9 @@ public class TrumpetImp : BaseEnemy
                 tryAttacking();
             }
         }
+
+        animator.SetFloat("velX", rigidbody.velocity.x);
+        animator.SetFloat("velY", rigidbody.velocity.y);
     }
 
     protected override void OnAffiliationChanged(EnemyAffiliation old, EnemyAffiliation newA)

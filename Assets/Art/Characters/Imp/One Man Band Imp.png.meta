@@ -1,0 +1,684 @@
+fileFormatVersion: 2
+guid: 269e05034f4e1c641841376ca9de76b3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1145289321377684666
+    second: One Man Band Imp_0
+  - first:
+      213: 6171442999644140493
+    second: One Man Band Imp_1
+  - first:
+      213: 2542941834330253181
+    second: One Man Band Imp_2
+  - first:
+      213: 6176417606674104852
+    second: One Man Band Imp_3
+  - first:
+      213: 6838454709895034809
+    second: One Man Band Imp_4
+  - first:
+      213: 2284198041869159477
+    second: One Man Band Imp_5
+  - first:
+      213: 8041306535655652085
+    second: One Man Band Imp_6
+  - first:
+      213: -5243256976175250656
+    second: One Man Band Imp_7
+  - first:
+      213: 6719267823951337832
+    second: One Man Band Imp_8
+  - first:
+      213: -1846941590154032596
+    second: One Man Band Imp_9
+  - first:
+      213: -892963827227636318
+    second: One Man Band Imp_10
+  - first:
+      213: 950465288658969015
+    second: One Man Band Imp_11
+  - first:
+      213: 6954349036140407825
+    second: One Man Band Imp_12
+  - first:
+      213: -1393482471227670836
+    second: One Man Band Imp_13
+  - first:
+      213: 8603893551634539535
+    second: One Man Band Imp_14
+  - first:
+      213: -4336215702069963246
+    second: One Man Band Imp_15
+  - first:
+      213: -326997743962842693
+    second: One Man Band Imp_16
+  - first:
+      213: 8256958505242793529
+    second: One Man Band Imp_17
+  - first:
+      213: -2490501700460233505
+    second: One Man Band Imp_18
+  - first:
+      213: 994845279132188390
+    second: One Man Band Imp_19
+  - first:
+      213: 3914550364752738745
+    second: One Man Band Imp_20
+  - first:
+      213: 3369170021919121012
+    second: One Man Band Imp_21
+  - first:
+      213: -4791680489953550661
+    second: One Man Band Imp_22
+  - first:
+      213: -8157557360125441190
+    second: One Man Band Imp_23
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 20
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: One Man Band Imp_0
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 163
+        width: 17
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abcd3cdd192e4ef00800000000000000
+      internalID: 1145289321377684666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: One Man Band Imp_1
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 166
+        width: 14
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc33c51e5be55a550800000000000000
+      internalID: 6171442999644140493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: One Man Band Imp_2
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 166
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d772cbf00285a4320800000000000000
+      internalID: 2542941834330253181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: One Man Band Imp_3
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 164
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4124746d61b07b550800000000000000
+      internalID: 6176417606674104852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: One Man Band Imp_4
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 133
+        width: 21
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b7f3e3b35217ee50800000000000000
+      internalID: 6838454709895034809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: One Man Band Imp_5
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 133
+        width: 15
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53c0142540a13bf10800000000000000
+      internalID: 2284198041869159477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: One Man Band Imp_6
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 133
+        width: 21
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fa38c380b5789f60800000000000000
+      internalID: 8041306535655652085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: One Man Band Imp_7
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 131
+        width: 19
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0234cf46f853c37b0800000000000000
+      internalID: -5243256976175250656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: One Man Band Imp_8
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 101
+        width: 21
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 869d4555c72af3d50800000000000000
+      internalID: 6719267823951337832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: One Man Band Imp_9
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 101
+        width: 15
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2a49f5c8685e56e0800000000000000
+      internalID: -1846941590154032596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: One Man Band Imp_10
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 101
+        width: 21
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2adc2d8512e8b93f0800000000000000
+      internalID: -892963827227636318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: One Man Band Imp_11
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 99
+        width: 19
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b16bdde42bb03d00800000000000000
+      internalID: 950465288658969015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: One Man Band Imp_12
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 67
+        width: 17
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11caa374a9fc28060800000000000000
+      internalID: 6954349036140407825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: One Man Band Imp_13
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 70
+        width: 14
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccebdbd431b59ace0800000000000000
+      internalID: -1393482471227670836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: One Man Band Imp_14
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 70
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f04637e899b276770800000000000000
+      internalID: 8603893551634539535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: One Man Band Imp_15
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 68
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21616a01bcaa2d3c0800000000000000
+      internalID: -4336215702069963246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: One Man Band Imp_16
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 35
+        width: 17
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb99dbcc845467bf0800000000000000
+      internalID: -326997743962842693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: One Man Band Imp_17
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 38
+        width: 14
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9361326630c969270800000000000000
+      internalID: 8256958505242793529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: One Man Band Imp_18
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 38
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdcbf8f06e5ff6dd0800000000000000
+      internalID: -2490501700460233505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: One Man Band Imp_19
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 36
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6eef52da2866ecd00800000000000000
+      internalID: 994845279132188390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: One Man Band Imp_20
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 3
+        width: 24
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b9767a01d6435630800000000000000
+      internalID: 3914550364752738745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: One Man Band Imp_21
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 6
+        width: 21
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47e5268c842b1ce20800000000000000
+      internalID: 3369170021919121012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: One Man Band Imp_22
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 5
+        width: 25
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbe16275bf7808db0800000000000000
+      internalID: -4791680489953550661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: One Man Band Imp_23
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 5
+        width: 24
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5b89d23dc88ace80800000000000000
+      internalID: -8157557360125441190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
