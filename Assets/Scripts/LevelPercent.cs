@@ -17,6 +17,6 @@ public class LevelPercent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Sliders.value = gm.n
+        Sliders.value = gm.collectionPercent;
     }
 }
