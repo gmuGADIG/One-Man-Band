@@ -17,7 +17,6 @@ public class MusicManager : MonoBehaviour
     private void Awake()
     {
         //This audio source will not be destoyed between scene loads
-        DontDestroyOnLoad(gameObject);
         MusicManager[] otherManagers = FindObjectsOfType<MusicManager>();
         if (otherManagers.Length > 1)
         {
@@ -41,6 +40,7 @@ public class MusicManager : MonoBehaviour
     private void Start()
     {
         percentageBetweenTracks = ((float)manager.allNotes / sources.Length) / manager.allNotes;
+        Debug.Log(manager.allNotes + " " + sources.Length);
         Debug.Log(percentageBetweenTracks + " PERCENT DIFFERENCE");
     }
     private void FixedUpdate()

@@ -26,10 +26,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    public void Start()
-    {
         player = GameObject.FindGameObjectWithTag("Player");
         allNotes = FindObjectsOfType<ParentNote>().Length;
         Debug.Log("Notes at start: " + allNotes);
