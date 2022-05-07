@@ -49473,6 +49473,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 207269348751334099, guid: 3b28e515518d63e46ac64c2623f6cd6c, type: 3}
+      propertyPath: tracks.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 207269348751334099, guid: 3b28e515518d63e46ac64c2623f6cd6c, type: 3}
+      propertyPath: tracks.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: b26605e792d96984995b795e098747ad, type: 3}
+    - target: {fileID: 207269348751334099, guid: 3b28e515518d63e46ac64c2623f6cd6c, type: 3}
+      propertyPath: tracks.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6590ae89afba58d4d9585418c68f213d, type: 3}
+    - target: {fileID: 207269348751334099, guid: 3b28e515518d63e46ac64c2623f6cd6c, type: 3}
+      propertyPath: tracks.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7b468b493cff5d84baa91577b6590367, type: 3}
+    - target: {fileID: 207269348751334099, guid: 3b28e515518d63e46ac64c2623f6cd6c, type: 3}
+      propertyPath: tracks.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: fcecb2ee9e5d68640a86088ea2b5786d, type: 3}
+    - target: {fileID: 207269348751334099, guid: 3b28e515518d63e46ac64c2623f6cd6c, type: 3}
+      propertyPath: tracks.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0031d0910cc276040b81093fb1d21dcb, type: 3}
     - target: {fileID: 957561189493029217, guid: 3b28e515518d63e46ac64c2623f6cd6c, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -53234,6 +53258,10 @@ PrefabInstance:
     - target: {fileID: 741815488648890001, guid: dadf485dbf456d246adc15183c5dfcde, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2363644891548022855, guid: dadf485dbf456d246adc15183c5dfcde, type: 3}
+      propertyPath: nextScene
+      value: TitleScreen
       objectReference: {fileID: 0}
     - target: {fileID: 3270261387985931626, guid: dadf485dbf456d246adc15183c5dfcde, type: 3}
       propertyPath: m_Name
