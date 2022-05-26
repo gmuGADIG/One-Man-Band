@@ -23,7 +23,7 @@ public class LevelEndGUIScript : MonoBehaviour
 
     private void Awake()
     {
-        
+        OnEnable();
     }
 
     // Start is called before the first frame update
