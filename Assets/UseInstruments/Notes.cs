@@ -5,7 +5,7 @@ using UnityEngine;
 public class Notes : MonoBehaviour
 {
 
-    private bool red, green, blue;
+    public bool red, green, blue;
     //public EnemyAffiliation affiliation { get; private set; }
     [Range(0,100)]
     public int damage;

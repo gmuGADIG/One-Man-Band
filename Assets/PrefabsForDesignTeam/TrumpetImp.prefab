@@ -144,7 +144,10 @@ MonoBehaviour:
   baseConvertHealth: 5
   Health: 0
   baseHealth: 5
-  allowToTargetPlayerRadius: 10
+  damagedByRed: 0
+  damagedByBlue: 1
+  damagedByGreen: 0
+  allowToTargetPlayerRadius: 20
   maxVelocity: 16
   maxAcceleration: 40
   currentTargetObject: {fileID: 0}
