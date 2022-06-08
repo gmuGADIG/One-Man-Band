@@ -176,7 +176,7 @@ MonoBehaviour:
   Health: 0
   baseHealth: 5
   movespeed: 2
-  minDist: 1.5
+  minDist: 0.5
   maxDist: 10
   damage: 1
   coolDown: 1
