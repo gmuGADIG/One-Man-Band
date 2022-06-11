@@ -70,12 +70,16 @@ public class BaseEnemy : MonoBehaviour
         GameObject closest = null;
         foreach (BaseEnemy be in FindObjectsOfType<BaseEnemy>())
         {
-            if(be == this || (int)be.affiliation != ((int)affiliation + 1) % 3 || be.affiliation != EnemyAffiliation.AgainstPlayer) { continue; } //no targeting oneself
-            float newDist = Vector3.Distance(be.transform.position, transform.position);                
-            if ((!closest || (newDist < Vector3.Distance(closest.transform.position, transform.position))))
-            {
-                closest = be.gameObject;
+            Debug.Log(be.affiliation);
+            if(be == this) { continue; } //no targeting oneself
+            if((int)be.affiliation == ((int)affiliation + 1) % 3 || be.affiliation == EnemyAffiliation.AgainstPlayer){
+                float newDist = Vector3.Distance(be.transform.position, transform.position);                
+                if ((!closest || (newDist < Vector3.Distance(closest.transform.position, transform.position))))
+                {
+                    closest = be.gameObject;
+                }
             }
+
         }
         Debug.Log(closest);
         if(closest == null){
