@@ -474,7 +474,7 @@ public class TrumpetImp : BaseEnemy
             if (dist <= radius)
             {
                 bool f = testImpFormation(imp);
-                if (f)
+                if (f && imp.GetComponent<TrumpetImp>().affiliation == affiliation)
                 {
                     if (closest == null)
                     {
@@ -629,7 +629,7 @@ public class TrumpetImp : BaseEnemy
             BaseEnemy be = possibleEnemyHealth.GetComponent<BaseEnemy>();
             if (be != null)
             {
-                if (be.affiliation != affiliation)
+                if ((int)be.affiliation == ((int)affiliation + 1 % 3))
                 {
                     shouldAttack = true;
                 }
