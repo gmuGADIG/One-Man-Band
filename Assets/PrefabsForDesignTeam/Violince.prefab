@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 58406514864570836}
   - component: {fileID: 58406514864570833}
   - component: {fileID: 6654377708562783851}
+  - component: {fileID: -3960455002889898128}
   m_Layer: 0
   m_Name: Violince
   m_TagString: Enemy
@@ -150,9 +151,12 @@ MonoBehaviour:
   baseConvertHealth: 5
   Health: 0
   baseHealth: 5
+  Target: {fileID: 0}
+  enemyTarget: {fileID: 0}
   damagedByRed: 1
   damagedByBlue: 0
   damagedByGreen: 0
+  affiliation: 0
   speed: 0.1
   angleSpeed: 1
   radius: 5
@@ -284,3 +288,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-3960455002889898128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58406514864570843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c8476bf4a0bdb94fa13bb88c77c84c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 5
+  currentHP: 5
