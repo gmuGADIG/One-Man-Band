@@ -60,12 +60,12 @@ public class BaseEnemy : MonoBehaviour
 	}
 	protected void Update()
 	{
-		if(Target == null || (enemyTarget != null && enemyTarget.affiliation == affiliation)){
+		if(Target == null || (enemyTarget != null && (int)enemyTarget.affiliation != ((int)affiliation + 1) % 3)){
             Target = FindTarget();
         }
 	}
 
-    GameObject FindTarget(){
+    protected GameObject FindTarget(){
         Debug.Log("Finding Target:"+ ((int)affiliation + 1) % 3);
         GameObject closest = null;
         foreach (BaseEnemy be in FindObjectsOfType<BaseEnemy>())
@@ -93,7 +93,7 @@ public class BaseEnemy : MonoBehaviour
         return closest;
     }
 
-	private void checkConvertNoteCollide(Collider2D collision)
+	protected void checkConvertNoteCollide(Collider2D collision)
     {
         // Already converted, don't need to check for conversion notes
         if (convertHealth <= 0) return;
