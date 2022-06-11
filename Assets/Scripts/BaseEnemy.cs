@@ -119,16 +119,22 @@ public class BaseEnemy : MonoBehaviour
                     ChangeAffiliation(EnemyAffiliation.Red);
                     Debug.Log("red");
                     isRed.SetActive(true);
+                    isGreen.SetActive(false);
+                    isBlue.SetActive(false);
                 }
                 else if(noteScript.green){
                     ChangeAffiliation(EnemyAffiliation.Green);
                     Debug.Log("green");
                     isGreen.SetActive(true);
+                    isRed.SetActive(false);
+                    isBlue.SetActive(false);
                 }
                 else if(noteScript.blue){
                     ChangeAffiliation(EnemyAffiliation.Blue);
                     Debug.Log("blue");
                     isBlue.SetActive(true);
+                    isRed.SetActive(false);
+                    isGreen.SetActive(false);
                 }
                 else
                 {
