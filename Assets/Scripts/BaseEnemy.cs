@@ -5,7 +5,10 @@ using UnityEngine;
 public enum EnemyAffiliation
 {
 
-    AgainstPlayer,
+    AgainstPlayer = -1,
+    Red = 0,
+    Green = 1,
+    Blue = 2,
     WithPlayer
 
 }
@@ -18,7 +21,10 @@ public class BaseEnemy : MonoBehaviour
 	
 	public int Health;
     public int baseHealth = 5;
+    [SerializeField]
 	protected GameObject Target;
+    [SerializeField]
+    protected BaseEnemy enemyTarget;
 
     public bool damagedByRed = true;
     public bool damagedByBlue = true;
@@ -26,7 +32,7 @@ public class BaseEnemy : MonoBehaviour
 
     // Affiliation must be changed through ChangeAffiliation.
     // This makes it clear that the affiliation change may have additional side effects.
-    public EnemyAffiliation affiliation { get; private set; }
+    public EnemyAffiliation affiliation;
 
     protected void Start()
     {
@@ -38,14 +44,15 @@ public class BaseEnemy : MonoBehaviour
     public void ChangeAffiliation(EnemyAffiliation newAffiliation)
     {
         EnemyAffiliation oldAffiliation = affiliation;
-
+        Debug.Log("Affiliation" + newAffiliation);
         affiliation = newAffiliation;
         OnAffiliationChanged(oldAffiliation, newAffiliation);
     }
 
     protected virtual void OnAffiliationChanged(EnemyAffiliation oldAffiliation, EnemyAffiliation newAffiliation)
     {
-		
+        convertHealth = baseConvertHealth;
+        Target = FindTarget();
     }
 	public virtual void Die()
 	{
@@ -53,22 +60,34 @@ public class BaseEnemy : MonoBehaviour
 	}
 	protected void Update()
 	{
-		
-		if(affiliation == EnemyAffiliation.WithPlayer)
-		{
-			GameObject closest = null;
-			foreach (BaseEnemy be in FindObjectsOfType<BaseEnemy>())
-			{
-                if(be == this) { continue; } //no targeting oneself
-                float newDist = Vector3.Distance(be.transform.position, transform.position);                
-                if ((!closest || (be.affiliation != affiliation && newDist < Vector3.Distance(closest.transform.position, transform.position))))
-				{
-					closest = be.gameObject;
-				}
-			}
-			Target = closest;
-		}
+		if(Target == null || (enemyTarget != null && enemyTarget.affiliation == affiliation)){
+            Target = FindTarget();
+        }
 	}
+
+    GameObject FindTarget(){
+        Debug.Log("Finding Target:"+ ((int)affiliation + 1) % 3);
+        GameObject closest = null;
+        foreach (BaseEnemy be in FindObjectsOfType<BaseEnemy>())
+        {
+            if(be == this || (int)be.affiliation != ((int)affiliation + 1) % 3 || be.affiliation != EnemyAffiliation.AgainstPlayer) { continue; } //no targeting oneself
+            float newDist = Vector3.Distance(be.transform.position, transform.position);                
+            if ((!closest || (newDist < Vector3.Distance(closest.transform.position, transform.position))))
+            {
+                closest = be.gameObject;
+            }
+        }
+        Debug.Log(closest);
+        if(closest == null){
+            enemyTarget = null;
+            closest = GameObject.FindGameObjectWithTag("Player");;
+		}
+		else
+		{
+            enemyTarget = closest.GetComponent<BaseEnemy>();
+		}
+        return closest;
+    }
 
 	private void checkConvertNoteCollide(Collider2D collision)
     {
@@ -80,15 +99,31 @@ public class BaseEnemy : MonoBehaviour
         // If we actually collided with a note...
         if (noteScript != null)
         {
-            if (noteScript.red && !damagedByRed) return;
-            if (noteScript.green && !damagedByGreen) return;
-            if (noteScript.blue && !damagedByBlue) return;
+            if (noteScript.red && affiliation == EnemyAffiliation.Red) return;
+            if (noteScript.green && affiliation == EnemyAffiliation.Green) return;
+            if (noteScript.blue && affiliation == EnemyAffiliation.Blue) return;
 
             convertHealth -= noteScript.damage;
             if (convertHealth <= 0)
             {
                 Debug.Log("I'm dead LMAO");
-                ChangeAffiliation(EnemyAffiliation.WithPlayer);
+                if(noteScript.red){
+                    ChangeAffiliation(EnemyAffiliation.Red);
+                    Debug.Log("red");
+                }
+                else if(noteScript.green){
+                    ChangeAffiliation(EnemyAffiliation.Green);
+                    Debug.Log("green");
+                }
+                else if(noteScript.blue){
+                    ChangeAffiliation(EnemyAffiliation.Blue);
+                    Debug.Log("blue");
+                }
+                else{
+                    ChangeAffiliation(EnemyAffiliation.WithPlayer);
+                }
+                Debug.Log("DEAD");
+                
             }
         }
     }
