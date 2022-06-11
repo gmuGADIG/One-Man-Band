@@ -80,7 +80,7 @@ public class Orc : BaseEnemy
     {
         Destroy(gameObject);
     }
-    private void checkConvertNoteCollide(Collider2D collision)
+    /*private void checkConvertNoteCollide(Collider2D collision)
     {
         // Already converted, don't need to check for conversion notes
         if (convertHealth <= 0) return;
@@ -96,7 +96,7 @@ public class Orc : BaseEnemy
                 ChangeAffiliation(EnemyAffiliation.WithPlayer);
             }
         }
-    }
+    }*/
 
 
     private void OnTriggerEnter2D(Collider2D collision)

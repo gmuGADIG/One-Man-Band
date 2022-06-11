@@ -30,6 +30,10 @@ public class BaseEnemy : MonoBehaviour
     public bool damagedByBlue = true;
     public bool damagedByGreen = true;
 
+    public GameObject isRed;
+    public GameObject isGreen;
+    public GameObject isBlue;
+
     // Affiliation must be changed through ChangeAffiliation.
     // This makes it clear that the affiliation change may have additional side effects.
     public EnemyAffiliation affiliation;
@@ -114,16 +118,20 @@ public class BaseEnemy : MonoBehaviour
                 if(noteScript.red){
                     ChangeAffiliation(EnemyAffiliation.Red);
                     Debug.Log("red");
+                    isRed.SetActive(true);
                 }
                 else if(noteScript.green){
                     ChangeAffiliation(EnemyAffiliation.Green);
                     Debug.Log("green");
+                    isGreen.SetActive(true);
                 }
                 else if(noteScript.blue){
                     ChangeAffiliation(EnemyAffiliation.Blue);
                     Debug.Log("blue");
+                    isBlue.SetActive(true);
                 }
-                else{
+                else
+                {
                     ChangeAffiliation(EnemyAffiliation.WithPlayer);
                 }
                 Debug.Log("DEAD");
