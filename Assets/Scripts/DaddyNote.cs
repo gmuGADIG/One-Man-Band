@@ -24,6 +24,7 @@ public class DaddyNote : ParentNote
     {
         for (int i = 0; i < timedNotes.Length; i++)
         {
+            GameManager.gm.notesCollected++;
             notesCollected++;
         }
         Debug.Log(notesCollected);
