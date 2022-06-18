@@ -50,7 +50,7 @@ public class Instruments : MonoBehaviour
 
 			cursorPosition -= note.transform.position;
             Notes tempNote = Instantiate(note, player.transform);
-            Debug.Log(cursorPosition);
+            //Debug.Log(cursorPosition);
             tempNote.setVelocity(cursorPosition, color);
             FrameTimerAttack = 0.0f;
             playerSource.clip = AttackAudio[instrument_cycle*2 + Random.Range(0,2)];
@@ -62,18 +62,21 @@ public class Instruments : MonoBehaviour
             instrument_cycle = Trumpet_cycle;
             color = "Red";
             FrameTimerSwitch = 0.0f;
+            Debug.Log("Trumpet Cycle");
         }
         if (Input.GetKeyDown(Flute) && swap_speed <= FrameTimerSwitch)
         {
             instrument_cycle = Flute_cycle;
             color = "Green";
             FrameTimerSwitch = 0.0f;
+            Debug.Log("Flute Cycle");
         }
         if (Input.GetKeyDown(Violin) && swap_speed <= FrameTimerSwitch)
         {
             instrument_cycle = Violin_cycle;
             color = "Blue";
             FrameTimerSwitch = 0.0f;
+            Debug.Log("Violin Cycle");
         }
     }
 }

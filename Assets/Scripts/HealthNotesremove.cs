@@ -24,7 +24,7 @@ public class HealthNotesremove : MonoBehaviour
     public void notePop()
     {
 
-        Debug.Log("hdfsua");
+        Debug.Log("Imp Attack");
         for (int i =0; i < notePops.Length; i++ )
         {
             if (i >= GetComponent<Slider>().value)
