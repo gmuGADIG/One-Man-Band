@@ -58,12 +58,13 @@ public class LevelEndScript : MonoBehaviour
 	private void onPlayerTouch()
     {
         stopAllEnemies();
+        source.PlayOneShot(WinSound);
         levelEndGUI.SetActive(true);
         playerPrevVelocity = playerMoveScript.maxVelocity;
         playerMoveScript.maxVelocity = 0;
         playerAttackScript.enabled = false;
         //TODO: please make this load the next scene also
-        StartCoroutine(PlayMusicThenLoad());
+        //StartCoroutine(PlayMusicThenLoad());
     }
 
     private void stopAllEnemies()

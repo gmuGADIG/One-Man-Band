@@ -8,7 +8,7 @@ public class Instruments : MonoBehaviour
     public float swap_speed = 5;
     [Range(0.0f, 5.0f)]
     public float AttackCooldown;
-    public KeyCode attack = KeyCode.E;
+    public KeyCode attack = KeyCode.Mouse0;
     public KeyCode instrument_swap = KeyCode.Tab;
     public int instrument_cycle = 0;
     public int Trumpet_cycle = 0;
@@ -50,50 +50,33 @@ public class Instruments : MonoBehaviour
 
 			cursorPosition -= note.transform.position;
             Notes tempNote = Instantiate(note, player.transform);
-            Debug.Log(cursorPosition);
+            //Debug.Log(cursorPosition);
             tempNote.setVelocity(cursorPosition, color);
             FrameTimerAttack = 0.0f;
-            // playerSource.clip = AttackAudio[instrument_cycle];
-            // playerSource.Play();
+            playerSource.clip = AttackAudio[instrument_cycle*2 + Random.Range(0,2)];
+            playerSource.Play();
         }
-        if (Input.GetKeyDown(instrument_swap) && swap_speed <= FrameTimerSwitch)
-        {
-            instrument_cycle++;
-            if(instrument_cycle == 3)
-            {
-                instrument_cycle = 0;
-            }
-            if(instrument_cycle == Trumpet_cycle)
-            {
-                color = "Green";
-            }
-            else if(instrument_cycle == Flute_cycle)
-            {
-                color = "Red";
-            }
-            else if (instrument_cycle == Violin_cycle)
-            {
-                color = "Blue";
-            }
-            FrameTimerSwitch = 0.0f;
-        }
+
         if (Input.GetKeyDown(Trumpet) && swap_speed <= FrameTimerSwitch)
         {
             instrument_cycle = Trumpet_cycle;
-            color = "Green";
+            color = "Red";
             FrameTimerSwitch = 0.0f;
+            Debug.Log("Trumpet Cycle");
         }
         if (Input.GetKeyDown(Flute) && swap_speed <= FrameTimerSwitch)
         {
             instrument_cycle = Flute_cycle;
-            color = "Red";
+            color = "Green";
             FrameTimerSwitch = 0.0f;
+            Debug.Log("Flute Cycle");
         }
         if (Input.GetKeyDown(Violin) && swap_speed <= FrameTimerSwitch)
         {
             instrument_cycle = Violin_cycle;
             color = "Blue";
             FrameTimerSwitch = 0.0f;
+            Debug.Log("Violin Cycle");
         }
     }
 }

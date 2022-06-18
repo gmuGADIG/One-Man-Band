@@ -95,19 +95,19 @@ public class Player : MonoBehaviour
             playing = true;
             if (ins.instrument_cycle == 0 && playing)
             {
-                Debug.Log("Playing insrument 1");
+                //Debug.Log("Playing insrument 1");
                 animator.Play("Ins0");
 
             }
             else if (ins.instrument_cycle == 1 && playing)
             {
-                Debug.Log("Playing insrument 2");
+                //Debug.Log("Playing insrument 2");
                 animator.Play("Ins1");
 
             }
             else if (ins.instrument_cycle == 2 && playing)
             {
-                Debug.Log("Playing insrument 3");
+                //Debug.Log("Playing insrument 3");
                 animator.Play("Ins2");
             }
         }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Orc : BaseEnemy
 {
 
-    public float movespeed = 2f, minDist = 1;
+	public float movespeed = 2f, minDist = 1, maxDist = 10;
 	[SerializeField] int damage = 1;
 	[SerializeField] int coolDown = 1;
     private Rigidbody2D rb;
@@ -43,14 +43,15 @@ public class Orc : BaseEnemy
 
     // Note: Add acceleration
     private void FixedUpdate() {
-        if (Target)
+		float targetDist = Vector3.Distance(Target.transform.position, transform.position);
+        if (Target && targetDist < maxDist)
         {
             am.SetBool("hasTarget", true);
-            float targetDist = Vector3.Distance(Target.transform.position, transform.position);
+            
             if (targetDist > minDist)
             {
                 am.SetBool("isAttack", false);
-                moveCharacter();
+				moveCharacter();
             }
             else
             {
@@ -79,7 +80,7 @@ public class Orc : BaseEnemy
     {
         Destroy(gameObject);
     }
-    private void checkConvertNoteCollide(Collider2D collision)
+    /*private void checkConvertNoteCollide(Collider2D collision)
     {
         // Already converted, don't need to check for conversion notes
         if (convertHealth <= 0) return;
@@ -95,7 +96,7 @@ public class Orc : BaseEnemy
                 ChangeAffiliation(EnemyAffiliation.WithPlayer);
             }
         }
-    }
+    }*/
 
 
     private void OnTriggerEnter2D(Collider2D collision)

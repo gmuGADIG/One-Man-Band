@@ -165,10 +165,6 @@ public class TrumpetImp : BaseEnemy
             posY -= 1.0f;
         }
     }
-    private void Update()
-    {
-        GetComponent<AudioSource>().Play();
-    }
     private void Start()
     {
         // MUST CALL PARENT START!
@@ -337,9 +333,14 @@ public class TrumpetImp : BaseEnemy
     private TrumpetImp findFormationTail()
     {
         TrumpetImp tail = this;
-        int cycleDetect = 0;
+		TrumpetImp head = this.prevImp;
+		int cycleDetect = 0;
         while (tail.nextImp != null)
         {
+			if(tail.nextImp == prevImp)
+			{
+				break;
+			}
             tail = tail.nextImp;
 
             if (cycleDetect++ > impsInFormation)
@@ -363,13 +364,14 @@ public class TrumpetImp : BaseEnemy
         // actually exist.
         // This is because we update the size before relinking the list.
         int nodesToUpdate = head.impsInFormation;
-
+		TrumpetImp tail = head.prevImp;
         // Must update the head before the formation may be correctly generated.
         head.impsInFormation = newSize;
         head.generateFormation();
 
         while (head != null)
         {
+			if (head.nextImp = tail) { break; }
             if (cycleDetect >= nodesToUpdate)
             {
                 //Debug.Log("Cycle in Update Size: " + cycleDetect + " vs " + newSize);
@@ -472,7 +474,7 @@ public class TrumpetImp : BaseEnemy
             if (dist <= radius)
             {
                 bool f = testImpFormation(imp);
-                if (f)
+                if (f && imp.GetComponent<TrumpetImp>().affiliation == affiliation)
                 {
                     if (closest == null)
                     {
@@ -524,6 +526,7 @@ public class TrumpetImp : BaseEnemy
 
     private void retargetWholeFormation()
     {
+
         movePatternIndex += 1;
         if (movePatternIndex >= movePattern.Length)
         {
@@ -626,7 +629,7 @@ public class TrumpetImp : BaseEnemy
             BaseEnemy be = possibleEnemyHealth.GetComponent<BaseEnemy>();
             if (be != null)
             {
-                if (be.affiliation != affiliation)
+                if ((int)be.affiliation == ((int)affiliation + 1 % 3))
                 {
                     shouldAttack = true;
                 }
@@ -661,7 +664,10 @@ public class TrumpetImp : BaseEnemy
 
     private void FixedUpdate()
     {
-        
+		if(Vector2.Distance(transform.position, Target.transform.position) > allowToTargetPlayerRadius)
+		{
+			return;
+		}
         // Cooldown is updated each frame to time when the attack is ready.
         if (attackCooldown > 0) attackCooldown -= Time.fixedDeltaTime;
 

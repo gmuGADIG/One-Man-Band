@@ -20,10 +20,11 @@ public class LevelEndGUIScript : MonoBehaviour
     private GameObject levelLoader;
     private SceneTransitioner sceneTransitioner;
     private LevelEndScript levelEndScript;
+    private Animator animator;
 
     private void Awake()
     {
-        
+        OnEnable();
     }
 
     // Start is called before the first frame update
@@ -74,6 +75,9 @@ public class LevelEndGUIScript : MonoBehaviour
         songLockedText.SetActive(false);
         notEnoughNotesText.SetActive(false);
         setSongLockedText();
+
+        animator = gameObject.GetComponent<Animator>();
+        animator.Play("ZoomIn");
     }
 
     void setNotesCollectedText()
@@ -112,6 +116,11 @@ public class LevelEndGUIScript : MonoBehaviour
     }
 
     public void retryButtonClicked()
+    {
+        animator.Play("ZoomOut");
+    }
+
+    public void zoomOutFinished() //Called by an event in the ZoomOut animation
     {
         levelEndScript.resumeGame();
     }
