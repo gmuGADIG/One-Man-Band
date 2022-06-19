@@ -150,9 +150,6 @@ MonoBehaviour:
   baseConvertHealth: 5
   Health: 0
   baseHealth: 5
-  damagedByRed: 1
-  damagedByBlue: 0
-  damagedByGreen: 0
   speed: 0.1
   angleSpeed: 1
   radius: 5
