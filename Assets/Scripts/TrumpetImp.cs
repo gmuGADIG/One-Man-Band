@@ -698,6 +698,7 @@ public class TrumpetImp : BaseEnemy
 
         animator.SetFloat("velX", rigidbody.velocity.x);
         animator.SetFloat("velY", rigidbody.velocity.y);
+        animator.SetBool("Vert", Mathf.Abs(rigidbody.velocity.y) > Mathf.Abs(rigidbody.velocity.x));
     }
 
     protected override void OnAffiliationChanged(EnemyAffiliation old, EnemyAffiliation newA)
