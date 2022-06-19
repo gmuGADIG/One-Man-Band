@@ -17,6 +17,8 @@ public class Orc : BaseEnemy
     public AudioClip[] attackAudio;
     public AudioClip[] hurtAudio;
     public AudioClip[] defeatAudio;
+    public AudioClip[] idleAudio;
+    public float randSound = 1.8f;
 
     // Start is called before the first frame update
     public void Start()
@@ -106,5 +108,11 @@ public class Orc : BaseEnemy
     void moveCharacter()
 	{
 		rb.MovePosition((Vector2)transform.position + (movement * movespeed * Time.deltaTime));
-	}
+        randSound -= 1 * Time.deltaTime;
+        if (randSound <= 0.0f)
+        {
+            this.gameObject.GetComponent<AudioSource>().PlayOneShot(idleAudio[Random.Range(0, idleAudio.Length)]);
+            randSound = 1.8f;
+        }
+    }
 }

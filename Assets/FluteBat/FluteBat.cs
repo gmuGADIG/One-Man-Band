@@ -93,4 +93,8 @@ public class FluteBat : BaseEnemy
         FrameAttack = 0;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        checkConvertNoteCollide(collision);
+    }
 }

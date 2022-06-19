@@ -14614,6 +14614,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8e3ebc281bab71f4f8d3d4b32c0fdf85, type: 3}
   defeatAudio:
   - {fileID: 8300000, guid: bbd6c35dd59601b4daee57e1cf419d70, type: 3}
+  idleAudio:
+  - {fileID: 8300000, guid: fc64911dc1abd3148a397500af61aef5, type: 3}
+  - {fileID: 8300000, guid: 128eca524cc39d841b5a43946377f916, type: 3}
+  - {fileID: 8300000, guid: 1502338078964e640857813fed5ae153, type: 3}
+  - {fileID: 8300000, guid: 9f62a70812bd63146861dfde3ed4d9ad, type: 3}
+  - {fileID: 8300000, guid: 3b746fa46d5493d4b9e3271f7650d5ab, type: 3}
+  randSound: 1.8
 --- !u!50 &-4141356941425789020
 Rigidbody2D:
   serializedVersion: 4
