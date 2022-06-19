@@ -20,6 +20,7 @@ public class FluteBat : BaseEnemy
     public bool attackAnim, doAttack;
     public Animator ani;
     public bool following;
+    public bool startFollow;
     public AudioClip[] idle;
     public AudioClip attackClip;
 
@@ -28,6 +29,7 @@ public class FluteBat : BaseEnemy
     void Start()
     {
         following = false;
+        startFollow = false;
         ani = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         base.Start();
@@ -38,6 +40,10 @@ public class FluteBat : BaseEnemy
         if (Vector2.Distance(transform.position, Target.transform.position) < alertDistance)
         {
             following = true;
+            if (startFollow == false)
+            {
+                startAttack();
+            }
         }
         ani.SetBool("Follow", following);
         if (following)
@@ -96,5 +102,11 @@ public class FluteBat : BaseEnemy
     private void OnTriggerEnter2D(Collider2D collision)
     {
         checkConvertNoteCollide(collision);
+    }
+
+    void startAttack()
+    {
+        startFollow = true;
+        this.gameObject.GetComponent<AudioSource>().PlayOneShot(idle[Random.Range(0, idle.Length)]);
     }
 }

@@ -9732,7 +9732,9 @@ MonoBehaviour:
   doAttack: 0
   ani: {fileID: 0}
   following: 0
-  idle: []
+  startFollow: 0
+  idle:
+  - {fileID: 8300000, guid: 9095338e8062eee46b0577fedb8e61e8, type: 3}
   attackClip: {fileID: 8300000, guid: 08ec3d32a15d7f140b6cfa7d8d7eb6ad, type: 3}
 --- !u!61 &3364922255149450958
 BoxCollider2D:
