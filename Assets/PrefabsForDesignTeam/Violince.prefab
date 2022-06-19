@@ -158,10 +158,10 @@ MonoBehaviour:
   damagedByRed: 1
   damagedByBlue: 1
   damagedByGreen: 1
-  isRed: {fileID: 0}
-  isGreen: {fileID: 0}
-  isBlue: {fileID: 0}
-  affiliation: 0
+  isRed: {fileID: 2339602323815604383}
+  isGreen: {fileID: 1841522626305012167}
+  isBlue: {fileID: 6717271513771690787}
+  affiliation: -1
   speed: 0.1
   angleSpeed: 1
   radius: 5
@@ -319,7 +319,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1841522626305012167}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -166.19498, y: -38.902924, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 58406514864570832}
@@ -5123,7 +5123,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2339602323815604383}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -166.19498, y: -38.902924, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 58406514864570832}
@@ -9927,7 +9927,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6717271513771690787}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -166.19498, y: -38.902924, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 58406514864570832}
