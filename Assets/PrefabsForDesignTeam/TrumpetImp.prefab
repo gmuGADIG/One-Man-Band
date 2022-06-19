@@ -157,8 +157,8 @@ MonoBehaviour:
   isBlue: {fileID: 8431387705968802199}
   affiliation: -1
   allowToTargetPlayerRadius: 20
-  maxVelocity: 16
-  maxAcceleration: 40
+  maxVelocity: 10
+  maxAcceleration: 10
   currentTargetObject: {fileID: 0}
   currentFormationIndex: 0
   attackDamage: 1

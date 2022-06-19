@@ -20,7 +20,6 @@ public class FluteBat : BaseEnemy
     public bool attackAnim, doAttack;
     public Animator ani;
     public bool following;
-    public bool startFollow;
     public AudioClip[] idle;
     public AudioClip attackClip;
 
@@ -29,7 +28,6 @@ public class FluteBat : BaseEnemy
     void Start()
     {
         following = false;
-        startFollow = false;
         ani = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         base.Start();
@@ -37,14 +35,7 @@ public class FluteBat : BaseEnemy
     
     void FixedUpdate()
     {
-        if (Vector2.Distance(transform.position, Target.transform.position) < alertDistance)
-        {
-            following = true;
-            if (startFollow == false)
-            {
-                startAttack();
-            }
-        }
+        following = Vector2.Distance(transform.position, Target.transform.position) < alertDistance;
         ani.SetBool("Follow", following);
         if (following)
         {
@@ -62,7 +53,8 @@ public class FluteBat : BaseEnemy
             }
             else if (!attackAnim)
             {
-                TargetMove();
+				//TargetMove();
+				MoveToward();
             }
             FrameAttack++;
         }
@@ -70,19 +62,24 @@ public class FluteBat : BaseEnemy
     //Moves toward specified target
     void MoveToward()
     {
-        rb.MovePosition(Vector2.MoveTowards(transform.position, Target.transform.position, speed));
-        angle = Mathf.Atan2(Target.transform.position.x - transform.position.x, Target.transform.position.y - transform.position.y) * Mathf.Rad2Deg;
-        //angle = Mathf.Atan2(transform.position.x - Target.transform.position.x, transform.position.y - Target.transform.position.y) * -Mathf.Rad2Deg;
-        //transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, angle));
-    }
+		angle += angleSpeed;
+
+		movement.x = (-Mathf.Sin(angle * Mathf.Deg2Rad) * radius) + Target.transform.position.x;
+		movement.y = (Mathf.Cos(angle * Mathf.Deg2Rad) * radius) + Target.transform.position.y;
+
+		rb.MovePosition(Vector2.MoveTowards(transform.position, movement, speed));
+		//angle = Mathf.Atan2(Target.transform.position.x - transform.position.x, Target.transform.position.y - transform.position.y) * Mathf.Rad2Deg;
+		//angle = Mathf.Atan2(transform.position.x - Target.transform.position.x, transform.position.y - Target.transform.position.y) * -Mathf.Rad2Deg;
+		//transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, angle));
+	}
     //Moves in a perfect circle around the character
     void TargetMove()
     {
-        angle += angleSpeed;
+		angle += angleSpeed;
 
-        movement.x = (-Mathf.Sin(angle * Mathf.Deg2Rad) * radius) + Target.transform.position.x;
+		movement.x = (-Mathf.Sin(angle * Mathf.Deg2Rad) * radius) + Target.transform.position.x;
         movement.y = (Mathf.Cos(angle * Mathf.Deg2Rad) * radius) + Target.transform.position.y;
-
+		
         rb.MovePosition(movement);
 
         //transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, angle));
@@ -94,19 +91,9 @@ public class FluteBat : BaseEnemy
         GameObject temp = Instantiate(WindBlast, transform.position, transform.rotation);
         temp.GetComponent<WindBlast>().setMovement(new Vector3(transform.position.x - Target.transform.position.x, transform.position.y - Target.transform.position.y, 0.0f), Mathf.Atan2(Target.transform.position.x - transform.position.x, Target.transform.position.y - transform.position.y) * -Mathf.Rad2Deg);
         temp.GetComponent<WindBlast>().setColor(gameObject, "Red");
-        angle = Mathf.Atan2(Target.transform.position.x - transform.position.x, Target.transform.position.y - transform.position.y) * Mathf.Rad2Deg;
+        //angle = Mathf.Atan2(Target.transform.position.x - transform.position.x, Target.transform.position.y - transform.position.y) * Mathf.Rad2Deg;
         attackAnim = false;
         FrameAttack = 0;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        checkConvertNoteCollide(collision);
-    }
-
-    void startAttack()
-    {
-        startFollow = true;
-        this.gameObject.GetComponent<AudioSource>().PlayOneShot(idle[Random.Range(0, idle.Length)]);
-    }
 }
