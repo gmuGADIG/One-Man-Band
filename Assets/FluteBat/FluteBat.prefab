@@ -9711,7 +9711,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   convertHealth: 0
-  baseConvertHealth: 5
+  baseConvertHealth: 2
   Health: 0
   baseHealth: 5
   Target: {fileID: 0}
@@ -9732,7 +9732,6 @@ MonoBehaviour:
   doAttack: 0
   ani: {fileID: 0}
   following: 0
-  startFollow: 0
   idle:
   - {fileID: 8300000, guid: 9095338e8062eee46b0577fedb8e61e8, type: 3}
   attackClip: {fileID: 8300000, guid: 08ec3d32a15d7f140b6cfa7d8d7eb6ad, type: 3}

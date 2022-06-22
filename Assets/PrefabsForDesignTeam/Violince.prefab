@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   convertHealth: 0
-  baseConvertHealth: 5
+  baseConvertHealth: 2
   Health: 0
   baseHealth: 5
   Target: {fileID: 0}
