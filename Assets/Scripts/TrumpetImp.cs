@@ -50,6 +50,8 @@ public class TrumpetImp : BaseEnemy
 
     Animator animator;
 
+    public AudioClip[] attackAudio;
+
     Vector2[] arrangement =
     {
         new Vector2(0, 0)
@@ -652,8 +654,9 @@ public class TrumpetImp : BaseEnemy
     {
         if (isThereAnyAttackTarget())
         {
-
             attack();
+
+            this.gameObject.GetComponent<AudioSource>().PlayOneShot(attackAudio[Random.Range(0, attackAudio.Length)]);
         }
     }
     private void OnDestroy()
