@@ -9719,6 +9719,7 @@ MonoBehaviour:
   damagedByRed: 1
   damagedByBlue: 1
   damagedByGreen: 1
+  maxDistance: 15
   isRed: {fileID: 5073435303584110304}
   isGreen: {fileID: 2853727672798342764}
   isBlue: {fileID: 892764602476370293}
@@ -9732,7 +9733,6 @@ MonoBehaviour:
   doAttack: 0
   ani: {fileID: 0}
   following: 0
-  startFollow: 0
   idle:
   - {fileID: 8300000, guid: 9095338e8062eee46b0577fedb8e61e8, type: 3}
   attackClip: {fileID: 8300000, guid: 08ec3d32a15d7f140b6cfa7d8d7eb6ad, type: 3}

@@ -30,6 +30,8 @@ public class BaseEnemy : MonoBehaviour
     public bool damagedByBlue = true;
     public bool damagedByGreen = true;
 
+	[SerializeField] protected float maxDistance;
+
     public GameObject isRed;
     public GameObject isGreen;
     public GameObject isBlue;
@@ -64,7 +66,7 @@ public class BaseEnemy : MonoBehaviour
 	}
 	protected void Update()
 	{
-		if(Target == null || (enemyTarget != null && (int)enemyTarget.affiliation != ((int)affiliation + 1) % 3)){
+		if(Target == null || (enemyTarget != null && (int)enemyTarget.affiliation != ((int)affiliation + 1) % 3) || (affiliation != EnemyAffiliation.AgainstPlayer && Target.tag == "Player")){
             Target = FindTarget();
         }
 	}
@@ -86,9 +88,10 @@ public class BaseEnemy : MonoBehaviour
 
         }
         Debug.Log(closest);
-        if(closest == null){
+        if(closest == null || maxDistance > Vector3.Distance(closest.transform.position, transform.position))
+		{
             enemyTarget = null;
-            closest = GameObject.FindGameObjectWithTag("Player");;
+            closest = GameObject.FindGameObjectWithTag("Player");
 		}
 		else
 		{

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Orc : BaseEnemy
 {
 
-	public float movespeed = 2f, minDist = 1, maxDist = 10;
+	public float movespeed = 2f, minDist = 1;
 	[SerializeField] int damage = 1;
 	[SerializeField] int coolDown = 1;
     private Rigidbody2D rb;
@@ -46,7 +46,7 @@ public class Orc : BaseEnemy
     // Note: Add acceleration
     private void FixedUpdate() {
 		float targetDist = Vector3.Distance(Target.transform.position, transform.position);
-        if (Target && targetDist < maxDist)
+        if (Target && targetDist < maxDistance)
         {
             am.SetBool("hasTarget", true);
             
