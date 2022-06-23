@@ -118,9 +118,14 @@ public class LevelEndGUIScript : MonoBehaviour
     public void retryButtonClicked()
     {
         animator.Play("ZoomOut");
-    }
+		Invoke("Disable", 1f);
+	}
+	void Disable()
+	{
 
-    public void zoomOutFinished() //Called by an event in the ZoomOut animation
+		gameObject.SetActive(false);
+	}
+	public void zoomOutFinished() //Called by an event in the ZoomOut animation
     {
         levelEndScript.resumeGame();
     }

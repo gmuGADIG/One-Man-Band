@@ -44,7 +44,7 @@ public class DaddyNote : ParentNote
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == "Player" && gameObject.GetComponent<Renderer>().enabled)
         {
 			AudioSource.PlayClipAtPoint(pickupSound[Random.Range(0, pickupSound.Length)], transform.position);
 			gameObject.GetComponent<Renderer>().enabled = false;
