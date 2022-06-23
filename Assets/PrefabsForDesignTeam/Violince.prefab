@@ -158,6 +158,7 @@ MonoBehaviour:
   damagedByRed: 1
   damagedByBlue: 1
   damagedByGreen: 1
+  maxDistance: 10
   isRed: {fileID: 2339602323815604383}
   isGreen: {fileID: 1841522626305012167}
   isBlue: {fileID: 6717271513771690787}
