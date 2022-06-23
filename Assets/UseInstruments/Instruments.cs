@@ -53,7 +53,7 @@ public class Instruments : MonoBehaviour
             //Debug.Log(cursorPosition);
             tempNote.setVelocity(cursorPosition, color);
             FrameTimerAttack = 0.0f;
-            playerSource.clip = AttackAudio[instrument_cycle*2 + Random.Range(0,2)];
+            playerSource.clip = AttackAudio[instrument_cycle * 2 + Random.Range(0,2)];
             playerSource.Play();
         }
 

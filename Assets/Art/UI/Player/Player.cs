@@ -174,7 +174,7 @@ public class Player : MonoBehaviour
         }
 
 		// Checking if the player is moving to play the stepping sound audio
-		if (rigidbody.velocity.x != 0)
+		/*if (rigidbody.velocity.x != 0)
 			isMoving = true;
 		if (rigidbody.velocity.y != 0)
 			isMoving = true;
@@ -186,6 +186,6 @@ public class Player : MonoBehaviour
 				audioSrc.Play();
 		} else {
 			audioSrc.Stop();
-		}
+		}*/
     }
 }
