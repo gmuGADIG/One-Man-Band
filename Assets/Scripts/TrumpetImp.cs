@@ -52,6 +52,9 @@ public class TrumpetImp : BaseEnemy
 
     public AudioClip[] attackAudio;
 
+    public AudioClip[] defeatAudio;
+
+
     Vector2[] arrangement =
     {
         new Vector2(0, 0)

@@ -22,6 +22,7 @@ public class FluteBat : BaseEnemy
     public bool following;
     public AudioClip[] idle;
     public AudioClip attackClip;
+    public AudioClip[] defeatAudio;
 
 
 

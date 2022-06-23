@@ -23,6 +23,7 @@ public class Spider : BaseEnemy
     public AudioClip[] idleClips;
     public AudioClip chargeClip;
     public AudioClip attackClip;
+    public AudioClip[] defeatAudio;
 
 
     void Start()
