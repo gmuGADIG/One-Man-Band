@@ -180,6 +180,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: be0480519ee64b844911744b887c9ce3, type: 3}
   chargeClip: {fileID: 8300000, guid: ae0071a78cb384b468cfafbfca17ff5a, type: 3}
   attackClip: {fileID: 8300000, guid: 7379fb0ded3aaa446b8b1c6176906665, type: 3}
+  defeatAudio:
+  - {fileID: 8300000, guid: 91a79cd092fe10a4aacb8e761e4481fc, type: 3}
 --- !u!95 &58406514864570833
 Animator:
   serializedVersion: 3

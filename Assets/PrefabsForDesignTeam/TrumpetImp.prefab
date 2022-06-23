@@ -165,6 +165,10 @@ MonoBehaviour:
   attackDamage: 1
   attackAudio:
   - {fileID: 8300000, guid: 2d72a5550c3750849b85e140f133d0bc, type: 3}
+  defeatAudio:
+  - {fileID: 8300000, guid: 581ff36ec44d9454a9c5bd7fd6f2f77a, type: 3}
+  - {fileID: 8300000, guid: 0f82f448ba573b148a42b0fbd19de772, type: 3}
+  - {fileID: 8300000, guid: d4a1f63a0e570b24bb1a526f9b242771, type: 3}
 --- !u!198 &124566289300051613
 ParticleSystem:
   m_ObjectHideFlags: 0
