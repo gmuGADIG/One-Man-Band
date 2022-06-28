@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Notes : MonoBehaviour
 {
+    public Camera playerCamera;
 
     public bool red, green, blue;
     //public EnemyAffiliation affiliation { get; private set; }

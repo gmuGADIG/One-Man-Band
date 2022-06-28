@@ -310,7 +310,7 @@ PrefabInstance:
     - target: {fileID: 605813250, guid: 06d2e75bd2bc4e44e8e470b0fe5051c5, type: 3}
       propertyPath: main
       value: 
-      objectReference: {fileID: 7670738530664810987}
+      objectReference: {fileID: 1087489755691587974}
     - target: {fileID: 605813250, guid: 06d2e75bd2bc4e44e8e470b0fe5051c5, type: 3}
       propertyPath: playerCode
       value: 
@@ -318,7 +318,7 @@ PrefabInstance:
     - target: {fileID: 605813250, guid: 06d2e75bd2bc4e44e8e470b0fe5051c5, type: 3}
       propertyPath: playerSource
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5203860244650242500}
     - target: {fileID: 605813250, guid: 06d2e75bd2bc4e44e8e470b0fe5051c5, type: 3}
       propertyPath: AttackAudio.Array.size
       value: 6
@@ -347,6 +347,14 @@ PrefabInstance:
       propertyPath: AttackAudio.Array.data[5]
       value: 
       objectReference: {fileID: 8300000, guid: 3abf11e373a4a714aa0778421b7c1be5, type: 3}
+    - target: {fileID: 1020285700995972120, guid: 06d2e75bd2bc4e44e8e470b0fe5051c5, type: 3}
+      propertyPath: Priority
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020285700995972120, guid: 06d2e75bd2bc4e44e8e470b0fe5051c5, type: 3}
+      propertyPath: rolloffMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1819283733120573220, guid: 06d2e75bd2bc4e44e8e470b0fe5051c5, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -357,11 +365,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3508245568329665398, guid: 06d2e75bd2bc4e44e8e470b0fe5051c5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.6447597
+      value: -6.56
       objectReference: {fileID: 0}
     - target: {fileID: 3508245568329665398, guid: 06d2e75bd2bc4e44e8e470b0fe5051c5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.4240823
+      value: -19.68
       objectReference: {fileID: 0}
     - target: {fileID: 3508245568329665398, guid: 06d2e75bd2bc4e44e8e470b0fe5051c5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -449,6 +457,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f8ae03a1acf1df45a2874326134a830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &5203860244650242500 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1020285700995972120, guid: 06d2e75bd2bc4e44e8e470b0fe5051c5, type: 3}
+  m_PrefabInstance: {fileID: 5052787140956638684}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &1087489755691587974 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 5262615634817995866, guid: 06d2e75bd2bc4e44e8e470b0fe5051c5, type: 3}
+  m_PrefabInstance: {fileID: 5052787140956638684}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &4626297060611172164
 Animator:
   serializedVersion: 3
