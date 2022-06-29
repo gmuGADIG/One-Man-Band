@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5679070403058383902
 Transform:
   m_ObjectHideFlags: 0
@@ -4894,7 +4894,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -7035636522886184449, guid: 570e6db841ef58b43a4322d3cbab6645, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5047,7 +5047,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -6989971478767414710, guid: c10d52ae1b39cde47acc84bfc25c35d2, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -5144,8 +5144,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c8476bf4a0bdb94fa13bb88c77c84c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 3
-  currentHP: 3
+  maxHP: 4
+  currentHP: 4
+  hurtAudio: []
 --- !u!95 &4626297060611172164
 Animator:
   serializedVersion: 3
@@ -5179,7 +5180,7 @@ GameObject:
   - component: {fileID: 7886340412822672966}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5232,7 +5233,7 @@ Camera:
     m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
+  m_TargetDisplay: 1
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
@@ -5297,7 +5298,7 @@ GameObject:
   - component: {fileID: 2631816670066834898}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
