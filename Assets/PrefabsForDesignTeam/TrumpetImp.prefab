@@ -156,6 +156,10 @@ MonoBehaviour:
   isRed: {fileID: 7395860786700483501}
   isGreen: {fileID: 3604555999527143748}
   isBlue: {fileID: 8431387705968802199}
+  defeatAudio:
+  - {fileID: 8300000, guid: 581ff36ec44d9454a9c5bd7fd6f2f77a, type: 3}
+  - {fileID: 8300000, guid: 0f82f448ba573b148a42b0fbd19de772, type: 3}
+  - {fileID: 8300000, guid: d4a1f63a0e570b24bb1a526f9b242771, type: 3}
   affiliation: -1
   allowToTargetPlayerRadius: 20
   maxVelocity: 10
@@ -165,10 +169,6 @@ MonoBehaviour:
   attackDamage: 1
   attackAudio:
   - {fileID: 8300000, guid: 2d72a5550c3750849b85e140f133d0bc, type: 3}
-  defeatAudio:
-  - {fileID: 8300000, guid: 581ff36ec44d9454a9c5bd7fd6f2f77a, type: 3}
-  - {fileID: 8300000, guid: 0f82f448ba573b148a42b0fbd19de772, type: 3}
-  - {fileID: 8300000, guid: d4a1f63a0e570b24bb1a526f9b242771, type: 3}
 --- !u!198 &124566289300051613
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -5013,6 +5013,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 2
   currentHP: 0
+  hurtAudio:
+  - {fileID: 8300000, guid: 50bfac0e6f54af44485288922988a3ca, type: 3}
+  - {fileID: 8300000, guid: 45150d7045c8f3d4cb6dae0b6740579e, type: 3}
+  - {fileID: 8300000, guid: 00b97b0d7a2ad6c47839d82104cd4986, type: 3}
 --- !u!95 &1599151547376475936
 Animator:
   serializedVersion: 3

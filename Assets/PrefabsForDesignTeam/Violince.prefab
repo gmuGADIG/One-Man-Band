@@ -311,6 +311,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 2
   currentHP: 2
+  hurtAudio: []
 --- !u!1 &1841522626305012167
 GameObject:
   m_ObjectHideFlags: 0

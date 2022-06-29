@@ -9724,6 +9724,8 @@ MonoBehaviour:
   isRed: {fileID: 5073435303584110304}
   isGreen: {fileID: 2853727672798342764}
   isBlue: {fileID: 892764602476370293}
+  defeatAudio:
+  - {fileID: 8300000, guid: 51749996b8b208847b974418726c99d4, type: 3}
   affiliation: -1
   speed: 0.25
   angleSpeed: 2
@@ -9737,8 +9739,6 @@ MonoBehaviour:
   idle:
   - {fileID: 8300000, guid: 9095338e8062eee46b0577fedb8e61e8, type: 3}
   attackClip: {fileID: 8300000, guid: 08ec3d32a15d7f140b6cfa7d8d7eb6ad, type: 3}
-  defeatAudio:
-  - {fileID: 8300000, guid: 51749996b8b208847b974418726c99d4, type: 3}
 --- !u!61 &3364922255149450958
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9915,6 +9915,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 2
   currentHP: 2
+  hurtAudio:
+  - {fileID: 8300000, guid: f32b9bb6b9d089644b563f3751bf937a, type: 3}
 --- !u!1 &5073435303584110304
 GameObject:
   m_ObjectHideFlags: 0
