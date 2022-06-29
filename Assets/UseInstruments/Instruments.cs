@@ -5,7 +5,7 @@ using UnityEngine;
 public class Instruments : MonoBehaviour
 {
     [Range(0.0f, 10.0f)]
-    public float swap_speed = 5;
+    public float swap_speed = 0.01f;
     [Range(0.0f, 5.0f)]
     public float AttackCooldown;
     public KeyCode attack = KeyCode.Mouse0;
@@ -77,6 +77,22 @@ public class Instruments : MonoBehaviour
             color = "Blue";
             FrameTimerSwitch = 0.0f;
             Debug.Log("Violin Cycle");
+        }
+
+        if (Input.GetKeyDown(instrument_swap))
+        {
+            switch (instrument_cycle)
+            {
+                case 0:
+                    instrument_cycle++;
+                    break;
+                case 1:
+                    instrument_cycle++;
+                    break;
+                case 2:
+                    instrument_cycle = 0;
+                    break;
+            }
         }
     }
 }
