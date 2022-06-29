@@ -6,6 +6,8 @@ public class ParentNote : MonoBehaviour
 {
     public static int notesCollected;
 
+    //public bool isTrapNote;
+
     public delegate void NoteEvent();
     public event NoteEvent Collected;
     public GameManager gm;
