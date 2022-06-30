@@ -79,7 +79,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.3
+  m_Radius: 0.75
 --- !u!212 &891101225263380475
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5013,6 +5013,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 2
   currentHP: 0
+  canDamage: 1
   hurtAudio:
   - {fileID: 8300000, guid: 50bfac0e6f54af44485288922988a3ca, type: 3}
   - {fileID: 8300000, guid: 45150d7045c8f3d4cb6dae0b6740579e, type: 3}

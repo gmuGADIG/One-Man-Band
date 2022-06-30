@@ -707,6 +707,7 @@ public class TrumpetImp : BaseEnemy
 
     protected override void OnAffiliationChanged(EnemyAffiliation old, EnemyAffiliation newA)
     {
+        convertHealth = baseConvertHealth;
         if (old != newA)
         {
             leaveFormation();
