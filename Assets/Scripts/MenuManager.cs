@@ -40,5 +40,8 @@ public class MenuManager : MonoBehaviour
         TitleUI.gameObject.SetActive(true);
         OptionsUI.gameObject.SetActive(false);
     }
-
+	public void ChangeMenu(GameObject menu)
+	{
+		menu.SetActive(!menu.activeSelf);
+	}
 }

@@ -14,10 +14,10 @@ public class ProgressUI : MonoBehaviour
     // Start is called before the first frame update Yay Party Time
     void Start()
     {
-        player = gm.GetPlayer();
+        
         gm = (GameManager)GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-
-        yayParticles = GameObject.Find("Yay Party Time");
+		player = gm.GetPlayer();
+		yayParticles = GameObject.Find("Yay Party Time");
     }
 
     // Update is called once per frame
