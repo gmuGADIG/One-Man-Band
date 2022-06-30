@@ -14,6 +14,8 @@ public class MusicManager : MonoBehaviour
     private float percentageBetweenTracks = 0;
     private GameManager manager;
 
+    private GameObject progUI;
+
     private void Awake()
     {
         //This audio source will not be destoyed between scene loads
@@ -36,6 +38,8 @@ public class MusicManager : MonoBehaviour
         FadeInTrack(0);
         
         manager = GetComponent<GameManager>();
+
+        progUI = GameObject.Find("Progress Notes");
     }
     private void Start()
     {
@@ -50,6 +54,10 @@ public class MusicManager : MonoBehaviour
         {
             FadeInTrack(nextBranchIndex);
             nextBranchIndex++;
+
+            Debug.Log(nextBranchIndex);
+
+            progUI.GetComponent<ProgressUI>().moreProgress(nextBranchIndex);
         }
     }
 

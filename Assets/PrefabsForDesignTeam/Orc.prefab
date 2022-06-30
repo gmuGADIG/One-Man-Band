@@ -14599,10 +14599,11 @@ MonoBehaviour:
   isRed: {fileID: 1103597443823426684}
   isGreen: {fileID: 4128414618710264355}
   isBlue: {fileID: 2208555495401683143}
+  defeatAudio:
+  - {fileID: 8300000, guid: bbd6c35dd59601b4daee57e1cf419d70, type: 3}
   affiliation: 0
   movespeed: 2
   minDist: 0.5
-  maxDist: 10
   damage: 1
   coolDown: 1
   player: {fileID: 0}
@@ -14611,10 +14612,6 @@ MonoBehaviour:
   am: {fileID: 0}
   attackAudio:
   - {fileID: 8300000, guid: c04d2c146b399c644a222dbe485344a4, type: 3}
-  hurtAudio:
-  - {fileID: 8300000, guid: 8e3ebc281bab71f4f8d3d4b32c0fdf85, type: 3}
-  defeatAudio:
-  - {fileID: 8300000, guid: bbd6c35dd59601b4daee57e1cf419d70, type: 3}
   idleAudio:
   - {fileID: 8300000, guid: fc64911dc1abd3148a397500af61aef5, type: 3}
   - {fileID: 8300000, guid: 128eca524cc39d841b5a43946377f916, type: 3}
@@ -14657,6 +14654,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 2
   currentHP: 2
+  hurtAudio:
+  - {fileID: 8300000, guid: 8e3ebc281bab71f4f8d3d4b32c0fdf85, type: 3}
+  - {fileID: 8300000, guid: 7d70c58224837014d97171ec5c1a0e76, type: 3}
+  - {fileID: 8300000, guid: 726357e518bff514ca5dc4723fd28c9a, type: 3}
+  - {fileID: 8300000, guid: b5442b479b28fb24da52d4e1ea5c9dde, type: 3}
+  - {fileID: 8300000, guid: ee9061656bd62634e96d46f415920f28, type: 3}
+  - {fileID: 8300000, guid: f135f0ef936dd7e41beab1f939792efa, type: 3}
+  - {fileID: 8300000, guid: b682d274ed6362543aadfa2d3ddd2219, type: 3}
 --- !u!61 &4845013616121755866
 BoxCollider2D:
   m_ObjectHideFlags: 0

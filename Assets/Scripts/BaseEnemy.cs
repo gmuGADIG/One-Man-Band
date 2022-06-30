@@ -36,6 +36,8 @@ public class BaseEnemy : MonoBehaviour
     public GameObject isGreen;
     public GameObject isBlue;
 
+    public AudioClip[] defeatAudio;
+
     // Affiliation must be changed through ChangeAffiliation.
     // This makes it clear that the affiliation change may have additional side effects.
     public EnemyAffiliation affiliation;
@@ -62,9 +64,10 @@ public class BaseEnemy : MonoBehaviour
     }
 	public virtual void Die()
 	{
-		Destroy(gameObject);
-	}
-	protected void Update()
+        GetComponent<AudioSource>().PlayOneShot(defeatAudio[Random.Range(0, defeatAudio.Length)]);
+        Invoke("MyDestroy", 2.0f);
+    }
+    protected void Update()
 	{
 		if(Target == null || (enemyTarget != null && (int)enemyTarget.affiliation != ((int)affiliation + 1) % 3) || (affiliation != EnemyAffiliation.AgainstPlayer && Target.tag == "Player")){
             Target = FindTarget();
@@ -154,5 +157,10 @@ public class BaseEnemy : MonoBehaviour
     {
         checkConvertNoteCollide(collision);
         Debug.Log(collision.name);
+    }
+
+    private void MyDestroy()
+    {
+        Destroy(gameObject);
     }
 }

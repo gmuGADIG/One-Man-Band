@@ -6,7 +6,9 @@ public class Health : MonoBehaviour
 {
     public int maxHP;
     public int currentHP;
-    
+
+    public AudioClip[] hurtAudio;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +28,11 @@ public class Health : MonoBehaviour
 				GetComponent<Player>().Die();
 			}
 		}
-	}
+        else
+        {
+            GetComponent<AudioSource>().PlayOneShot(hurtAudio[Random.Range(0, hurtAudio.Length)]);
+        }
+    }
 
     void OnTriggerEnter2D(Collider2D collision)
     {

@@ -15,8 +15,8 @@ public class Orc : BaseEnemy
     public SpriteRenderer sr;
     public Animator am;
     public AudioClip[] attackAudio;
-    public AudioClip[] hurtAudio;
-    public AudioClip[] defeatAudio;
+    /*public AudioClip[] hurtAudio;
+    public AudioClip[] defeatAudio;*/
     public AudioClip[] idleAudio;
     public float randSound = 1.8f;
 

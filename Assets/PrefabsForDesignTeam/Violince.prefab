@@ -79,7 +79,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -2196303611067167651, guid: 072fb813bb44e7246a253f3818367834, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -163,6 +163,8 @@ MonoBehaviour:
   isRed: {fileID: 2339602323815604383}
   isGreen: {fileID: 1841522626305012167}
   isBlue: {fileID: 6717271513771690787}
+  defeatAudio:
+  - {fileID: 8300000, guid: 91a79cd092fe10a4aacb8e761e4481fc, type: 3}
   affiliation: -1
   speed: 0.1
   angleSpeed: 1
@@ -309,6 +311,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 2
   currentHP: 2
+  hurtAudio: []
 --- !u!1 &1841522626305012167
 GameObject:
   m_ObjectHideFlags: 0

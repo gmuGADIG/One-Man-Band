@@ -16,6 +16,7 @@ TagManager:
   - TimedNotes
   - Enemy
   - EnemySpawner
+  - Its A Trap
   layers:
   - Default
   - TransparentFX
