@@ -85,12 +85,15 @@ public class Instruments : MonoBehaviour
             {
                 case 0:
                     instrument_cycle++;
+                    color = "Green";
                     break;
                 case 1:
                     instrument_cycle++;
+                    color = "Blue";
                     break;
                 case 2:
                     instrument_cycle = 0;
+                    color = "Red";
                     break;
             }
         }
