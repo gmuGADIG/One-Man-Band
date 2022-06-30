@@ -5,16 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/FINAL DESIGN LEVELS/TitleScreen.unity
     guid: f47320de06980cd498f4860f48f2116f
-  - enabled: 1
+  - enabled: 0
     path: Assets/FINAL DESIGN LEVELS/Tutorial.unity
     guid: fefec05cdfc9157488d8635a08a87430
-  - enabled: 1
+  - enabled: 0
     path: Assets/FINAL DESIGN LEVELS/Level 1.unity
     guid: b6d6c2ad57814ca4babab3b48af5e365
-  - enabled: 1
+  - enabled: 0
     path: Assets/FINAL DESIGN LEVELS/Level 2.unity
     guid: 4313849d3ec62314d92b7a0232ccd2c8
   - enabled: 1

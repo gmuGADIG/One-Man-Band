@@ -17,28 +17,28 @@ public class MenuManager : MonoBehaviour
         OptionsUI = GameObject.Find("OptionsCanvas").GetComponent<Canvas>();
 
         //Starts with the title screen enabled and the options screen false
-        TitleUI.enabled = true;
-        OptionsUI.enabled = false;
+        TitleUI.gameObject.SetActive(true);
+        OptionsUI.gameObject.SetActive(false);
     }
 
     public void QuitGame()
     {
-        Application.Quit();
+		Application.Quit();
         Debug.Log("QUIT");
     }
 
     //Function for entering the options menu
     public void OptionSelect()
     {
-        TitleUI.enabled = false;
-        OptionsUI.enabled = true;
+        TitleUI.gameObject.SetActive(false);
+        OptionsUI.gameObject.SetActive(true);
     }
 
     //Function for exiting the option menu back to title screen
     public void OptionsBack()
     {
-        TitleUI.enabled = true;
-        OptionsUI.enabled = false;
+        TitleUI.gameObject.SetActive(true);
+        OptionsUI.gameObject.SetActive(false);
     }
 
 }
