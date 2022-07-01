@@ -91,7 +91,7 @@ public class BaseEnemy : MonoBehaviour
 
         }
         Debug.Log(closest);
-        if(closest == null || maxDistance > Vector3.Distance(closest.transform.position, transform.position))
+        if(closest == null || maxDistance < Vector3.Distance(closest.transform.position, transform.position))
 		{
             enemyTarget = null;
             closest = GameObject.FindGameObjectWithTag("Player");
