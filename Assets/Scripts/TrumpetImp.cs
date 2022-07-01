@@ -168,10 +168,12 @@ public class TrumpetImp : BaseEnemy
             posY -= 1.0f;
         }
     }
-    private void Start()
-    {
-        // MUST CALL PARENT START!
-        base.Start();
+	float baseSpeed;
+	void Start()
+	{
+		baseSpeed = maxVelocity;
+		// MUST CALL PARENT START!
+		base.Start();
 
         rigidbody = GetComponent<Rigidbody2D>();
 
@@ -668,7 +670,15 @@ public class TrumpetImp : BaseEnemy
 
     private void FixedUpdate()
     {
-		if(Vector2.Distance(transform.position, Target.transform.position) > allowToTargetPlayerRadius)
+		if (Target.tag != "Player")
+		{
+			maxVelocity = baseSpeed * 1.5f;
+		}
+		else
+		{
+			maxVelocity = baseSpeed;
+		}
+		if (Vector2.Distance(transform.position, Target.transform.position) > allowToTargetPlayerRadius)
 		{
 			return;
 		}
