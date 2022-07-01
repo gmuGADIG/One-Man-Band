@@ -23,7 +23,7 @@ public class Health : MonoBehaviour
             bool isPlayer = (GetComponent<Player>()!= null);
             if(isPlayer){
                 canDamage = false;
-                Invoke("resetDamageFlag",.25f);
+                Invoke("resetDamageFlag",.5f);
             }
             if (currentHP <= 0)
             {

@@ -11,6 +11,12 @@ public class Teleporter : MonoBehaviour
     {
         if (collision.gameObject.tag == validTag)
         {
+			Health hp = collision.GetComponent<Health>();
+			if (hp.canDamage)
+			{
+				hp.canDamage = false;
+				hp.Invoke("resetDamageFlag", 1f);
+			}
             collision.gameObject.transform.position = location.position;
         }
     }
