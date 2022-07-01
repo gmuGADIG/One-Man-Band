@@ -25,9 +25,11 @@ public class Spider : BaseEnemy
     public AudioClip attackClip;
 
 
-    void Start()
-    {
-        following = false;
+	float baseSpeed;
+	void Start()
+	{
+		baseSpeed = speed;
+		following = false;
         ani = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         base.Start();
@@ -35,7 +37,15 @@ public class Spider : BaseEnemy
     
     void FixedUpdate()
     {
-        if(Vector2.Distance(transform.position,Target.transform.position) < alertDistance)
+		if (Target.tag != "Player")
+		{
+			speed = baseSpeed * 1.5f;
+		}
+		else
+		{
+			speed = baseSpeed;
+		}
+		if (Vector2.Distance(transform.position,Target.transform.position) < alertDistance)
         {
             following = true;
         }
