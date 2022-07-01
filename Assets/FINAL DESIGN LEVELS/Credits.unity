@@ -282,14 +282,14 @@ MonoBehaviour:
 
     Cavin Loh
 
-    Xavier Pastor
-
     Matthew Neri
 
-    Stephanie
-    Hostetter
+    Stephanie Hostetter
 
-    Toine Giesberts
+    Toine
+    Giesberts
+
+    Xavier Pastor
 
     
 
@@ -322,36 +322,36 @@ MonoBehaviour:
     Music
     Composition:
 
-    ForteFortissimo
-
     Joshua Gaines (Itella)
-
-    Matthew
-    Neri
-
-    morsh dawg
-
-    
-
-    Sound Design/Sound Effects:
-
-    Brendon
-    Wright
-
-    Elijah Anderson
-
-    ForteFortissimo
-
-    Jace Tate
-
-    Joshua
-    Gaines (Itella)
 
     Matthew Neri
 
     morsh dawg
 
+    Xavier
+    Pastor
+
+    
+
+    Sound Design/Sound Effects:
+
+    Brendon Wright
+
+    Elijah
+    Anderson
+
+    Jace Tate
+
+    Joshua Gaines (Itella)
+
+    Matthew Neri
+
+    morsh
+    dawg
+
     Tim Buffalo
+
+    Xavier Pastor
 
     
 
@@ -389,9 +389,7 @@ MonoBehaviour:
     William
     O''Brien
 
-    Xavier Pastor
-
-'
+    Xavier Pastor'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 504b6400a48897640a5f43f8a5894a2f, type: 2}
   m_sharedMaterial: {fileID: 2543401152548633969, guid: 504b6400a48897640a5f43f8a5894a2f, type: 2}
