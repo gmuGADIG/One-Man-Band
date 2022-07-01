@@ -9687,7 +9687,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 2620723775378735317, guid: fdbe4769a02b2e94d804fa80207b9789, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -9915,6 +9915,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 2
   currentHP: 2
+  canDamage: 1
   hurtAudio:
   - {fileID: 8300000, guid: f32b9bb6b9d089644b563f3751bf937a, type: 3}
 --- !u!1 &5073435303584110304
