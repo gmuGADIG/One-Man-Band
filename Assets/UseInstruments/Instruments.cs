@@ -38,6 +38,9 @@ public class Instruments : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(PauseMenu.GameIsPaused){
+            return;
+        }
         FrameTimerSwitch += Time.deltaTime;
         FrameTimerAttack += Time.deltaTime;
         if (Input.GetKeyDown(attack) && AttackCooldown <= FrameTimerAttack) 
