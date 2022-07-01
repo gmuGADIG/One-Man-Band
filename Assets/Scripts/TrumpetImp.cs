@@ -209,7 +209,7 @@ public class TrumpetImp : BaseEnemy
                     shouldAttack = true;
                 }
             }
-            else if (health.gameObject.GetComponent<Player>() != null && affiliation == EnemyAffiliation.AgainstPlayer)
+            else if (health.gameObject.GetComponent<Player>() != null && Target==health.gameObject)
             {
                 shouldAttack = true;
             }
@@ -637,7 +637,7 @@ public class TrumpetImp : BaseEnemy
                     shouldAttack = true;
                 }
             }
-            else if (possibleEnemyHealth.GetComponent<Player>() != null && affiliation == EnemyAffiliation.AgainstPlayer)
+            else if (possibleEnemyHealth.GetComponent<Player>() != null && Target == possibleEnemyHealth.gameObject)
             {
                 shouldAttack = true;
             }
@@ -707,6 +707,7 @@ public class TrumpetImp : BaseEnemy
 
     protected override void OnAffiliationChanged(EnemyAffiliation old, EnemyAffiliation newA)
     {
+        convertHealth = baseConvertHealth;
         if (old != newA)
         {
             leaveFormation();

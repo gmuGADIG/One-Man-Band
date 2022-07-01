@@ -49,7 +49,7 @@ public class WindBlast : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.Equals(comeFrom)) { }
-        else if (collision.CompareTag("Player") || collision.CompareTag("Enemy"))
+        else if (collision.CompareTag("Player") || collision.CompareTag("Enemy") || collision.CompareTag("TrumpetImp"))
         {
             Health health = collision.gameObject.GetComponent<Health>();
             if(health!=null){
