@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/FINAL DESIGN LEVELS/TitleScreen.unity
     guid: f47320de06980cd498f4860f48f2116f
   - enabled: 1
+    path: Assets/FINAL DESIGN LEVELS/Intro.unity
+    guid: d7bb8aea5c4a3634d81a7f0f8e77c948
+  - enabled: 1
     path: Assets/FINAL DESIGN LEVELS/Tutorial.unity
     guid: fefec05cdfc9157488d8635a08a87430
   - enabled: 1
@@ -20,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/FINAL DESIGN LEVELS/Level 3.unity
     guid: 73126add72678464d945dc9268543286
+  - enabled: 1
+    path: Assets/FINAL DESIGN LEVELS/Credits.unity
+    guid: 0a5492c075ba53c4f89756ceec22de41
   m_configObjects: {}

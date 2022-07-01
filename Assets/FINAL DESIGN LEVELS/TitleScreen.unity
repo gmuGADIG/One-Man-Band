@@ -2503,6 +2503,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b65c6e5aa1e4fe4f89ef7509e6d673a, type: 3}
+--- !u!114 &1537712322 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3395070402257213511, guid: 8b65c6e5aa1e4fe4f89ef7509e6d673a, type: 3}
+  m_PrefabInstance: {fileID: 1537712321}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bfc22222c128c148a3ac3d02cff10a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1613933648
 GameObject:
   m_ObjectHideFlags: 0
@@ -2584,7 +2595,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1613933651}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1537712322}
+        m_TargetAssemblyTypeName: SceneTransitioner, Assembly-CSharp
+        m_MethodName: StartScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Credits
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1613933651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4033,7 +4056,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Tutorial
+          m_StringArgument: Intro
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1958422532
