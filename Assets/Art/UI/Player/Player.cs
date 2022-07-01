@@ -89,6 +89,9 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if(PauseMenu.GameIsPaused){
+            return;
+        }
         if (Input.GetMouseButtonDown(0))
         {
             Debug.Log("MOUSE CLICKED");
