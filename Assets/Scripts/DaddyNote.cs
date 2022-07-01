@@ -22,6 +22,8 @@ public class DaddyNote : ParentNote
 
     new protected void Collect()
     {
+        GameManager.gm.notesCollected++;
+        notesCollected++;
         for (int i = 0; i < timedNotes.Length; i++)
         {
             GameManager.gm.notesCollected++;
