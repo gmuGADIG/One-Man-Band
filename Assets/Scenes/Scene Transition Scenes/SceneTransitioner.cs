@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneTransitioner : MonoBehaviour
 {
     private Animator anim;
-    private string nextScene;
+    string nextScene;
 
     [SerializeField] private bool playAnimationOnStart = true;
 

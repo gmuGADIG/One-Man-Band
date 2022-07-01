@@ -20,9 +20,11 @@ public class Orc : BaseEnemy
     public AudioClip[] idleAudio;
     public float randSound = 1.8f;
 
-    // Start is called before the first frame update
+	// Start is called before the first frame update
+	float baseSpeed;
     public void Start()
     {
+		baseSpeed = movespeed;
 		base.Start();
         gm = (GameManager) GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         player = gm.GetPlayer();
@@ -34,6 +36,14 @@ public class Orc : BaseEnemy
 	// Update is called once per frame
 	public void Update()
     {
+		if(Target.tag != "Player")
+		{
+			movespeed = baseSpeed * 1.5f;
+		}
+		else
+		{
+			movespeed = baseSpeed;
+		}
         base.Update();
         if (Target)
         {
