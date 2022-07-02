@@ -28,7 +28,7 @@ public class TrapNote : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.tag);
+        //Debug.Log(collision.tag);
 
         if (collision.tag == "Player" && pickedUp == false)
         {
