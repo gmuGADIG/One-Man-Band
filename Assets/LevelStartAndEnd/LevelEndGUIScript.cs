@@ -122,7 +122,7 @@ public class LevelEndGUIScript : MonoBehaviour
 	}
 	void Disable()
 	{
-
+		zoomOutFinished();
 		gameObject.SetActive(false);
 	}
 	public void zoomOutFinished() //Called by an event in the ZoomOut animation
