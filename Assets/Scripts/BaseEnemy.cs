@@ -52,7 +52,7 @@ public class BaseEnemy : MonoBehaviour
     public void ChangeAffiliation(EnemyAffiliation newAffiliation)
     {
         EnemyAffiliation oldAffiliation = affiliation;
-        Debug.Log("Affiliation" + newAffiliation);
+        //Debug.Log("Affiliation" + newAffiliation);
         affiliation = newAffiliation;
         OnAffiliationChanged(oldAffiliation, newAffiliation);
     }
@@ -75,11 +75,11 @@ public class BaseEnemy : MonoBehaviour
 	}
 
     protected GameObject FindTarget(){
-        Debug.Log("Finding Target:"+ ((int)affiliation + 1) % 3);
+        //Debug.Log("Finding Target:"+ ((int)affiliation + 1) % 3);
         GameObject closest = null;
         foreach (BaseEnemy be in FindObjectsOfType<BaseEnemy>())
         {
-            Debug.Log(be.affiliation);
+            //Debug.Log(be.affiliation);
             if(be == this) { continue; } //no targeting oneself
             if((int)be.affiliation == ((int)affiliation + 1) % 3){
                 float newDist = Vector3.Distance(be.transform.position, transform.position);                
