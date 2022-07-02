@@ -20,6 +20,9 @@ public class LevelEndScript : MonoBehaviour
     private Collider2D playerCollider;
     private LevelEndGUIScript GUIscript;
     private float playerPrevVelocity;
+
+    public GameManager gm;
+    private MusicManager manageMusic;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +35,7 @@ public class LevelEndScript : MonoBehaviour
         GUIscript = levelEndGUI.GetComponent<LevelEndGUIScript>();
         levelEndGUI.SetActive(false);
         GUIscript.enabled = true;
+        manageMusic = gm.GetComponent<MusicManager>();
 
         //totalNotes = FindObjectsOfType<ParentNote>().Length; //So LevelEndGUI knows how many notes are in the level total
         //GUIscript.setTotalNotes(totalNotes);
@@ -59,6 +63,10 @@ public class LevelEndScript : MonoBehaviour
     {
         stopAllEnemies();
         source.PlayOneShot(WinSound);
+
+        manageMusic.SimplyMuteMusic();
+        Invoke("bringMusicBack", WinSound.length);
+
         levelEndGUI.SetActive(true);
         playerPrevVelocity = playerMoveScript.maxVelocity;
         playerMoveScript.maxVelocity = 0;
@@ -107,5 +115,11 @@ public class LevelEndScript : MonoBehaviour
         levelEndGUI.SetActive(false);
         playerMoveScript.maxVelocity = playerPrevVelocity;
         playerAttackScript.enabled = true;
+    }
+
+    public void bringMusicBack()
+    {
+
+        manageMusic.PickItBackUp();
     }
 }

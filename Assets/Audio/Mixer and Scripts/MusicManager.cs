@@ -10,7 +10,7 @@ public class MusicManager : MonoBehaviour
 
     [HideInInspector] public AudioSource[] sources;
 
-    private int nextBranchIndex = 1;
+    public int nextBranchIndex = 1;
     private float percentageBetweenTracks = 0;
     private GameManager manager;
 
@@ -55,7 +55,7 @@ public class MusicManager : MonoBehaviour
             FadeInTrack(nextBranchIndex);
             nextBranchIndex++;
 
-            Debug.Log(nextBranchIndex);
+            Debug.Log("ELI - " + nextBranchIndex);
 
             progUI.GetComponent<ProgressUI>().moreProgress(nextBranchIndex);
         }
@@ -90,5 +90,45 @@ public class MusicManager : MonoBehaviour
     public void TurnOffMusic()
     {
         Destroy(gameObject);
+    }
+
+    public void SimplyMuteMusic()
+    {
+        for (int i = 0; i < tracks.Count; i++) //assigns array and track properties
+        {
+            sources[i].volume = 0;
+        }
+    }
+
+    public void PickItBackUp()
+    {
+        switch (nextBranchIndex)
+        {
+            case 1:
+                FadeInTrack(0);
+                break;
+            case 2:
+                FadeInTrack(0);
+                FadeInTrack(1);
+                break;
+            case 3:
+                FadeInTrack(0);
+                FadeInTrack(1);
+                FadeInTrack(2);
+                break;
+            case 4:
+                FadeInTrack(0);
+                FadeInTrack(1);
+                FadeInTrack(2);
+                FadeInTrack(3);
+                break;
+            case 5:
+                FadeInTrack(0);
+                FadeInTrack(1);
+                FadeInTrack(2);
+                FadeInTrack(3);
+                FadeInTrack(4);
+                break;
+        }
     }
 }

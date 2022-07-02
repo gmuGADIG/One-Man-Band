@@ -65,8 +65,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mix: {fileID: 24300002, guid: c10d52ae1b39cde47acc84bfc25c35d2, type: 2}
-  tracks: []
+  tracks:
+  - {fileID: 8300000, guid: b26605e792d96984995b795e098747ad, type: 3}
+  - {fileID: 8300000, guid: 6590ae89afba58d4d9585418c68f213d, type: 3}
+  - {fileID: 8300000, guid: 7b468b493cff5d84baa91577b6590367, type: 3}
+  - {fileID: 8300000, guid: fcecb2ee9e5d68640a86088ea2b5786d, type: 3}
+  - {fileID: 8300000, guid: 0031d0910cc276040b81093fb1d21dcb, type: 3}
   sources: []
+  nextBranchIndex: 1
 --- !u!1001 &2216911018986886235
 PrefabInstance:
   m_ObjectHideFlags: 0
